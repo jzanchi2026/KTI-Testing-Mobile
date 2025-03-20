@@ -66,7 +66,6 @@ namespace KTI_Testing__Mobile_.NewFolder
             {
                 return null;
             }
-            return null;
         }
     }
 }

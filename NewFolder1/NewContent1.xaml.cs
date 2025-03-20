@@ -9,8 +9,8 @@ public partial class NewContent1 : ContentView
 		InitializeComponent();
 		if (App.UserInfo != null) 
 		{
-			lbUserName.Text = "Logged in as: " + App.UserInfo.UserName;
-			lbUserEmail.Text = App.UserInfo.UserName;//set email from api
+			lbUserName.Text = "Logged in as: " + App.UserInfo.Name;
+			lbUserEmail.Text = App.UserInfo.Name;
 		}
 	}
 }
