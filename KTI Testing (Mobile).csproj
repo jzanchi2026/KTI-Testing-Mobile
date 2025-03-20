@@ -62,10 +62,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiAsset Remove="Resources\Raw\networksecurityconfig.xml" />
-	</ItemGroup>
-
-	<ItemGroup>
 	  <MauiImage Remove="Resources\Images\Person_icons.png" />
 	</ItemGroup>
 
