@@ -22,6 +22,8 @@ namespace KTI_Testing__Mobile_.Resources.viewModels
 
         public async void Login()
         {
+            //Yongle
+            //https://www.bing.com/search?pglt=297&q=yongle&cvid=5b2d059acf4c45ca8bcf5571c5701f17&gs_lcrp=EgRlZGdlKgkIABBFGDsY-QcyCQgAEEUYOxj5BzIGCAEQABhAMgYIAhBFGDsyBggDEEUYOTIGCAQQLhhAMgYIBRAuGEAyBggGEEUYPDIGCAcQRRg8MgYICBBFGDzSAQgxMzE1ajBqMagCALACAA&FORM=ANNTA1&PC=HCTS
             if (!string.IsNullOrEmpty(UserName) && !string.IsNullOrWhiteSpace(Password))
             {
                 UserInfo userInfo = await loginRepos.Login(UserName, Password);

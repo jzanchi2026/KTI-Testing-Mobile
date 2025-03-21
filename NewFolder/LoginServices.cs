@@ -19,9 +19,10 @@ namespace KTI_Testing__Mobile_.NewFolder
 
                 //OLD
                 //Uri uri = new Uri("http://178.28.32.1:3000/login");
-
+                //ROMAN'S PC, USE ONLY FOR DEBUGGING
+                Uri uri = new Uri("http://10.3.9.41:3000/login");
                 //NEW AND GOOD AND USE THIS ONE
-                Uri uri = new Uri("http://10.0.2.2:3000/login"); 
+                //Uri uri = new Uri("http://10.0.2.2:3000/login"); 
 
                 // Prepare form data for the POST request
                 var formContent = new FormUrlEncodedContent(new[]
