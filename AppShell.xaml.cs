@@ -25,7 +25,7 @@ namespace MauiApp2
             Routing.RegisterRoute(nameof(HistoryPage), typeof(HistoryPage));
             Routing.RegisterRoute(nameof(CartPage), typeof(CartPage));
             Routing.RegisterRoute(nameof(SettingsPage), typeof(SettingsPage));
-            Routing.RegisterRoute(nameof(temp), typeof(temp));
+            Routing.RegisterRoute(nameof(Temp), typeof(Temp));
             Routing.RegisterRoute(nameof(Inventory), typeof(Inventory));
         }
     }
