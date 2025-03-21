@@ -6,14 +6,14 @@
     xmlns:local="clr-namespace:MauiApp2"
     Shell.FlyoutBehavior="Flyout"
     Title="MauiApp2"
-    BackgroundColor="Orange"
+    BackgroundColor="HotPink"
     x:Name="MyAppShell"
      >
     
     <ShellContent
         x:Name="MyLoginPage"
-    Title="Login"
-         Shell.FlyoutBehavior="Disabled"
+        Title="Login"
+        Shell.FlyoutBehavior="Disabled"
         ContentTemplate="{DataTemplate local:MauiLoginPage}"
         Route="MauiLoginPage"
         />
@@ -24,7 +24,7 @@
         ContentTemplate="{DataTemplate local:MainPage}"
         Route="MainPage" />
     <ShellContent
-        Title="Profile"
+         Title="Profile"
          ContentTemplate="{DataTemplate local:ProfilePage}"
          Route="ProfilePage" />
     <ShellContent
@@ -36,18 +36,18 @@
         ContentTemplate="{DataTemplate local:CartPage}"
         Route="CartPage" />
     <ShellContent
-    Title="Inventory"
-    ContentTemplate="{DataTemplate local:Inventory}"
-    Route="Inventory" />
+        Title="Inventory"
+        ContentTemplate="{DataTemplate local:Inventory}"
+        Route="Inventory" />
     <ShellContent
         Title="Borrow Items"
         ContentTemplate="{DataTemplate local:Borrow}"
         Route="Borrow" />
 
     <ShellContent
-    Title="temp"
-    ContentTemplate="{DataTemplate local:temp}"
-    Route="temp" />
+        Title="temp"
+        ContentTemplate="{DataTemplate local:temp}"
+        Route="temp" />
 
     <Shell.FlyoutFooter>
         <StackLayout>
