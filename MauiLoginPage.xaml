@@ -35,7 +35,7 @@
                         <Frame BackgroundColor="#044b9B" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5" >
                             <Image Aspect="AspectFill" Margin="0"/>
                         </Frame>
-                        <Entry Text="{Binding UserName}" Placeholder="Username" TextColor="Orange" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"/>
+                        <Entry Text="{Binding UserName}" Placeholder="Username" TextColor="Blue" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"/>
                     </StackLayout>
                 </Frame>
                 <Frame BackgroundColor="Transparent" BorderColor="Black" Margin="0,15,0,0"  Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
