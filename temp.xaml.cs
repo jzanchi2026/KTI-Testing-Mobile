@@ -4,15 +4,14 @@ using CommunityToolkit.Maui.Markup;
 using KTI_Testing__Mobile_.Models;
 
 [QueryProperty("addedTool", "addedTool")]
-public partial class temp : ContentPage
+public partial class Temp : ContentPage
 {
-    Tool addedTool;
-    public temp()
+    public Temp()
     {
         InitializeComponent();
     }
 
-    public temp(Tool t)
+    public Temp(Tool t)
     {
         InitializeComponent();
 

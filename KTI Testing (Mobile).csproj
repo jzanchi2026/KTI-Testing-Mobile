@@ -84,13 +84,19 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="temp.xaml.cs">
+	    <DependentUpon>Temp.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
 	  <MauiXaml Update="Borrow.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Inventory.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="temp.xaml">
+	  <MauiXaml Update="Temp.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Platforms\Android\Resources\values\Network_Security_Config.xaml">
