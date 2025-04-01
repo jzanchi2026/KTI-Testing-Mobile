@@ -52,48 +52,6 @@ namespace KTI_Testing__Mobile_.NewFolder
 
                     userinfo.Error = "Incorrect Username and/or password";
                 }
-                    /*
-                    // Load the response into an HTML document for parsing
-                    HtmlDocument htmlSnippet = new HtmlDocument();
-                    htmlSnippet.LoadHtml(stringContent);
-
-                    // Extract errors from the response
-                    List<string> errors = new List<string>();
-                    HtmlNodeCollection nodelist = htmlSnippet.DocumentNode.SelectNodes("//error");
-                    if (nodelist != null)
-                    {
-                        // Add each error found to the list
-                        foreach (HtmlNode link in htmlSnippet.DocumentNode.SelectNodes("//error"))
-                        {
-                            string att = link.InnerHtml;
-                            errors.Add(att.Trim());
-                        }
-                    }
-
-                    // Extract user information from the response
-                    HtmlNode userelement = htmlSnippet.DocumentNode.SelectSingleNode("//userinfo");
-                    string userid = "";
-                    if (userelement != null)
-                    {
-                        userid = userelement.InnerHtml; // Extract user information content
-                    }
-
-                    Console.WriteLine(errors.ToString()); // Log errors for debugging
-
-                    // Process the extracted data
-                    if (errors.Count == 0)
-                    {
-                        string[] info = userid.Split(','); // Split user data by commas
-                        userinfo.UserId = (info[0].Trim()); // Extract user ID
-                        userinfo.Name = (info[1].Trim());   // Extract user name
-                        userinfo.Email = (info[2].Trim());  // Extract user email
-                    }
-                    else if (errors[1] == "400") // Check if error code 400 exists (may cause index error)
-                    {
-                        Console.WriteLine("Errored: " + errors[0]);
-                        userinfo.Error = errors[0]; // Assign error message
-                    }
-                    */
                     return userinfo; // Return the user information or error data
             }
             else
