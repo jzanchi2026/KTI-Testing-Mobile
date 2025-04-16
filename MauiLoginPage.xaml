@@ -3,18 +3,18 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MauiApp2.MauiLoginPage"
              Title="Login" Shell.NavBarIsVisible="False" >
-    <Grid BackgroundColor="White">
+    <Grid BackgroundColor="Grey">
         <Grid.RowDefinitions>
             <RowDefinition Height="220"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
-        <Path Stroke="White" Data="m-0.02,-241.035l805.00015,0l-5.02624,497.65615c-294.21016,176.52286 -459.71328,146.99438 -799.97391,34.13395l0,-531.7901z"  Fill="Orange"/>
+        <Path Stroke="White" Data="m-0.02,-241.035l805.00015,0l-5.02624,497.65615c-294.21016,176.52286 -459.71328,146.99438 -799.97391,34.13395l0,-531.7901z"  Fill="DarkRed"/>
 
 
         <StackLayout >
-            <Frame BackgroundColor="#044b9B" HeightRequest="60" WidthRequest="60" CornerRadius="50" Padding="0" Margin="0,100,0,0" HorizontalOptions="Center">
-                <Image Aspect="AspectFill"></Image>
+            <Frame BackgroundColor="white" HeightRequest="160" WidthRequest="160" CornerRadius="50" Padding="0" Margin="0,30,0,0" HorizontalOptions="Center">
+                <Image Source="metalslogo.png" Aspect="AspectFill"></Image>
             </Frame>
         </StackLayout>
         <Grid RowSpacing="5" Grid.Row="1" Margin="20,20,20,0">
@@ -30,7 +30,7 @@
             <Label Grid.Row="1" Text="Welcome!" HorizontalOptions="Center" FontSize="Title" FontAttributes="Bold" Padding="0" Margin="0"/>
             <Label Grid.Row="2" Text="Sign in to continue" HorizontalOptions="Center" FontSize="Subtitle"/>
             <StackLayout Grid.Row="3" Orientation="Vertical" HorizontalOptions="CenterAndExpand">
-                <Frame BackgroundColor="Transparent" BorderColor="Black" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
+                <Frame BackgroundColor="White" BorderColor="Black" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="10">
                     <StackLayout Orientation="Horizontal">
                         <Frame BackgroundColor="#044b9B" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5" >
                             <Image Aspect="AspectFill" Margin="0"/>
@@ -38,7 +38,7 @@
                         <Entry Text="{Binding UserName}" Placeholder="Username" TextColor="Blue" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"/>
                     </StackLayout>
                 </Frame>
-                <Frame BackgroundColor="Transparent" BorderColor="Black" Margin="0,15,0,0"  Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="30">
+                <Frame BackgroundColor="White" BorderColor="Black" Margin="0,15,0,0"  Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="10">
                     <StackLayout Orientation="Horizontal">
                         <Frame BackgroundColor="#044b9B" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5" >
                             <Image Aspect="AspectFill" Margin="0"/>

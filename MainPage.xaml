@@ -1,55 +1,51 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             BackgroundColor="LightBlue"
+             BackgroundColor="DarkGray"
              x:Class="MauiApp2.MainPage">
+    <Grid Padding="5" RowSpacing="10">
 
-    <Grid
-    Padding="5"
-    RowDefinitions="50, *, 100"
-    ColumnDefinitions="*"
-    >
-        <SearchBar
-        Grid.Row="0"
-        Grid.Column="0"
-        Placeholder="Search Tool"
-        TextChanged="SearchBar_TextChanged"
-        ></SearchBar>
-        <ListView 
-        Grid.Row="1"
-        Grid.Column="0"
-        x:Name="toolList" 
-        BackgroundColor="White"
-        SeparatorColor="Grey"
-        RowHeight="65"
-        ItemSelected="toolList_ItemSelected"
-        ItemTapped="toolList_ItemTapped"
-        >
+        <!-- Define the grid rows -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <!-- For SearchBar -->
+            <RowDefinition Height="2*"/>
+            <!-- For ListView -->
+            <RowDefinition Height="9*"/>
+            <!-- For ScrollView -->
+        </Grid.RowDefinitions>
+
+        <!-- SearchBar in Row 0 -->
+        <SearchBar Grid.Row="0"
+                   Placeholder="Search Tool"
+                   TextChanged="SearchBar_TextChanged"/>
+
+        <!-- ListView in Row 1 -->
+        <!-- This code just broke the entire thing, it might be needed later-->
+        
+        <ListView Grid.Row="1"
+                  x:Name="toolList" 
+                  BackgroundColor="White"
+                  SeparatorColor="Grey"
+                  RowHeight="65"
+                  ItemSelected="toolList_ItemSelected"
+                  ItemTapped="toolList_ItemTapped">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextCell Text="{Binding Name}"
-                          Detail="{Binding Quantities}"></TextCell>
+                    <TextCell Text="{Binding Name}" Detail="{Binding Quantities}"/>
                 </DataTemplate>
             </ListView.ItemTemplate>
-
         </ListView>
-
-        <Label
-            Grid.Row="2"
-            Grid.Column="0"
-            Text="Borrowed Items"
-            FontAttributes="Bold"
-            FontSize="Header"
-            HorizontalOptions="Center"
-            VerticalOptions="Center"/>
-
-        <ScrollView>
+        
+        <!-- ScrollView in Row 2 -->
+        <ScrollView Grid.Row="2" BackgroundColor="DarkGray">
             <StackLayout x:Name="listBox" StyleClass="body">
-                <Button StyleClass="Items" Text="Hammer" x:Name="Hammer"></Button>
-                <Button StyleClass="Items" Text="Nails"></Button>
-                <Button StyleClass="Items" Text="Screwdrivers"></Button>
-                <Button StyleClass="Items" Text="Cats"></Button>
+                <Button StyleClass="Items" Text="Hammer" x:Name="Hammer"/>
+                <Button StyleClass="Items" Text="Nails"/>
+                <Button StyleClass="Items" Text="Screwdrivers"/>
+                <!-- Add more items here to test scrolling -->
             </StackLayout>
         </ScrollView>
+
     </Grid>
 </ContentPage>

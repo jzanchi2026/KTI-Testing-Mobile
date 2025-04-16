@@ -6,7 +6,7 @@
     xmlns:local="clr-namespace:MauiApp2"
     Shell.FlyoutBehavior="Flyout"
     Title="KT Metals Inventory"
-    BackgroundColor="White"
+    BackgroundColor="DarkRed"
     x:Name="MyAppShell"
      >
     <ShellContent
@@ -14,6 +14,8 @@
     Title="Home"
     ContentTemplate="{DataTemplate local:MainPage}"
     Route="MainPage" />
+    <!--This does not need to be here-->
+    <!--
     <ShellContent
         x:Name="MyLoginPage"
         Title="Login"
@@ -21,7 +23,7 @@
         ContentTemplate="{DataTemplate local:MauiLoginPage}"
         Route="MauiLoginPage"
         />
-
+    -->
     
     <ShellContent
          Title="Profile"
@@ -51,7 +53,7 @@
 
     <Shell.FlyoutFooter>
         <StackLayout>
-            <Button Text="Sign Out" Command ="{Binding SignOutCommand}" BackgroundColor="White"></Button>
+            <Button Text="Sign Out" Command ="{Binding SignOutCommand}" BackgroundColor="DarkRed"></Button>
         </StackLayout>
     </Shell.FlyoutFooter>
 

@@ -16,6 +16,8 @@ namespace KTI_Testing__Mobile_.Resources.viewModels
         [ObservableProperty]
         private string _password;
 
+        private UserInfo userInfo;
+
         readonly ILoginRepos loginRepos = new LoginServices();
 
         [ICommand]
@@ -26,8 +28,8 @@ namespace KTI_Testing__Mobile_.Resources.viewModels
             //https://www.bing.com/search?pglt=297&q=yongle&cvid=5b2d059acf4c45ca8bcf5571c5701f17&gs_lcrp=EgRlZGdlKgkIABBFGDsY-QcyCQgAEEUYOxj5BzIGCAEQABhAMgYIAhBFGDsyBggDEEUYOTIGCAQQLhhAMgYIBRAuGEAyBggGEEUYPDIGCAcQRRg8MgYICBBFGDzSAQgxMzE1ajBqMagCALACAA&FORM=ANNTA1&PC=HCTS
             if (!string.IsNullOrEmpty(UserName) && !string.IsNullOrWhiteSpace(Password))
             {
-                UserInfo userInfo = await loginRepos.Login(UserName, Password);
-
+                userInfo = await loginRepos.Login(UserName, Password);
+                
                 if (Preferences.ContainsKey(nameof(App.UserInfo)))
                 {
                     Preferences.Remove(nameof(App.UserInfo));
