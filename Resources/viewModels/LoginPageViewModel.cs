@@ -42,14 +42,20 @@ namespace KTI_Testing__Mobile_.Resources.viewModels
                 App.UserInfo = userInfo;
                 if (userInfo.Error == null) 
                 {
+                    string fileName = "storedUserData.json";
+                    string filePath = Path.Combine(FileSystem.AppDataDirectory, fileName);
+
+                    // Build the data object
                     var storedUserData = new
                     {
                         Name = userInfo.Name,
-                        Email = userInfo.Email
+                        Email = userInfo.Email,
+                        UserId = userInfo.UserId
                     };
 
+                    // Serialize and write to the correct location
                     string json = JsonConvert.SerializeObject(storedUserData, Formatting.Indented);
-                    File.WriteAllText("storedUserData.json", json);
+                    File.WriteAllText(filePath, json);
                     await Shell.Current.GoToAsync("//MainPage");
                 }
                 else
