@@ -19,7 +19,7 @@ namespace MauiApp2
 
             List<Tool> tools = ToolRepository.GetTools();
 
-            Tool cloneTool = new Tool(1, "Hammer", "a bangy boi", 50);
+            Tool cloneTool = new Tool(1, "Hammer", "a bangy boi", 5);
 
             for (int i = 0; i < 20; i++)
             {
