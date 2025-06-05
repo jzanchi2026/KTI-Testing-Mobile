@@ -1,7 +1,9 @@
 ﻿using HtmlAgilityPack;  // For parsing HTML responses
 using KTI_Testing__Mobile_.Models; // For accessing the UserInfo model
+using MauiApp2;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.Net;
 namespace KTI_Testing__Mobile_.NewFolder
 {
     public class LoginServices : ILoginRepos
@@ -15,15 +17,14 @@ namespace KTI_Testing__Mobile_.NewFolder
                 var userinfo = new UserInfo();
 
                 // Create an HttpClient instance to send the request
-                using var client = new HttpClient();
 
                 //OLD
                 //Uri uri = new Uri("http://178.28.32.1:3000/login");
                 //ROMAN'S PC, USE ONLY FOR DEBUGGING
                 //Uri uri = new Uri("http://10.3.9.41:3000/login");
                 //NEW AND GOOD AND USE THIS ONE
-                Uri uri = new Uri("https://develmets.skiscratcher.com/login"); 
-
+                //Uri uri = new Uri("https://develmets.skiscratcher.com/");
+                
                 // Prepare form data for the POST request
                 var formContent = new FormUrlEncodedContent(new[]
                 {
@@ -31,12 +32,14 @@ namespace KTI_Testing__Mobile_.NewFolder
                     new KeyValuePair<string, string>("password", password),
                     new KeyValuePair<string, string>("mobile", "antonia"), // Static "mobile" field
                 });
-                
+                Uri loginUri = new Uri(App.uri, "login");
                 // Send the POST request and await the rgesponse
-                var myHttpClient = new HttpClient();
-                var response = await myHttpClient.PostAsync(uri.ToString(), formContent);
+                
+                var response = await App.myHttpClient.PostAsync(loginUri.ToString(), formContent);
                 var stringContent = await response.Content.ReadAsStringAsync(); // Read response as string
                 Console.WriteLine(stringContent); // Log response for debugging
+
+
 
                 JObject data = JObject.Parse(stringContent);
                 if ((bool?)data["login"] == true)

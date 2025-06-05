@@ -16,17 +16,20 @@ namespace MauiApp2
         public MainPage()
         {
             InitializeComponent();
+            _ = grabTools();
 
+        }
+        private async Task grabTools()
+        {
+            await ToolRepository.InitializeToolsAsync();
             List<Tool> tools = ToolRepository.GetTools();
 
-            Tool cloneTool = new Tool(1, "Hammer", "a bangy boi", 5);
-
-            for (int i = 0; i < 20; i++)
+            foreach (Tool i in tools)
             {
-                addItem(cloneTool);
+                addItem(i);
             }
-        }
 
+        }
         public void addItem(Tool tool)
         {
             toollist.Add(tool);

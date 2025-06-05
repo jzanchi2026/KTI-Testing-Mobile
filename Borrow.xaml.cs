@@ -43,8 +43,8 @@ public partial class Borrow : ContentPage
             //barcodeResult.Text = $"{args.Result[0].BarcodeFormat}: {args.Result[0].Text}";
 
             await cameraView.StopCameraAsync();
-
-            ScannedTool = new Tool(500, "kitty", "pooh", 100);
+            //
+            ScannedTool = new Tool(500, "kitty", "pooh", 1);
             barcodeResult.Text = ScannedTool.Name;
             Confirm.Text = "Are you sure you want to check out a\n" + ScannedTool.Name + "?";
             Confirm.IsVisible = true;

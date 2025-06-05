@@ -40,9 +40,7 @@
         <!-- ScrollView in Row 2 -->
         <ScrollView Grid.Row="2" BackgroundColor="DarkGray">
             <StackLayout x:Name="listBox" StyleClass="body">
-                <Button StyleClass="Items" Text="Hammer" x:Name="Hammer"/>
-                <Button StyleClass="Items" Text="Nails"/>
-                <Button StyleClass="Items" Text="Screwdrivers"/>
+
                 <!-- Add more items here to test scrolling -->
             </StackLayout>
         </ScrollView>
