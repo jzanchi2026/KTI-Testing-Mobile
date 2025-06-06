@@ -1,13 +1,14 @@
 namespace MauiApp2;
 using KTI_Testing__Mobile_.Models;
 using KTI_Testing__Mobile_.Resources.viewModels;
+using MauiApp2.Models;
 using System.Windows.Input;
 
 public partial class Borrow : ContentPage
 {
-	public Borrow()
-	{
-		InitializeComponent();
+    public Borrow()
+    {
+        InitializeComponent();
 
         RefreshView refreshView = new RefreshView();
         ICommand refreshCommand = new Command(() =>
@@ -43,11 +44,29 @@ public partial class Borrow : ContentPage
             //barcodeResult.Text = $"{args.Result[0].BarcodeFormat}: {args.Result[0].Text}";
 
             await cameraView.StopCameraAsync();
-            //
-            ScannedTool = new Tool(500, "kitty", "pooh", 1);
-            barcodeResult.Text = ScannedTool.Name;
-            Confirm.Text = "Are you sure you want to check out a\n" + ScannedTool.Name + "?";
-            Confirm.IsVisible = true;
+            string barcodeValue = args.Result[0].Text;
+            Tool tool = null;
+            if (int.TryParse(barcodeValue, out int result))
+            {
+                tool = ToolRepository.getSpecificTool(result);
+            }
+            else
+            {
+                tool = new Tool(-1, "invalid", "invalid", -1);
+            }
+
+            ScannedTool = tool;
+            if (tool.Name != "invalid")
+            {
+                Confirm.IsVisible = true;
+                barcodeResult.Text = $"Are you sure you want to check out:\n{ScannedTool.Name}";
+                Confirm.Text = "Confirm";
+            }
+            else
+            {
+                barcodeResult.Text = "invalid";
+            }
+            
             //Navigation.PushAsync(new CartPage(myTool));
         });
     }
@@ -59,4 +78,44 @@ public partial class Borrow : ContentPage
         barcodeResult.Text = "";
         await cameraView.StartCameraAsync();
     }
+protected override void OnAppearing()
+    {
+        base.OnAppearing();
+
+        if (cameraView.Camera == null && cameraView.Cameras.Count > 0)
+        {
+            cameraView.Camera = cameraView.Cameras.First();
+        }
+
+        MainThread.BeginInvokeOnMainThread(async () =>
+        {
+            try
+            {
+                await cameraView.StartCameraAsync();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Failed to start camera: {ex.Message}");
+            }
+        });
+    }
+
+ 
+    protected override void OnDisappearing()
+    {
+        base.OnDisappearing();
+
+        MainThread.BeginInvokeOnMainThread(async () =>
+        {
+            try
+            {
+                await cameraView.StopCameraAsync();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Failed to stop camera: {ex.Message}");
+            }
+        });
+    }
+
 }

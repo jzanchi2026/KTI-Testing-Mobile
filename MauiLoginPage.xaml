@@ -48,10 +48,24 @@
                 </Frame>
 
                 <StackLayout Orientation="Horizontal" Margin="0,10,0,0" Padding="0" HorizontalOptions="Center">
-                    <CheckBox IsChecked="False" Color="#044b9B"/>
-                    <Label Text="Remember Me" TextColor="Black" FontSize="Small" VerticalTextAlignment="Center" HorizontalOptions="Center"/>
-                    
+
+                    <CheckBox x:Name="RememberMeCheckbox"
+                      
+                      Color="#044b9B" IsChecked="{Binding IsRememberMeChecked}" />
+
+                    <Label x:Name="RememberMeLabel"
+                       Text="Remember Me"
+                       TextColor="Black"
+                       FontSize="Small"
+                       VerticalTextAlignment="Center"
+                       HorizontalOptions="Center">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnRememberMeLabelTapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+
                 </StackLayout>
+
                 <Button Text="Sign in" Background="Orange" TextColor="#044b9B" FontAttributes="Bold" CornerRadius="30" WidthRequest="200" Margin="0,15,0,0" Command="{Binding LoginCommand}"/>
 
                 <StackLayout Orientation="Horizontal"  Margin="0,15,0,0">

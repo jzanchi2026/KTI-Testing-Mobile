@@ -12,7 +12,7 @@ namespace MauiApp2
             Routing.RegisterRoute(nameof(MainPage), typeof(MainPage));
             this.BindingContext = new AppShellViewMode();
             string getuserSavedKey = Preferences.Get("UserInfo", "empty");
-
+            /*
             if (getuserSavedKey != "empty")
             {
                 MyAppShell.CurrentItem = MyMainPage;
@@ -20,7 +20,8 @@ namespace MauiApp2
             else
             {
                 MyAppShell.CurrentItem = MyLoginPage;
-            }
+            }*/
+            MyAppShell.CurrentItem = MyLoginPage;
             Routing.RegisterRoute(nameof(ProfilePage), typeof(ProfilePage));
             Routing.RegisterRoute(nameof(HistoryPage), typeof(HistoryPage));
             Routing.RegisterRoute(nameof(CartPage), typeof(CartPage));

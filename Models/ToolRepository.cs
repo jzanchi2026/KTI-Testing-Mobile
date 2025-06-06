@@ -56,5 +56,16 @@ namespace MauiApp2.Models
 
             return tools;
         }
+        public static Tool getSpecificTool(int tofind)
+        {
+            foreach(Tool i in _tools)
+            {
+                if (i.Id == tofind)
+                {
+                    return i;
+                }
+            }
+            return new Tool(-1, "invalid", "invalid", -1);
+        }
     }
 }

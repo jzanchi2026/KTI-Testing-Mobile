@@ -18,6 +18,8 @@ namespace KTI_Testing__Mobile_.Resources.viewModels
 
         private UserInfo userInfo;
 
+        private readonly MauiLoginPage _mauiLoginPage;
+
         readonly ILoginRepos loginRepos = new LoginServices();
 
         [ICommand]
@@ -40,8 +42,8 @@ namespace KTI_Testing__Mobile_.Resources.viewModels
                 Preferences.Set("UserInfo", userDetails);
 
                 App.UserInfo = userInfo;
-                if (userInfo.Error == null) 
-                {
+                if (userInfo.Error == null)
+                {   
                     string fileName = "storedUserData.json";
                     string filePath = Path.Combine(FileSystem.AppDataDirectory, fileName);
 

@@ -8,13 +8,19 @@
 
     <VerticalStackLayout StyleClass="body">
         <Label 
-            Text="Welcome to .NET MAUI!"
+            Text="Align barcode here"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
         
         <cv:CameraView x:Name="cameraView" WidthRequest="300" HeightRequest="200" CamerasLoaded="cameraview_CamerasLoaded" BarCodeDetectionEnabled="True" BarcodeDetected="cameraView_BarcodeDetected"/>
-        
-        <Label x:Name="barcodeResult"/>
+
+        <Label x:Name="barcodeResult"
+               FontSize="20"
+               FontAttributes="Bold"
+       HorizontalOptions="Center"
+       VerticalOptions="Center"
+       HorizontalTextAlignment="Center"
+       VerticalTextAlignment="Center" />
         <Button x:Name="Confirm" Clicked="addToCartPage" BackgroundColor="#00FF64" MaximumHeightRequest="200" MaximumWidthRequest="300" MinimumHeightRequest="10" MinimumWidthRequest="50" Margin="0,50,0,0" IsVisible="False"></Button>
 
     </VerticalStackLayout>
