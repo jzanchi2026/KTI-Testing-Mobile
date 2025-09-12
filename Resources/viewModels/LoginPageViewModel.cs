@@ -43,7 +43,10 @@ namespace KTI_Testing__Mobile_.Resources.viewModels
 
                 App.UserInfo = userInfo;
                 if (userInfo.Error == null)
-                {   
+                {
+                    //Saves user data to json file for later use
+                    //DO NOT USE VERY UNSECURE
+                    /*
                     string fileName = "storedUserData.json";
                     string filePath = Path.Combine(FileSystem.AppDataDirectory, fileName);
 
@@ -58,6 +61,7 @@ namespace KTI_Testing__Mobile_.Resources.viewModels
                     // Serialize and write to the correct location
                     string json = JsonConvert.SerializeObject(storedUserData, Formatting.Indented);
                     File.WriteAllText(filePath, json);
+                    */
                     await Shell.Current.GoToAsync("//MainPage");
                 }
                 else

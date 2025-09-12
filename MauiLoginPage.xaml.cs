@@ -1,6 +1,5 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using KTI_Testing__Mobile_.Resources.viewModels;
-using Newtonsoft.Json.Linq;
 
 namespace MauiApp2;
 

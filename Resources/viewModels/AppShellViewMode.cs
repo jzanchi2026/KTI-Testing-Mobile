@@ -17,6 +17,8 @@ namespace KTI_Testing__Mobile_.Resources.viewModels
             if (Preferences.ContainsKey("UserInfo")) 
             {
                 Preferences.Remove(nameof(App.UserInfo));
+                Uri loginUri = new Uri(App.uri, "logout");
+                var response = await App.myHttpClient.GetAsync(loginUri.ToString());
             }
             await Shell.Current.GoToAsync("//MauiLoginPage");
         }

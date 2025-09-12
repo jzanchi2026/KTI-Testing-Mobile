@@ -40,8 +40,8 @@ namespace KTI_Testing__Mobile_.NewFolder
                 Console.WriteLine(stringContent); // Log response for debugging
 
 
-
                 JObject data = JObject.Parse(stringContent);
+
                 if ((bool?)data["login"] == true)
                 {
                     Console.WriteLine("LOGIN TRUE");

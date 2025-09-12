@@ -10,13 +10,14 @@ namespace MauiApp2.Models
 {
     public static class ToolRepository
     {
-        private static async Task<List<Tool>> ringo()
+        public static async Task<List<Tool>> ringo(string where)
         {
-            Uri thisUri = new Uri(App.uri, "getTools");
-            
-            
+            Uri thisUri = new Uri(App.uri, where);
+
+
             var response = await App.myHttpClient.GetAsync(thisUri.ToString());
             var stringContent = await response.Content.ReadAsStringAsync();
+
             Console.Write(stringContent);
             List<Tool> toolList = new List<Tool>();
 
@@ -24,17 +25,26 @@ namespace MauiApp2.Models
 
             Console.Write(stringContent);
 
-            for (int i =0; i < data.Count; i++)
+            for (int i = 0; i < data.Count; i++)
             {
-                JObject toolObj = (JObject)data[i];
-                toolList.Add(new Tool((int)toolObj["toolTypeId"], toolObj["toolName"].ToString(), "", 1));
+                if (where == "getTools")
+                {
+                    JObject toolObj = (JObject)data[i];
+                    toolList.Add(new Tool((int)toolObj["toolTypeId"], toolObj["toolName"].ToString(), "", 1));
+                }
+                else if(where == "getUserTools")
+                {
+                    JObject toolObj = (JObject)data[i];
+                    Tool ret = await parseTool((int)toolObj["toolTypeId"]);
+                    toolList.Add(ret);
+                }
             }
             return toolList;
         }
         public static List<Tool> _tools;
         public static async Task InitializeToolsAsync()
         {
-            _tools = await ringo();
+            _tools = await ringo("getTools");
         }
         public static List<Tool> GetTools() => _tools;
         public static Tool GetToolById(int ToolId)
@@ -58,7 +68,7 @@ namespace MauiApp2.Models
         }
         public static Tool getSpecificTool(int tofind)
         {
-            foreach(Tool i in _tools)
+            foreach (Tool i in _tools)
             {
                 if (i.Id == tofind)
                 {
@@ -66,6 +76,16 @@ namespace MauiApp2.Models
                 }
             }
             return new Tool(-1, "invalid", "invalid", -1);
+        }
+        public static async Task<Tool> parseTool(int id)
+        {
+            Uri invUri = new Uri(App.uri, "getTool?id=" + id);
+            var response = await App.myHttpClient.GetAsync(invUri.ToString());
+            Console.WriteLine(response);
+            var stringContent = await response.Content.ReadAsStringAsync();
+            JObject tooldata = JObject.Parse(stringContent);
+            Tool ret = new Tool((int)tooldata["toolTypeId"], tooldata["toolName"].ToString(), "", 1);
+            return ret;
         }
     }
 }
