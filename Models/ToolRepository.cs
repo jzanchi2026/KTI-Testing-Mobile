@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using KTI_Testing__Mobile_.Models;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace MauiApp2.Models
@@ -86,6 +87,23 @@ namespace MauiApp2.Models
             JObject tooldata = JObject.Parse(stringContent);
             Tool ret = new Tool((int)tooldata["toolTypeId"], tooldata["toolName"].ToString(), "", 1);
             return ret;
+        }
+        /*
+        public static async void checkoutTool(int id)
+        {
+
+        }
+        */
+        public static async void checkoutTool(Tool tool)
+        {
+            // Append the ID to the URL as a query parameter
+            Uri checkUri = new Uri($"{App.uri}checkoutTool?id={tool.Id}");
+
+            var response = await App.myHttpClient.PostAsync(checkUri, null);
+            var stringContent = await response.Content.ReadAsStringAsync();
+
+            Console.WriteLine(stringContent);
+
         }
     }
 }

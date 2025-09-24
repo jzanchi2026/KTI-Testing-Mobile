@@ -45,6 +45,12 @@ namespace MauiApp2
 
             Button button = new Button { Text = tool.Name, Style = myStyle };
             button.Margin = new Thickness(15, 15, 15, 0);
+
+            button.Clicked += (s, e) =>
+            {
+                // Do something when clicked
+                Console.WriteLine($"Clicked on {tool.Name}");
+            };
             listBox.Children.Add(button);
         }
 

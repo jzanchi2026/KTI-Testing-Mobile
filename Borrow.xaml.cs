@@ -72,8 +72,8 @@ public partial class Borrow : ContentPage
     }
 
     private async void addToCartPage(object sender, EventArgs e)
-    {
-        await Shell.Current.GoToAsync(nameof(CartPage));
+    { 
+        await Navigation.PushAsync(new ToolInfo(ScannedTool));
         Confirm.IsVisible = false;
         barcodeResult.Text = "";
         await cameraView.StartCameraAsync();

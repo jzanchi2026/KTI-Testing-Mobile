@@ -13,7 +13,7 @@ public partial class Temp : ContentPage
 
     public Temp(Tool t)
     {
-        InitializeComponent();
+        
 
         var myStyle = new Style<Entry>(
 
