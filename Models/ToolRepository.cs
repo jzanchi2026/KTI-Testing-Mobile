@@ -98,7 +98,7 @@ namespace MauiApp2.Models
         {
             // Append the ID to the URL as a query parameter
             Uri checkUri = new Uri($"{App.uri}checkoutTool?id={tool.Id}");
-
+            // Treat like a GET although it is a POST
             var response = await App.myHttpClient.PostAsync(checkUri, null);
             var stringContent = await response.Content.ReadAsStringAsync();
 
