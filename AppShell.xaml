@@ -14,21 +14,22 @@
     Title="Home"
     ContentTemplate="{DataTemplate local:MainPage}"
     Route="MainPage" />
-   
-   
+
+
     <ShellContent
         x:Name="MyLoginPage"
         Title="Login"
         Shell.FlyoutBehavior="Disabled"
         ContentTemplate="{DataTemplate local:MauiLoginPage}"
         Route="MauiLoginPage"
+        Shell.FlyoutItemIsVisible="False"
+        Shell.TabBarIsVisible="False"
         />
-    
-    
     <ShellContent
          Title="Profile"
          ContentTemplate="{DataTemplate local:ProfilePage}"
          Route="ProfilePage" />
+    
     <ShellContent
         Title="history"
         ContentTemplate="{DataTemplate local:HistoryPage}"

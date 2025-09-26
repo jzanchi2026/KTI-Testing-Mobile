@@ -4,25 +4,25 @@
              x:Class="MauiApp2.Inventory"
              Title="Inventory">
 
+    <Grid RowDefinitions="Auto,Auto,*">
+        <!-- Top button -->
+        <Button Text="Add" Grid.Row="0" />
 
-    <VerticalStackLayout>
-        <Button
-            Text="Add"
-            Command="{Binding addToolCommand}"/>
-        
-        <CollectionView ItemsSource="{Binding Tools}">
-
+        <!-- CollectionView (optional) -->
+        <CollectionView Grid.Row="1" ItemsSource="{Binding Tools}">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <ViewCell>
-                        <StackLayout BackgroundColor="Orange" Margin="10" HorizontalOptions="Center">
-                            <Label Text="{Binding AddedTool.Name}" TextColor="Red" FontAttributes="Bold"/>
-                        </StackLayout>
-                    </ViewCell>
+                    <Label Text="{Binding Name}" TextColor="Red" />
                 </DataTemplate>
             </CollectionView.ItemTemplate>
-
         </CollectionView>
-    </VerticalStackLayout>
-        
+
+        <!-- Scrollable listBox filling remaining space -->
+        <ScrollView Grid.Row="2" BackgroundColor="DarkGray">
+            <StackLayout x:Name="listBox">
+
+                <!-- Add more labels to test scrolling -->
+            </StackLayout>
+        </ScrollView>
+    </Grid>
 </ContentPage>

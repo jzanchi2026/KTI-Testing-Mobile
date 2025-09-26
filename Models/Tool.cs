@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using MauiApp2;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -26,7 +27,6 @@ namespace KTI_Testing__Mobile_.Models
             this.description = d;
             this.amount = a;
         }
-
         public int Id
         {
             get { return id; }

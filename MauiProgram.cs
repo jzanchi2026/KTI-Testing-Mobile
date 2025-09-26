@@ -21,12 +21,14 @@ namespace MauiApp2
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
-            if (App.UserInfo == null)
+            
+            /*if (App.UserInfo == null)
             {
+
                 string path = Path.Combine(FileSystem.AppDataDirectory, "storedUserData.json");
                 App.UserInfo = new KTI_Testing__Mobile_.Models.UserInfo();
                 if (File.Exists(path))
-                {
+                    {
                     string json = File.ReadAllText(path);
                     // Example usage
                     JObject data = JObject.Parse(json);
@@ -41,7 +43,7 @@ namespace MauiApp2
                     Console.WriteLine("File not found.");
                 }
 
-            }
+            }*/
             builder.Logging.AddDebug();
             builder.Services.AddSingleton<MainPage>();
             builder.Services.AddSingleton<MauiLoginPage>();
