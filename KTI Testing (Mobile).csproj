@@ -39,8 +39,8 @@
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(TargetFramework)'=='net8.0-ios'">
-	  <CodesignKey>Apple Development: Created via API (GRGY9KXA6W)</CodesignKey>
-	  <CodesignProvision>VS: WildCard Development</CodesignProvision>
+	  <CodesignKey>Apple Development: Jess Zanchi (UDHM3M3J8P)</CodesignKey>
+	  <CodesignProvision>provProf</CodesignProvision>
 	</PropertyGroup>
 
 	<ItemGroup>
