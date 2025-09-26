@@ -51,7 +51,10 @@
         Title="Temp"
         ContentTemplate="{DataTemplate local:Temp}"
         Route="Temp" />
-
+    <ShellContent
+         Title="Return"
+         ContentTemplate="{DataTemplate local:ReturnScan}"
+         Route="ReturnScan" />
     <Shell.FlyoutFooter>
         <StackLayout>
             <Button Text="Sign Out" Command ="{Binding SignOutCommand}" BackgroundColor="DarkRed"></Button>

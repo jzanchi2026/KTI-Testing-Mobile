@@ -38,7 +38,7 @@ public partial class Inventory : ContentPage
     public Inventory()
     {
         InitializeComponent();
-        GetInvTools();
+        //GetInvTools();
     }
     private async void GetInvTools()
     {
@@ -63,5 +63,15 @@ public partial class Inventory : ContentPage
         Button button = new Button { Text = tool.Name, Style = myStyle };
         button.Margin = new Thickness(15, 15, 15, 0);
         listBox.Children.Add(button);
+    }
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        foreach (var button in listBox.Children.OfType<Button>().ToList())
+        {
+            listBox.Children.Remove(button);
+        }
+
+        GetInvTools();
     }
 }
