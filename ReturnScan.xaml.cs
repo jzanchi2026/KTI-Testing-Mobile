@@ -1,12 +1,28 @@
+/*namespace MauiApp2;
+
+using CommunityToolkit.Maui.Markup;
+using KTI_Testing__Mobile_.Models;
+public partial class ReturnScan : ContentPage
+{
+    public ReturnScan()
+    {
+        InitializeComponent();
+    }
+
+    public ReturnScan(Tool t)
+    {
+
+    }
+}*/
 namespace MauiApp2;
 using KTI_Testing__Mobile_.Models;
 using KTI_Testing__Mobile_.Resources.viewModels;
 using MauiApp2.Models;
 using System.Windows.Input;
 
-public partial class Borrow : ContentPage
+public partial class ReturnScan : ContentPage
 {
-    public Borrow()
+    public ReturnScan()
     {
         InitializeComponent();
 
@@ -46,10 +62,7 @@ public partial class Borrow : ContentPage
             await cameraView.StopCameraAsync();
             string barcodeValue = args.Result[0].Text;
             Tool tool = null;
-            string truncated = "";
-            foreach (char character in barcodeValue){ truncated += int.TryParse(character.ToString(), out int j) ? character : ""; }
-
-            if (int.TryParse(truncated, out int result))
+            if (int.TryParse(barcodeValue, out int result))
             {
                 tool = ToolRepository.getSpecificTool(result);
             }
@@ -62,21 +75,21 @@ public partial class Borrow : ContentPage
             if (tool.Name != "invalid")
             {
                 Confirm.IsVisible = true;
-                barcodeResult.Text = $"Are you sure you want to check out:\n{ScannedTool.Name}";
+                barcodeResult.Text = $"Are you sure you want to return:\n{ScannedTool.Name}";
                 Confirm.Text = "Confirm";
             }
             else
             {
                 barcodeResult.Text = "invalid";
             }
-            
+
             //Navigation.PushAsync(new CartPage(myTool));
         });
     }
 
     private async void addToCartPage(object sender, EventArgs e)
-    { 
-        await Navigation.PushAsync(new ToolInfo());
+    {
+        await Navigation.PushAsync(new ToolInfo(ScannedTool));
         Confirm.IsVisible = false;
         barcodeResult.Text = "";
         await cameraView.StartCameraAsync();
@@ -103,7 +116,7 @@ public partial class Borrow : ContentPage
         });
     }
 
- 
+
     protected override void OnDisappearing()
     {
         base.OnDisappearing();

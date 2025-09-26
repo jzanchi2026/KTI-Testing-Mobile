@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:cv ="clr-namespace:Camera.MAUI;assembly=Camera.MAUI"
+             x:Class="MauiApp2.ReturnScan"
+             Title="ReturnScan"
+             >
+
+    <VerticalStackLayout StyleClass="body">
+        <Label 
+            Text="Align barcode here"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+
+        <cv:CameraView x:Name="cameraView" WidthRequest="300" HeightRequest="200" CamerasLoaded="cameraview_CamerasLoaded" BarCodeDetectionEnabled="True" BarcodeDetected="cameraView_BarcodeDetected"/>
+
+        <Label x:Name="barcodeResult"
+               FontSize="20"
+               FontAttributes="Bold"
+       HorizontalOptions="Center"
+       VerticalOptions="Center"
+       HorizontalTextAlignment="Center"
+       VerticalTextAlignment="Center" />
+        <Button x:Name="Confirm" Clicked="addToCartPage" BackgroundColor="#00FF64" MaximumHeightRequest="200" MaximumWidthRequest="300" MinimumHeightRequest="10" MinimumWidthRequest="50" Margin="0,50,0,0" IsVisible="False"></Button>
+
+    </VerticalStackLayout>
+</ContentPage>
