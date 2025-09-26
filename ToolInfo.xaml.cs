@@ -61,7 +61,7 @@ public partial class ToolInfo : ContentPage
             "gears.png",
             "ruler.png",
             "wrench.png",
-            "wire_cutter.png"
+            "wires_cutter.png"
         };
 
         Random random = new Random();
