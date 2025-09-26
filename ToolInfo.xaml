@@ -4,15 +4,75 @@
              x:Class="MauiApp2.ToolInfo">
 
     <VerticalStackLayout
-        VerticalOptions="Center"
-        HorizontalOptions="Center">
+    VerticalOptions="Center"
+    HorizontalOptions="Center"
+    Spacing="20">
+
+    <!-- Tool Image -->
+    <Image 
+        x:Name="toolImage"
+        Source="wires_cutter.png" 
+        WidthRequest="200"
+        HeightRequest="200"
+        HorizontalOptions="Center" />
+
+    <!-- Tool Name -->
+    <Label 
+        x:Name="mainText"
+        Text="Tool Name"
+        FontSize="30"
+        HorizontalOptions="Center" />
+
+    <!-- Availability -->
+    <Label 
+        x:Name="availableCount"
+        Text="0 available"
+        FontSize="30"
+        HorizontalOptions="Center" />
+
+    <!-- Quantity Selector -->
+    <HorizontalStackLayout 
+        HorizontalOptions="Center"
+        Spacing="10">
+
+        <Button 
+            Text="−"
+            FontSize="28"
+            WidthRequest="50"
+            Clicked="OnDecrementClicked" />
 
         <Label 
-                x:Name="mainText"
-                Text="Hello, ToolInfo Page!"
-               FontSize="30"
-               HorizontalOptions="Center"
-               />
+            x:Name="quantityLabel"
+            Text="0"
+            FontSize="28"
+            HorizontalOptions="Center"
+            VerticalOptions="Center" />
 
-    </VerticalStackLayout>
+        <Button 
+            Text="＋"
+            FontSize="28"
+            WidthRequest="50"
+            Clicked="OnIncrementClicked" />
+
+    </HorizontalStackLayout>
+
+    <!-- Action Buttons -->
+    <Button 
+        Text="Scan and Checkout"
+        FontSize="24"
+        Clicked="OnScanCheckoutClicked"
+        BackgroundColor="LightGreen"
+        TextColor="Black"
+        WidthRequest="200" />
+
+    <Button 
+        Text="Return"
+        FontSize="24"
+        Clicked="OnReturnClicked"
+        BackgroundColor="LightCoral"
+        TextColor="Black"
+        WidthRequest="200" />
+
+</VerticalStackLayout>
+
 </ContentPage>
