@@ -92,7 +92,6 @@ public partial class ReturnScan : ContentPage
     private async void addToCartPage(object sender, EventArgs e)
     {
         await Navigation.PushAsync(new ToolInfo(ScannedTool, "return"));
-
         Confirm.IsVisible = false;
         barcodeResult.Text = "";
         await cameraView.StartCameraAsync();
