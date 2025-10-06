@@ -39,7 +39,7 @@ public partial class ToolInfo : ContentPage
         {
             ToolRepository.returnTool(scannedTool);
         }
-
+    }
     int quantity = 0;
 
     private void OnIncrementClicked(object sender, EventArgs e)
