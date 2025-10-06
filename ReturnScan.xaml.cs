@@ -62,7 +62,10 @@ public partial class ReturnScan : ContentPage
             await cameraView.StopCameraAsync();
             string barcodeValue = args.Result[0].Text;
             Tool tool = null;
-            if (int.TryParse(barcodeValue, out int result))
+            string truncated = "";
+            foreach (char character in barcodeValue) { truncated += int.TryParse(character.ToString(), out int j) ? character : ""; }
+
+            if (int.TryParse(truncated, out int result))
             {
                 tool = ToolRepository.getSpecificTool(result);
             }
@@ -86,10 +89,10 @@ public partial class ReturnScan : ContentPage
             //Navigation.PushAsync(new CartPage(myTool));
         });
     }
-
     private async void addToCartPage(object sender, EventArgs e)
     {
-        await Navigation.PushAsync(new ToolInfo(ScannedTool));
+        await Navigation.PushAsync(new ToolInfo(ScannedTool, "return"));
+
         Confirm.IsVisible = false;
         barcodeResult.Text = "";
         await cameraView.StartCameraAsync();

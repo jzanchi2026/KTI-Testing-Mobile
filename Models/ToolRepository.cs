@@ -105,5 +105,14 @@ namespace MauiApp2.Models
             Console.WriteLine(stringContent);
 
         }
+        public static async void returnTool(Tool tool)
+        {
+            Uri checkUri = new Uri($"{App.uri}returnTool?id={tool.Id}");
+            // Treat like a GET although it is a POST
+            var response = await App.myHttpClient.PostAsync(checkUri, null);
+            var stringContent = await response.Content.ReadAsStringAsync();
+
+            Console.WriteLine(stringContent);
+        }
     }
 }

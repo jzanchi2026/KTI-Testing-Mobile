@@ -14,13 +14,19 @@ public partial class ToolInfo : ContentPage
 
     }
     private string _passedValue;
-    public ToolInfo(Tool scannedTool)
+    public ToolInfo(Tool scannedTool, string action)
     {
         InitializeComponent();
         _passedValue = scannedTool.Name;
         mainText.Text = _passedValue;
-        ToolRepository.checkoutTool(scannedTool);
-
+        if (action == "checkout")
+        {
+            ToolRepository.checkoutTool(scannedTool);
+        }
+        else if (action == "return")
+        {
+            ToolRepository.returnTool(scannedTool);
+        }
     }
 
 }
