@@ -31,12 +31,13 @@ namespace MauiApp2.Models
                 if (where == "getTools")
                 {
                     JObject toolObj = (JObject)data[i];
-                    toolList.Add(new Tool((int)toolObj["toolTypeId"], toolObj["toolName"].ToString(), "", 1));
+                    Tool add = new Tool((int)toolObj["toolID"], toolObj["toolName"].ToString());
+                    toolList.Add(add);
                 }
                 else if(where == "getUserTools")
                 {
                     JObject toolObj = (JObject)data[i];
-                    Tool ret = await parseTool((int)toolObj["toolTypeId"]);
+                    Tool ret = await parseTool((int)toolObj["toolID"]);
                     toolList.Add(ret);
                 }
             }
@@ -52,7 +53,8 @@ namespace MauiApp2.Models
         {
             return _tools.FirstOrDefault(x => x.Id == ToolId);
         }
-
+        //Temporary disable to the search
+        /*
         public static List<Tool> SearchTools(string filterText)
         {
             var tools = _tools.Where(x => !string.IsNullOrWhiteSpace(x.Name) && x.Name.StartsWith(filterText, StringComparison.OrdinalIgnoreCase))?.ToList();
@@ -67,6 +69,7 @@ namespace MauiApp2.Models
 
             return tools;
         }
+        */
         public static Tool getSpecificTool(int tofind)
         {
             foreach (Tool i in _tools)
@@ -76,7 +79,7 @@ namespace MauiApp2.Models
                     return i;
                 }
             }
-            return new Tool(-1, "invalid", "invalid", -1);
+            return new Tool(-1, "invalid");
         }
         public static async Task<Tool> parseTool(int id)
         {
@@ -85,7 +88,7 @@ namespace MauiApp2.Models
             Console.WriteLine(response);
             var stringContent = await response.Content.ReadAsStringAsync();
             JObject tooldata = JObject.Parse(stringContent);
-            Tool ret = new Tool((int)tooldata["toolTypeId"], tooldata["toolName"].ToString(), "", 1);
+            Tool ret = new Tool((int)tooldata["toolID"], tooldata["toolName"].ToString());
             return ret;
         }
         /*

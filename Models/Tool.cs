@@ -16,16 +16,14 @@ namespace KTI_Testing__Mobile_.Models
 
         private string name = "";
 
-        private string description;
         private string icon;
-        private int amount;
 
-        public Tool(int i, string n, string d, int a)
+
+        public Tool(int i, string n)
         {
             this.id = i;
             this.name = n;
-            this.description = d;
-            this.amount = a;
+            
         }
         public int Id
         {
@@ -38,11 +36,6 @@ namespace KTI_Testing__Mobile_.Models
             get { return name; }
             set { name = value; }
         }
-        public string Desc
-        {
-            get { return description; }
-            set { description = value; }
-        }
 
         public string Icon
         {
@@ -50,10 +43,5 @@ namespace KTI_Testing__Mobile_.Models
             set { icon = value; }
         }
 
-        public int Amount
-        {
-            get { return amount; }
-            set { amount = value; }
-        }
     }
 }

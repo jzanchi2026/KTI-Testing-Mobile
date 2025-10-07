@@ -99,7 +99,7 @@ public partial class ToolInfo : ContentPage
             if (tool != null)
             {
                 mainText.Text = tool.Name;
-                availableCount.Text = tool.Amount.ToString() + " available";
+                //availableCount.Text = tool.Amount.ToString() + " available";
                 /*if (tool.Icon.Trim() != "")
                     toolImage.Source = tool.Icon;
                 else*/

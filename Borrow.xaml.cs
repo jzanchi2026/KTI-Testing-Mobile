@@ -47,7 +47,10 @@ public partial class Borrow : ContentPage
             string barcodeValue = args.Result[0].Text;
             Tool tool = null;
             string truncated = "";
-            foreach (char character in barcodeValue){ truncated += int.TryParse(character.ToString(), out int j) ? character : ""; }
+            foreach (char character in barcodeValue)
+            { 
+                truncated += int.TryParse(character.ToString(), out int j) ? character : ""; 
+            }
 
             if (int.TryParse(truncated, out int result))
             {
@@ -55,7 +58,7 @@ public partial class Borrow : ContentPage
             }
             else
             {
-                tool = new Tool(-1, "invalid", "invalid", -1);
+                tool = new Tool(-1, "invalid");
             }
 
             ScannedTool = tool;

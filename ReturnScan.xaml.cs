@@ -71,7 +71,7 @@ public partial class ReturnScan : ContentPage
             }
             else
             {
-                tool = new Tool(-1, "invalid", "invalid", -1);
+                tool = new Tool(-1, "invalid");
             }
 
             ScannedTool = tool;
