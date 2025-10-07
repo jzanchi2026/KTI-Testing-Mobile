@@ -47,10 +47,7 @@
         ContentTemplate="{DataTemplate local:Borrow}"
         Route="Borrow" />
 
-    <ShellContent
-        Title="Temp"
-        ContentTemplate="{DataTemplate local:Temp}"
-        Route="Temp" />
+
     <ShellContent
          Title="Return"
          ContentTemplate="{DataTemplate local:ReturnScan}"
