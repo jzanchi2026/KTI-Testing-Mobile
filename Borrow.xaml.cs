@@ -6,10 +6,11 @@ using System.Windows.Input;
 
 public partial class Borrow : ContentPage
 {
+    public string Prefix { get; set; }
     public Borrow()
     {
         InitializeComponent();
-
+        Prefix = "";
         RefreshView refreshView = new RefreshView();
         ICommand refreshCommand = new Command(() =>
         {
@@ -36,7 +37,6 @@ public partial class Borrow : ContentPage
             });
         }
     }
-
     private void cameraView_BarcodeDetected(object sender, Camera.MAUI.ZXingHelper.BarcodeEventArgs args)
     {
         MainThread.BeginInvokeOnMainThread(async () =>
@@ -47,9 +47,12 @@ public partial class Borrow : ContentPage
             string barcodeValue = args.Result[0].Text;
             Tool tool = null;
             string truncated = "";
+            Prefix = "";
+            string action = "";
             foreach (char character in barcodeValue)
             { 
-                truncated += int.TryParse(character.ToString(), out int j) ? character : ""; 
+                truncated += int.TryParse(character.ToString(), out int j) ? character : "";
+                Prefix += !int.TryParse(character.ToString(), out int k) ? character : "";
             }
 
             if (int.TryParse(truncated, out int result))
@@ -58,14 +61,24 @@ public partial class Borrow : ContentPage
             }
             else
             {
-                tool = new Tool(-1, "invalid");
+                tool = new Tool(-1, "invalid", "DNE");
             }
+            
+            Console.WriteLine($"DEBUG Prefix = '{Prefix}'");
 
+            if (Prefix == "KTM_")
+            {
+                action = "check out";
+            }
+            else if (Prefix == "RKTM_")
+            {
+                action = "return";
+            }
             ScannedTool = tool;
             if (tool.Name != "invalid")
             {
                 Confirm.IsVisible = true;
-                barcodeResult.Text = $"Are you sure you want to check out:\n{ScannedTool.Name}";
+                barcodeResult.Text = $"Are you sure you want to {action}:\n{ScannedTool.Name}";
                 Confirm.Text = "Confirm";
             }
             else
@@ -76,12 +89,17 @@ public partial class Borrow : ContentPage
             //Navigation.PushAsync(new CartPage(myTool));
         });
     }
-
+    
     private async void addToCartPage(object sender, EventArgs e)
-    { 
-
-        await Navigation.PushAsync(new ToolInfo(ScannedTool, "checkout"));
-
+    {
+        if (Prefix == "KTM_")
+        {
+            await Navigation.PushAsync(new ToolInfo(ScannedTool, "checkout"));
+        }
+        else if (Prefix == "RKTM_")
+        {
+            await Navigation.PushAsync(new ToolInfo(ScannedTool, "return"));
+        }
         Confirm.IsVisible = false;
         barcodeResult.Text = "";
         await cameraView.StartCameraAsync();

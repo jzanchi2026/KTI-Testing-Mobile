@@ -46,11 +46,6 @@
         Title="Borrow Items"
         ContentTemplate="{DataTemplate local:Borrow}"
         Route="Borrow" />
-
-    <ShellContent
-         Title="Return"
-         ContentTemplate="{DataTemplate local:ReturnScan}"
-         Route="ReturnScan" />
     <Shell.FlyoutFooter>
         <StackLayout>
             <Button Text="Sign Out" Command ="{Binding SignOutCommand}" BackgroundColor="DarkRed"></Button>

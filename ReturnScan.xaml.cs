@@ -71,7 +71,7 @@ public partial class ReturnScan : ContentPage
             }
             else
             {
-                tool = new Tool(-1, "invalid"  );
+                tool = new Tool(-1, "invalid", "DNE");
             }
 
             ScannedTool = tool;

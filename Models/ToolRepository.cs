@@ -31,7 +31,7 @@ namespace MauiApp2.Models
                 if (where == "getTools")
                 {
                     JObject toolObj = (JObject)data[i];
-                    Tool add = new Tool((int)toolObj["toolID"], toolObj["toolName"].ToString());
+                    Tool add = new Tool((int)toolObj["toolID"], toolObj["toolName"].ToString(), toolObj["takenBy"].ToString());
                     toolList.Add(add);
                 }
                 else if(where == "getUserTools")
@@ -79,7 +79,7 @@ namespace MauiApp2.Models
                     return i;
                 }
             }
-            return new Tool(-1, "invalid");
+            return new Tool(-1, "invalid", "DNE");
         }
         public static async Task<Tool> parseTool(int id)
         {
@@ -88,7 +88,7 @@ namespace MauiApp2.Models
             Console.WriteLine(response);
             var stringContent = await response.Content.ReadAsStringAsync();
             JObject tooldata = JObject.Parse(stringContent);
-            Tool ret = new Tool((int)tooldata["toolID"], tooldata["toolName"].ToString());
+            Tool ret = new Tool((int)tooldata["toolID"], tooldata["toolName"].ToString(), tooldata["takenBy"].ToString());
             return ret;
         }
         /*

@@ -18,11 +18,15 @@ namespace KTI_Testing__Mobile_.Models
 
         private string icon;
 
+        private bool status;
 
-        public Tool(int i, string n)
+
+        public Tool(int i, string n, string s)
         {
             this.id = i;
             this.name = n;
+            this.status = (s == null) ? true : false;
+
             
         }
         public int Id
@@ -41,6 +45,11 @@ namespace KTI_Testing__Mobile_.Models
         {
             get { return icon; }
             set { icon = value; }
+        }
+        public bool Status
+        {
+            get { return status; }
+            set { status = value; }
         }
 
     }
