@@ -47,7 +47,6 @@
         ContentTemplate="{DataTemplate local:Borrow}"
         Route="Borrow" />
 
-
     <ShellContent
          Title="Return"
          ContentTemplate="{DataTemplate local:ReturnScan}"
