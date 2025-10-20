@@ -26,19 +26,13 @@ public partial class ToolInfo : ContentPage
     }
 
     private string _passedValue;
+    private Tool tool;
     public ToolInfo(Tool scannedTool, string action)
     {
         InitializeComponent();
         _passedValue = scannedTool.Name;
+        tool = scannedTool;
         mainText.Text = _passedValue;
-        if (action == "checkout")
-        {
-            ToolRepository.checkoutTool(scannedTool);
-        }
-        else if (action == "return")
-        {
-            ToolRepository.returnTool(scannedTool);
-        }
     }
     int quantity = 0;
 
@@ -60,11 +54,14 @@ public partial class ToolInfo : ContentPage
     private async void OnScanCheckoutClicked(object sender, EventArgs e)
     {
         // implement later
+        ToolRepository.checkoutTool(tool);
+        await Shell.Current.GoToAsync("..");
     }
 
     private async void OnReturnClicked(object sender, EventArgs e)
     {
         // implement later
+        await Navigation.PushAsync(new ReturnScan());
     }
 
     // Temporary function that puts random img in

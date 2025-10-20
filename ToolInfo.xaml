@@ -58,6 +58,7 @@
 
     <!-- Action Buttons -->
     <Button 
+        x:Name="Checkout"
         Text="Scan and Checkout"
         FontSize="24"
         Clicked="OnScanCheckoutClicked"
@@ -66,6 +67,7 @@
         WidthRequest="200" />
 
     <Button 
+        x:Name="Return"
         Text="Return"
         FontSize="24"
         Clicked="OnReturnClicked"

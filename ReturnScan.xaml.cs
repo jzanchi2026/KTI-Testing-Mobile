@@ -15,6 +15,7 @@ public partial class ReturnScan : ContentPage
     }
 }*/
 namespace MauiApp2;
+
 using KTI_Testing__Mobile_.Models;
 using KTI_Testing__Mobile_.Resources.viewModels;
 using MauiApp2.Models;
@@ -22,6 +23,7 @@ using System.Windows.Input;
 
 public partial class ReturnScan : ContentPage
 {
+    public string Prefix { get; set; }
     public ReturnScan()
     {
         InitializeComponent();
@@ -63,7 +65,13 @@ public partial class ReturnScan : ContentPage
             string barcodeValue = args.Result[0].Text;
             Tool tool = null;
             string truncated = "";
-            foreach (char character in barcodeValue) { truncated += int.TryParse(character.ToString(), out int j) ? character : ""; }
+            Prefix = "";
+            
+            foreach (char character in barcodeValue)
+            {
+                truncated += int.TryParse(character.ToString(), out int j) ? character : "";
+                Prefix += !int.TryParse(character.ToString(), out int k) ? character : "";
+            }
 
             if (int.TryParse(truncated, out int result))
             {
@@ -74,27 +82,29 @@ public partial class ReturnScan : ContentPage
                 tool = new Tool(-1, "invalid", "DNE");
             }
 
+            Console.WriteLine($"DEBUG Prefix = '{Prefix}'");
             ScannedTool = tool;
-            if (tool.Name != "invalid")
+            if (Prefix == "RKTM_")
             {
-                Confirm.IsVisible = true;
+                
                 barcodeResult.Text = $"Are you sure you want to return:\n{ScannedTool.Name}";
+                Confirm.IsVisible = true;
                 Confirm.Text = "Confirm";
             }
             else
             {
                 barcodeResult.Text = "invalid";
-            }
 
-            //Navigation.PushAsync(new CartPage(myTool));
+            }
         });
     }
     private async void addToCartPage(object sender, EventArgs e)
     {
-        await Navigation.PushAsync(new ToolInfo(ScannedTool, "return"));
+        ToolRepository.returnTool(ScannedTool);
         Confirm.IsVisible = false;
         barcodeResult.Text = "";
-        await cameraView.StartCameraAsync();
+
+        await Shell.Current.GoToAsync("..");
     }
     protected override void OnAppearing()
     {

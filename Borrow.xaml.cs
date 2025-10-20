@@ -65,27 +65,18 @@ public partial class Borrow : ContentPage
             }
             
             Console.WriteLine($"DEBUG Prefix = '{Prefix}'");
-
+            ScannedTool = tool;
             if (Prefix == "KTM_")
             {
-                action = "check out";
-            }
-            else if (Prefix == "RKTM_")
-            {
-                action = "return";
-            }
-            ScannedTool = tool;
-            if (tool.Name != "invalid")
-            {
-                Confirm.IsVisible = true;
-                barcodeResult.Text = $"Are you sure you want to {action}:\n{ScannedTool.Name}";
-                Confirm.Text = "Confirm";
+                barcodeValue = "";
+                await Navigation.PushAsync(new ToolInfo(ScannedTool, "checkout"));
+                //barcodeResult.Text = $"Are you sure you want to check out:\n{ScannedTool.Name}";
             }
             else
             {
                 barcodeResult.Text = "invalid";
+                
             }
-            
             //Navigation.PushAsync(new CartPage(myTool));
         });
     }
