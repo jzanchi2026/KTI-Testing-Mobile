@@ -48,6 +48,26 @@ namespace KTI_Testing__Mobile_.NewFolder
                     userinfo.UserId = data["userid"].ToString();
                     userinfo.Email = data["email"].ToString();
                     userinfo.Name = data["username"].ToString();
+                    userinfo.Status = int.Parse(data["userType"].ToString());
+
+                    var shell = Shell.Current as AppShell; // get the current shell
+                    if (userinfo.Status == 2)
+                    {
+                        if (shell != null)
+                        {
+                            // Create your ShellContent
+                            var adminPage = new ShellContent
+                            {
+                                Title = "Admin Page",
+                                ContentTemplate = new DataTemplate(typeof(AdminPage)),
+                                Route = "AdminPage"
+                            };
+
+                            // Add it to the Shell
+                            shell.Items.Add(adminPage);
+
+                        }
+                    }
                 }
                 else
                 {

@@ -8,6 +8,8 @@
 
         public string? Email { get; set; }
 
+        public int? Status { get; set; }
+
         public string? Error { get; set; }
 
     }

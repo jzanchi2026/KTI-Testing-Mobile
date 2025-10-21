@@ -1,4 +1,5 @@
 using KTI_Testing__Mobile_;
+using KTI_Testing__Mobile_.Models;
 using KTI_Testing__Mobile_.Resources.viewModels;
 using MauiApp2;
 
@@ -30,6 +31,8 @@ namespace MauiApp2
             Routing.RegisterRoute(nameof(Inventory), typeof(Inventory));
             Routing.RegisterRoute(nameof(ToolInfo), typeof(ToolInfo));
             Routing.RegisterRoute(nameof(ReturnScan), typeof(ReturnScan));
+            Routing.RegisterRoute(nameof(AdminPage), typeof(AdminPage));
+
         }
     }
 }
