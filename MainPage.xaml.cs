@@ -79,8 +79,8 @@ namespace MauiApp2
         private void SearchBar_TextChanged(object sender, TextChangedEventArgs e)
         {
             //Temporary disable to search
-            //var tools = new ObservableCollection<Tool>(ToolRepository.SearchTools(((SearchBar)sender).Text));
-            //toolList.ItemsSource = tools;
+            var tools = new ObservableCollection<Tool>(ToolRepository.SearchTools(((SearchBar)sender).Text));
+            toolList.ItemsSource = tools;
         }
     }
     //test

@@ -54,22 +54,15 @@ namespace MauiApp2.Models
             return _tools.FirstOrDefault(x => x.Id == ToolId);
         }
         //Temporary disable to the search
-        /*
+        
         public static List<Tool> SearchTools(string filterText)
         {
             var tools = _tools.Where(x => !string.IsNullOrWhiteSpace(x.Name) && x.Name.StartsWith(filterText, StringComparison.OrdinalIgnoreCase))?.ToList();
 
-            if (tools == null || _tools.Count <= 0)
-            {
-                tools = _tools.Where(x => !string.IsNullOrWhiteSpace(x.Amount.ToString()) && x.Amount.ToString().StartsWith(filterText, StringComparison.OrdinalIgnoreCase))?.ToList();
-            } else
-            {
-                return tools;
-            }
 
             return tools;
         }
-        */
+        
         public static Tool getSpecificTool(int tofind)
         {
             foreach (Tool i in _tools)
@@ -91,12 +84,6 @@ namespace MauiApp2.Models
             Tool ret = new Tool((int)tooldata["toolID"], tooldata["toolName"].ToString(), tooldata["takenBy"].ToString());
             return ret;
         }
-        /*
-        public static async void checkoutTool(int id)
-        {
-
-        }
-        */
         public static async void checkoutTool(Tool tool)
         {
             // Append the ID to the URL as a query parameter
