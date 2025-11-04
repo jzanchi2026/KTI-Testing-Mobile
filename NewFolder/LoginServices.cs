@@ -45,7 +45,7 @@ namespace KTI_Testing__Mobile_.NewFolder
                 if ((bool?)data["login"] == true)
                 {
                     Console.WriteLine("LOGIN TRUE");
-                    userinfo.UserId = data["userid"].ToString();
+                    userinfo.UserId = data["userId"].ToString();
                     userinfo.Email = data["email"].ToString();
                     userinfo.Name = data["username"].ToString();
                     userinfo.Status = int.Parse(data["userType"].ToString());

@@ -25,7 +25,7 @@ namespace KTI_Testing__Mobile_.Models
         {
             this.id = i;
             this.name = n;
-            this.status = (s == null) ? true : false;
+            this.status = (s == "") ? true : false;
 
             
         }

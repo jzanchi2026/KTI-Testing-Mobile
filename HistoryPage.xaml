@@ -3,37 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MauiApp2.HistoryPage"
              Title="HistoryPage">
-
-    <Grid RowDefinitions= "100, *, Auto, 75"
+    <ScrollView>
+        <Grid x:Name="toolList"
+          RowDefinitions= "100, *, Auto, 75"
         ColumnDefinitions="0.25*, 0.25*, 0.25*, 0.25*"
         Padding="10"
         ColumnSpacing="10" BackgroundColor="#345CFF">
 
-
-        <Button Text="Profile"
-        Grid.Row="3"
-        Grid.Column="0"
-        Clicked="GoToProfilePage"
-        
-        />
-
-        <Button Text="latesthistory"
-        Grid.Row="0"
-        Grid.Column="0"
-        Clicked="latestSubmitions_Clicked" Background="#F0BF93" IsVisible="True" BackgroundColor="#FFFFFF" TextColor="#000000" FlowDirection="MatchParent" FontAutoScalingEnabled="False" FontSize="Medium" InputTransparent="False" IsEnabled="True"
-        />
-
-        <Button Text="Cart"
-        Grid.Row="3"
-        Grid.Column="1"
-        Clicked="GoToCartPage"
-        />
-
-        <Button Text="Settings"
-        Grid.Row="3"
-        Grid.Column="2"
-        Clicked="GoToSettingPage"
-        />
-
-    </Grid>
+        </Grid>
+    </ScrollView>
 </ContentPage>

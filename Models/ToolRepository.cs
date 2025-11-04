@@ -31,13 +31,13 @@ namespace MauiApp2.Models
                 if (where == "getTools")
                 {
                     JObject toolObj = (JObject)data[i];
-                    Tool add = new Tool((int)toolObj["toolID"], toolObj["toolName"].ToString(), toolObj["takenBy"].ToString());
+                    Tool add = new Tool((int)toolObj["toolId"], toolObj["toolName"].ToString(), toolObj["takenBy"].ToString());
                     toolList.Add(add);
                 }
                 else if(where == "getUserTools")
                 {
                     JObject toolObj = (JObject)data[i];
-                    Tool ret = await parseTool((int)toolObj["toolID"]);
+                    Tool ret = await parseTool((int)toolObj["toolId"]);
                     toolList.Add(ret);
                 }
             }
@@ -53,7 +53,6 @@ namespace MauiApp2.Models
         {
             return _tools.FirstOrDefault(x => x.Id == ToolId);
         }
-        //Temporary disable to the search
         
         public static List<Tool> SearchTools(string filterText)
         {
@@ -81,18 +80,23 @@ namespace MauiApp2.Models
             Console.WriteLine(response);
             var stringContent = await response.Content.ReadAsStringAsync();
             JObject tooldata = JObject.Parse(stringContent);
-            Tool ret = new Tool((int)tooldata["toolID"], tooldata["toolName"].ToString(), tooldata["takenBy"].ToString());
+            Tool ret = new Tool((int)tooldata["toolId"], tooldata["toolName"].ToString(), tooldata["takenBy"].ToString());
             return ret;
         }
-        public static async void checkoutTool(Tool tool)
+        public static async Task<bool> checkoutTool(Tool tool)
         {
             // Append the ID to the URL as a query parameter
-            Uri checkUri = new Uri($"{App.uri}checkoutTool?id={tool.Id}");
-            // Treat like a GET although it is a POST
-            var response = await App.myHttpClient.PostAsync(checkUri, null);
-            var stringContent = await response.Content.ReadAsStringAsync();
-
-            Console.WriteLine(stringContent);
+            var stringContent = "";
+            if (tool.Status == true)
+            {
+                Uri checkUri = new Uri($"{App.uri}checkoutTool?id={tool.Id}");
+                // Treat like a GET although it is a POST
+                var response = await App.myHttpClient.PostAsync(checkUri, null);
+                stringContent = await response.Content.ReadAsStringAsync();
+                Console.WriteLine(stringContent);
+                return true;
+            }
+            return false;
 
         }
         public static async void returnTool(Tool tool)
@@ -103,6 +107,35 @@ namespace MauiApp2.Models
             var stringContent = await response.Content.ReadAsStringAsync();
 
             Console.WriteLine(stringContent);
+        }
+        public static async Task<List<HistoryObject>> userToolHistory()
+        {
+            Uri historyUri = new Uri($"{App.uri}getMyHistory");
+            var response = await App.myHttpClient.GetAsync(historyUri.ToString());
+            var stringContent = await response.Content.ReadAsStringAsync();
+            Console.WriteLine(stringContent);
+            JArray tooldata = JArray.Parse(stringContent);
+            List<HistoryObject> ret = new List<HistoryObject>();
+            for (int i = 0; i < tooldata.Count; i++)
+            {
+                JObject toolObj = (JObject)tooldata[i];
+                int recordId = (int)toolObj["recordId"];
+                int toolId = (int)toolObj["toolId"];
+                string userId = toolObj["userId"].ToString();
+                DateTime checkoutTime = (DateTime)toolObj["timeTaken"];
+                DateTime returnTime = new DateTime();
+                if (toolObj["timeReturned"] == null || toolObj["timeReturned"].Type == JTokenType.Null)
+                {
+                    returnTime =  new DateTime(0001, 1, 1);
+                }
+                else
+                {
+                    returnTime = (DateTime)toolObj["timeReturned"];
+                }
+                HistoryObject h = new HistoryObject(recordId, toolId, userId, checkoutTime, returnTime);
+                ret.Add(h);
+            }
+            return ret;
         }
     }
 }

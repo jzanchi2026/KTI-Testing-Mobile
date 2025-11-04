@@ -53,14 +53,24 @@ public partial class ToolInfo : ContentPage
 
     private async void OnScanCheckoutClicked(object sender, EventArgs e)
     {
-        // implement later
-        ToolRepository.checkoutTool(tool);
-        await Shell.Current.GoToAsync("..");
+        if (tool != null)
+        {
+            bool a = await ToolRepository.checkoutTool(tool);
+            if (a)
+            {
+                await DisplayAlert("Success", "Tool checked out successfully!", "OK");
+            }
+            else
+            {
+                await DisplayAlert("Error", "Failed to check out the tool.", "OK");
+            }
+        }
+            await Shell.Current.GoToAsync("..");
     }
 
     private async void OnReturnClicked(object sender, EventArgs e)
     {
-        // implement later
+        
         await Navigation.PushAsync(new ReturnScan());
     }
 
