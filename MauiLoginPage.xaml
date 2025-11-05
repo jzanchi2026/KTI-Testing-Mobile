@@ -1,83 +1,173 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MauiApp2.MauiLoginPage"
-             Title="Login" Shell.NavBarIsVisible="False" >
-    <Grid BackgroundColor="Grey">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="220"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="50"/>
-        </Grid.RowDefinitions>
-        <Path Stroke="White" Data="m-0.02,-241.035l805.00015,0l-5.02624,497.65615c-294.21016,176.52286 -459.71328,146.99438 -799.97391,34.13395l0,-531.7901z"  Fill="DarkRed"/>
+<ContentPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="MauiApp2.MauiLoginPage"
+    Title="Login"
+    Shell.NavBarIsVisible="False"
+    BackgroundColor="#2B0000"
+    Padding="0">
+
+    <Grid>
+
+        <!-- Background Image -->
+        <Image 
+            Source="loginbg.png"
+            Aspect="AspectFill"
+            ZIndex="-2"/>
+
+        
+
+        <!-- Safe Area Adjust for iOS -->
+        <Grid
+            RowDefinitions="Auto,*,Auto"
+            Padding="10"
+            Margin="0"
+            BackgroundColor="Transparent"
+            IgnoreSafeArea="False">
+            
+            <!-- Header -->
+            <VerticalStackLayout Grid.Row="0" Margin="0,40,0,20" HorizontalOptions="Center">
+                <Border
+                    WidthRequest="140" HeightRequest="140"
+                    StrokeThickness="0"
+                    Shadow="5,5,10,Black">
+                    <Image Source="applogo.png" Aspect="AspectFill"/>
+                </Border>
+
+            </VerticalStackLayout>
+
+            <!-- Login Form Container -->
+            <Border
+                Grid.Row="1"
+                Stroke="Transparent"
+                BackgroundColor="#772B0303"
+                StrokeShape="RoundRectangle 20"
+                Padding="20"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                WidthRequest="340">
+
+                <!-- All Content Inside -->
+                <VerticalStackLayout 
+                    Spacing="20"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center">
+
+                    <!-- Inner Content -->
+                    <VerticalStackLayout 
+                        Spacing="12"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        WidthRequest="300">
+
+                        <Label 
+                            Text="KEEFE TECH INVENTORY"
+                            TextColor="White"
+                            FontSize="28"
+                            FontFamily="HighSchoolUsa.ttf"
+                            FontAttributes="Bold"
+                            HorizontalOptions="Center"
+                            Margin="0,15,0,0"/>
+
+                        <Label Text="SIGN IN"
+                            FontAttributes="Bold"
+                            FontSize="20"
+                            TextColor="White"
+                            HorizontalOptions="Center"
+                            Margin="0,0,0,10"/>
+
+                        <!-- Username -->
+                        <Border 
+                            Stroke="Transparent" 
+                            BackgroundColor="White"
+                            StrokeShape="RoundRectangle 10">
+                            <Entry 
+                                Placeholder="Enter your username..."
+                                Text="{Binding UserName}"
+                                PlaceholderColor="#CCCCCC"
+                                TextColor="Black"
+                                HeightRequest="45"
+                                Margin="10,0"/>
+                        </Border>
+
+                        <!-- Password -->
+                        <Border 
+                            Stroke="Transparent" 
+                            BackgroundColor="White"
+                            StrokeShape="RoundRectangle 10">
+                            <Entry 
+                                Placeholder="Enter your password..."
+                                Text="{Binding Password}"
+                                IsPassword="True"
+                                PlaceholderColor="#CCCCCC"
+                                TextColor="Black"
+                                HeightRequest="45"
+                                Margin="10,0"/>
+                        </Border>
+
+                        <!-- Remember Me -->
+                        <HorizontalStackLayout HorizontalOptions="Center" Spacing="6">
+                            <CheckBox x:Name="RememberMeCheckbox"
+                                    IsChecked="{Binding IsRememberMeChecked}"
+                                    Color="#cc1321"/>
+                            <Label Text="Remember Me" TextColor="White" VerticalTextAlignment="Center">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnRememberMeLabelTapped"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </HorizontalStackLayout>
+
+                        <!-- Buttons -->
+                        <Button 
+                            Text="Sign in"
+                            Command="{Binding LoginCommand}"
+                            BackgroundColor="#cc1321"
+                            TextColor="White"
+                            FontAttributes="Bold"
+                            CornerRadius="25"
+                            HeightRequest="45"
+                            Margin="0,10,0,0"/>
+
+                        <Button 
+                            Text="Sign in with Google"
+                            BackgroundColor="White"
+                            TextColor="Black"
+                            CornerRadius="25"
+                            HeightRequest="45"
+                            ImageSource="google_icon_placeholder.png"
+                            ContentLayout="Left,10"
+                            Margin="0,5,0,0"/>
+                    </VerticalStackLayout>
+
+                    <!-- Footer -->
+                    <VerticalStackLayout 
+                        HorizontalOptions="Center"
+                        VerticalOptions="End"
+                        Spacing="5"
+                        Margin="0,20,0,10">
+
+                        <HorizontalStackLayout HorizontalOptions="Center" Spacing="5">
+                            <Label Text="New User?" TextColor="White" FontSize="13"/>
+                            <Label Text="Sign up" 
+                                TextColor="Red" 
+                                FontAttributes="Bold"
+                                FontSize="13"/>
+                        </HorizontalStackLayout>
+
+                        <Label Text="Forgot Password?" 
+                            TextColor="Red"
+                            FontAttributes="Bold"
+                            FontSize="13"
+                            HorizontalOptions="Center"/>
 
 
-        <StackLayout >
-            <Frame BackgroundColor="white" HeightRequest="160" WidthRequest="160" CornerRadius="50" Padding="0" Margin="0,30,0,0" HorizontalOptions="Center">
-                <Image Source="metalslogo.png" Aspect="AspectFill"></Image>
-            </Frame>
-        </StackLayout>
-        <Grid RowSpacing="5" Grid.Row="1" Margin="20,20,20,0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="50"/>
-                <RowDefinition Height="50"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="40"/>
-                <RowDefinition Height="40"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <Label Grid.Row="1" Text="Welcome!" HorizontalOptions="Center" FontSize="Title" FontAttributes="Bold" Padding="0" Margin="0"/>
-            <Label Grid.Row="2" Text="Sign in to continue" HorizontalOptions="Center" FontSize="Subtitle"/>
-            <StackLayout Grid.Row="3" Orientation="Vertical" HorizontalOptions="CenterAndExpand">
-                <Frame BackgroundColor="White" BorderColor="Black" Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="10">
-                    <StackLayout Orientation="Horizontal">
-                        <Frame BackgroundColor="#044b9B" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5" >
-                            <Image Aspect="AspectFill" Margin="0"/>
-                        </Frame>
-                        <Entry Text="{Binding UserName}" Placeholder="Username" TextColor="Blue" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"/>
-                    </StackLayout>
-                </Frame>
-                <Frame BackgroundColor="White" BorderColor="Black" Margin="0,15,0,0"  Padding="0" HorizontalOptions="FillAndExpand" CornerRadius="10">
-                    <StackLayout Orientation="Horizontal">
-                        <Frame BackgroundColor="#044b9B" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5" >
-                            <Image Aspect="AspectFill" Margin="0"/>
-                        </Frame>
-                        <Entry Text="{Binding Password}" Placeholder="Password" TextColor="#FF6B01" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"/>
-                    </StackLayout>
-                </Frame>
+                    </VerticalStackLayout>
 
-                <StackLayout Orientation="Horizontal" Margin="0,10,0,0" Padding="0" HorizontalOptions="Center">
 
-                    <CheckBox x:Name="RememberMeCheckbox"
-                      
-                      Color="#044b9B" IsChecked="{Binding IsRememberMeChecked}" />
+                </VerticalStackLayout>
+            </Border>
 
-                    <Label x:Name="RememberMeLabel"
-                       Text="Remember Me"
-                       TextColor="Black"
-                       FontSize="Small"
-                       VerticalTextAlignment="Center"
-                       HorizontalOptions="Center">
-                        <Label.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="OnRememberMeLabelTapped" />
-                        </Label.GestureRecognizers>
-                    </Label>
-
-                </StackLayout>
-
-                <Button Text="Sign in" Background="Orange" TextColor="#044b9B" FontAttributes="Bold" CornerRadius="30" WidthRequest="200" Margin="0,15,0,0" Command="{Binding LoginCommand}"/>
-
-                <StackLayout Orientation="Horizontal"  Margin="0,15,0,0">
-                    <StackLayout>
-                        <Label Text="New User?" TextColor="Firebrick" FontSize="Small"/>
-                        <Label Text="Sign up" TextColor="Firebrick" FontAttributes="Bold" FontSize="Small"/>
-                    </StackLayout>
-
-                    <Label Text="Forgot Password?" TextColor="Firebrick" FontAttributes="Bold" HorizontalOptions="EndAndExpand" VerticalOptions="Center" HorizontalTextAlignment="Center"/>
-                </StackLayout>
-            </StackLayout>
         </Grid>
     </Grid>
-    
 </ContentPage>
