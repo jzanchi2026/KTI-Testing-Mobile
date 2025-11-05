@@ -44,14 +44,15 @@ namespace MauiApp2
                 Text = tool.Name,
                 Style = myStyle,
                 Margin = new Thickness(15, 15, 15, 0),
-                BindingContext = tool // 👈 attach the whole tool object
+                BindingContext = tool //  attach the whole tool object
             };
 
             button.Clicked += async (s, e) =>
             {
                 var btn = (Button)s;
-                var selectedTool = (Tool)btn.BindingContext; // 👈 retrieve attached tool
-                await Shell.Current.GoToAsync($"{nameof(ToolInfo)}?Id={selectedTool.Id}");
+                var selectedTool = (Tool)btn.BindingContext; //  retrieve attached tool
+                await Navigation.PushAsync(new ToolInfo(selectedTool, "button"));
+                
             };
 
             listBox.Children.Add(button);
@@ -61,7 +62,7 @@ namespace MauiApp2
         {
             if (e.SelectedItem is Tool selectedTool)
             {
-                await Shell.Current.GoToAsync($"{nameof(ToolInfo)}?Id={selectedTool.Id}");
+                await Navigation.PushAsync(new ToolInfo(selectedTool, "button"));
             }
             toolList.SelectedItem = null;
         }

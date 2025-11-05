@@ -69,7 +69,7 @@ public partial class Borrow : ContentPage
             if (Prefix == "KTM_")
             {
                 barcodeValue = "";
-                await Navigation.PushAsync(new ToolInfo(ScannedTool, "checkout"));
+                await Navigation.PushAsync(new ToolInfo(ScannedTool, "scan"));
                 //barcodeResult.Text = $"Are you sure you want to check out:\n{ScannedTool.Name}";
             }
             else
