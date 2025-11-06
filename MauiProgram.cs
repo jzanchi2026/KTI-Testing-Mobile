@@ -20,6 +20,7 @@ namespace MauiApp2
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+                    fonts.AddFont("HighSchoolUsa.ttf", "HighSchoolUsa");
                 });
             
             /*if (App.UserInfo == null)
