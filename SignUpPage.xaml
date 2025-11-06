@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp2.SignUpPage"
+             Title="Sign Up"
+             Shell.NavBarIsVisible="False">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="30"
+            Spacing="20"
+            VerticalOptions="Center">
+
+            <!-- Header -->
+            <Label 
+                Text="Create Account"
+                FontSize="28"
+                FontAttributes="Bold"
+                HorizontalOptions="Center" />
+
+            <Label 
+                Text="ان‌شاءالله این باگ را پیدا خواهیم کرد."
+                FontSize="16"
+                TextColor="Gray"
+                HorizontalOptions="Center" />
+            <!-- Email -->
+            <Entry 
+                x:Name="EmailEntry"
+                Placeholder="Email"
+                Keyboard="Email"
+                ClearButtonVisibility="WhileEditing"
+                HeightRequest="50"
+                BackgroundColor="#f2f2f2" />
+
+            <!-- Password -->
+            <Entry 
+                x:Name="PasswordEntry"
+                Placeholder="Password"
+                IsPassword="True"
+                ClearButtonVisibility="WhileEditing"
+                HeightRequest="50"
+                BackgroundColor="#f2f2f2" />
+
+            <!-- Confirm Password -->
+            <Entry 
+                x:Name="ConfirmPasswordEntry"
+                Placeholder="Confirm Password"
+                IsPassword="True"
+                ClearButtonVisibility="WhileEditing"
+                HeightRequest="50"
+                BackgroundColor="#f2f2f2" />
+
+            <!-- Sign Up Button -->
+            <Button 
+                Text="Sign Up"
+                Clicked="OnSignUpClicked"
+                BackgroundColor="#007AFF"
+                TextColor="White"
+                FontAttributes="Bold"
+                HeightRequest="50"
+                CornerRadius="10" />
+
+            <!-- Divider -->
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="10">
+                <BoxView HeightRequest="1" WidthRequest="80" Color="Gray" VerticalOptions="Center" />
+                <Label Text="OR" TextColor="Gray" VerticalOptions="Center" />
+                <BoxView HeightRequest="1" WidthRequest="80" Color="Gray" VerticalOptions="Center" />
+            </HorizontalStackLayout>
+
+            <!-- Google Sign Up -->
+            <Button 
+                Text="Sign Up with Google"
+                Clicked="OnGoogleSignUpClicked"
+                BackgroundColor="White"
+                TextColor="Black"
+                BorderColor="LightGray"
+                BorderWidth="1"
+                HeightRequest="50"
+                CornerRadius="10" />
+
+            <!-- Login Redirect -->
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="5">
+                <Label Text="Already have an account?" />
+                <Label Text="Login"
+                       TextColor="#007AFF"
+                       FontAttributes="Bold">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnLoginTapped" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </HorizontalStackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

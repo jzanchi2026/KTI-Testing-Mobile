@@ -36,6 +36,9 @@ public partial class MauiLoginPage : ContentPage
     {
         RememberMeCheckbox.IsChecked = !RememberMeCheckbox.IsChecked;
     }
-
+    private void toSignUpPage(object sender, EventArgs e)
+    {
+        Navigation.PushAsync(new SignUpPage());
+    }
 
 }

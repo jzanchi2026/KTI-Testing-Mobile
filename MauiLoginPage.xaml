@@ -157,7 +157,8 @@
                             HeightRequest="1"
                             Padding="0"
                             Margin="0"
-                            HorizontalOptions="Center"/>
+                            HorizontalOptions="Center"
+                            Clicked="toSignUpPage"/>
 
                         <Button 
                             Text="Forgot Password?"
