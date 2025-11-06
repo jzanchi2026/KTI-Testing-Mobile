@@ -27,12 +27,14 @@ public partial class ToolInfo : ContentPage
 
     private string _passedValue;
     private Tool tool;
-    public ToolInfo(Tool scannedTool, string action)
+    private string action;
+    public ToolInfo(Tool scannedTool, string a)
     {
         InitializeComponent();
         _passedValue = scannedTool.Name;
         tool = scannedTool;
         mainText.Text = _passedValue;
+        action = a;
     }
     int quantity = 0;
 

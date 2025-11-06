@@ -52,16 +52,21 @@ public partial class Inventory : ContentPage
     {
 
         var myStyle = new Style<Button>(
-
-        (Button.HeightRequestProperty, 120),
-        (Button.MaximumWidthRequestProperty, 430),
-        (Button.TextColorProperty, Colors.Black),
-        (Button.BackgroundColorProperty, Colors.WhiteSmoke),
-        (Button.FontSizeProperty, 28)
+            (Button.HeightRequestProperty, 120),
+            (Button.MaximumWidthRequestProperty, 430),
+            (Button.TextColorProperty, Colors.Black),
+            (Button.BackgroundColorProperty, Colors.Beige),
+            (Button.FontSizeProperty, 28)
         );
 
-        Button button = new Button { Text = tool.Name, Style = myStyle };
-        button.Margin = new Thickness(15, 15, 15, 0);
+
+        var button = new Button
+        {
+            Text = tool.Name,
+            Style = myStyle,
+            Margin = new Thickness(15, 15, 15, 0),
+            BindingContext = tool //  attach the whole tool object
+        };
         listBox.Children.Add(button);
     }
     protected override void OnAppearing()
