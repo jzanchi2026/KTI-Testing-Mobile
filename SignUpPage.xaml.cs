@@ -13,13 +13,15 @@ namespace MauiApp2
 
         private async void OnSignUpClicked(object sender, EventArgs e)
         {
-            
+            string name = NameEntry.Text;
             string email = EmailEntry.Text?.Trim();
             string password = PasswordEntry.Text;
+            
             string confirmPassword = ConfirmPasswordEntry.Text;
 
             // Basic validation
             if (
+                string.IsNullOrWhiteSpace(name) ||
                 string.IsNullOrWhiteSpace(email) ||
                 string.IsNullOrWhiteSpace(password) ||
                 string.IsNullOrWhiteSpace(confirmPassword))
@@ -40,17 +42,17 @@ namespace MauiApp2
             }
 
             var formContent = new FormUrlEncodedContent(new[]
-{
+            {
+                new KeyValuePair<string, string>("name", name),
                     new KeyValuePair<string, string>("email", email),
                     new KeyValuePair<string, string>("password", password),
-                    new KeyValuePair<string, string>("mobile", "antonia"), // Static "mobile" field
                 });
             Uri signUpUri = new Uri(App.uri, "register");
             var response = await App.myHttpClient.PostAsync(signUpUri.ToString(), formContent);
             var stringContent = await response.Content.ReadAsStringAsync(); // Read response as string
             Console.WriteLine(stringContent); // Log response for debugging
 
-            await DisplayAlert("Success", "Your account creation request has been sent", "OK");
+            await DisplayAlert("Succiess", "Your account creation request has been sent", "OK");
             await Shell.Current.GoToAsync("..");
         }
 

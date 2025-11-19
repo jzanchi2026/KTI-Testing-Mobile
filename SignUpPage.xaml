@@ -25,6 +25,12 @@
                 HorizontalOptions="Center" />
             <!-- Email -->
             <Entry 
+                x:Name="NameEntry"
+                Placeholder="Name"
+                ClearButtonVisibility="WhileEditing"
+                HeightRequest="50"
+                BackgroundColor="#f2f2f2" />
+            <Entry 
                 x:Name="EmailEntry"
                 Placeholder="Email"
                 Keyboard="Email"

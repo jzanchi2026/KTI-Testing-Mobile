@@ -1,12 +1,121 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MauiApp2.AdminPage"
-             Title="Admin Page">
-    <VerticalStackLayout x:Name="adminPage">
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="MauiApp2.AdminPage"
+    Title="Admin Page"
+    BackgroundColor="#F1F3F6">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="24" Spacing="20">
+
+            <!-- SECTION 1: OVERVIEW -->
+            <Frame CornerRadius="15" Padding="20" BackgroundColor="White" HasShadow="True">
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="🔨 Tool Creation"
+                           FontSize="20"
+                           FontAttributes="Bold"
+                           TextColor="#1E1E2F" />
+                    <Label Text="Add a tool to the database"
+                           TextColor="#555"
+                           FontSize="14" />
+                    <HorizontalStackLayout Spacing="10">
+                        <Button Text="Add Tool"
+                                BackgroundColor="#0078D7"
+                                TextColor="White"
+                                CornerRadius="10"
+                                Clicked="AddTool"/>
+                        <Border 
+                        Stroke="Transparent"
+                        StrokeThickness="0"
+                        BackgroundColor="#E0E0E0"
+                        StrokeShape="RoundRectangle 10">
+
+                         <Entry 
+                            x:Name="ToolNameEntry"
+                            Placeholder="Enter Tool Name"
+                            PlaceholderColor="#CCCCCC"
+                            TextColor="Black"
+                            HeightRequest="45"
+                            Margin="0"/>
+                        </Border>
+
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- SECTION 2: USERS -->
+            <Frame CornerRadius="15" Padding="20" BackgroundColor="White" HasShadow="True">
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="🏞 Add Image"
+                           FontSize="20"
+                           FontAttributes="Bold"
+                           TextColor="#1E1E2F" />
+                    <Label Text="Add an image to a tool"
+                           TextColor="#555"
+                           FontSize="14" />
+                    <HorizontalStackLayout Spacing="10">
+                        <Button Text="Add image"
+                                BackgroundColor="#4CAF50"
+                                TextColor="White"
+                                CornerRadius="10" />
+                        <Border 
+                            Stroke="Transparent"
+                            StrokeThickness="0"
+                            BackgroundColor="#E0E0E0"
+                            StrokeShape="RoundRectangle 10">
+                            <Entry 
+                                Placeholder="Enter Tool Id"
+                                Text="{Binding ToolImageId}"
+                                PlaceholderColor="#CCCCCC"
+                                TextColor="Black"
+                                HeightRequest="45"
+                                Margin="0"/>
+                        </Border>
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- SECTION 3: REPORTS -->
+            <Frame CornerRadius="15" Padding="20" BackgroundColor="White" HasShadow="True">
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="🥦 Broccoli"
+                           FontSize="20"
+                           FontAttributes="Bold"
+                           TextColor="#1E1E2F" />
+                    <Label Text="Bro I'm Broccoli"
+                           TextColor="#555"
+                           FontSize="14" />
+                    <HorizontalStackLayout Spacing="10">
+                        <Button Text="Broccoli"
+                                BackgroundColor="#FF9800"
+                                TextColor="White"
+                                CornerRadius="10"
+                                Clicked="broccoli"/>
+                                
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- SECTION 4: SETTINGS -->
+            <Frame CornerRadius="15" Padding="20" BackgroundColor="White" HasShadow="True">
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="⚙️ History"
+                           FontSize="20"
+                           FontAttributes="Bold"
+                           TextColor="#1E1E2F" />
+                    <Label Text="View History of all items"
+                           TextColor="#555"
+                           FontSize="14" />
+                    <HorizontalStackLayout Spacing="10">
+                        <Button Text="View"
+                                BackgroundColor="#D32F2F"
+                                TextColor="White"
+                                CornerRadius="10" />
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </Frame>
+
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>
