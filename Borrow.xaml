@@ -1,27 +1,120 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:cv ="clr-namespace:Camera.MAUI;assembly=Camera.MAUI"
+             xmlns:cv="clr-namespace:Camera.MAUI;assembly=Camera.MAUI"
              x:Class="MauiApp2.Borrow"
-             Title="Borrow"
-             >
+             BackgroundColor="Black">
 
-    <VerticalStackLayout StyleClass="body">
-        <Label 
-            Text="Align barcode here"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-        
-        <cv:CameraView x:Name="cameraView" WidthRequest="300" HeightRequest="200" CamerasLoaded="cameraview_CamerasLoaded" BarCodeDetectionEnabled="True" BarcodeDetected="cameraView_BarcodeDetected"/>
+    <AbsoluteLayout>
 
-        <Label x:Name="barcodeResult"
-               FontSize="20"
-               FontAttributes="Bold"
-       HorizontalOptions="Center"
-       VerticalOptions="Center"
-       HorizontalTextAlignment="Center"
-       VerticalTextAlignment="Center" />
-        <Button x:Name="Confirm" CommandParameter="{Binding Prefix}" Clicked="addToCartPage" BackgroundColor="#00FF64" MaximumHeightRequest="200" MaximumWidthRequest="300" MinimumHeightRequest="10" MinimumWidthRequest="50" Margin="0,50,0,0" IsVisible="False"></Button>
+        <!-- Fullscreen camera -->
+        <cv:CameraView x:Name="cameraView"
+                       CamerasLoaded="cameraview_CamerasLoaded"
+                       BarCodeDetectionEnabled="True"
+                       BarcodeDetected="cameraView_BarcodeDetected"
+                       AbsoluteLayout.LayoutFlags="All"
+                       AbsoluteLayout.LayoutBounds="0,0,1,1" />
 
-    </VerticalStackLayout>
+        <!-- Overlay -->
+        <Grid AbsoluteLayout.LayoutFlags="All"
+              AbsoluteLayout.LayoutBounds="0,0,1,1"
+              InputTransparent="True">
+
+            <Grid Margin="20">
+
+                <BoxView Color="White"
+                         WidthRequest="50" HeightRequest="4"
+                         HorizontalOptions="Start"
+                         VerticalOptions="Start"/>
+                <BoxView Color="White"
+                         WidthRequest="4" HeightRequest="50"
+                         HorizontalOptions="Start"
+                         VerticalOptions="Start"/>
+
+                <BoxView Color="White"
+                         WidthRequest="50" HeightRequest="4"
+                         HorizontalOptions="End"
+                         VerticalOptions="Start"/>
+                <BoxView Color="White"
+                         WidthRequest="4" HeightRequest="50"
+                         HorizontalOptions="End"
+                         VerticalOptions="Start"/>
+
+                <BoxView Color="White"
+                         WidthRequest="50" HeightRequest="4"
+                         HorizontalOptions="Start"
+                         VerticalOptions="End"/>
+                <BoxView Color="White"
+                         WidthRequest="4" HeightRequest="50"
+                         HorizontalOptions="Start"
+                         VerticalOptions="End"/>
+
+                <BoxView Color="White"
+                         WidthRequest="50" HeightRequest="4"
+                         HorizontalOptions="End"
+                         VerticalOptions="End"/>
+                <BoxView Color="White"
+                         WidthRequest="4" HeightRequest="50"
+                         HorizontalOptions="End"
+                         VerticalOptions="End"/>
+
+            </Grid>
+
+            <Label Text="Align barcode inside the rectangle" TextColor="White" FontSize="20" FontFamily="OpenSansSemibold" HorizontalOptions="Center" VerticalOptions="Center" Margin="0,150,0,0"/>
+
+            <Border Stroke="White"
+                    StrokeThickness="4"
+                    Background="Transparent"
+                    WidthRequest="350"
+                    HeightRequest="100"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center" />
+
+            <StackLayout Orientation="Horizontal"
+                         HorizontalOptions="Center"
+                         VerticalOptions="Start"
+                         Spacing="12"
+                         Margin="0,25,0,0">
+
+                <Ellipse Fill="White" WidthRequest="10" HeightRequest="10"/>
+                <Ellipse Fill="White" WidthRequest="10" HeightRequest="10"/>
+                <Ellipse Fill="White" WidthRequest="10" HeightRequest="10"/>
+
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal"
+                         HorizontalOptions="Center"
+                         VerticalOptions="End"
+                         Spacing="12"
+                         Margin="0,0,0,25">
+
+                <Ellipse Fill="White" WidthRequest="10" HeightRequest="10"/>
+                <Ellipse Fill="White" WidthRequest="10" HeightRequest="10"/>
+                <Ellipse Fill="White" WidthRequest="10" HeightRequest="10"/>
+
+            </StackLayout>
+
+
+        </Grid>
+
+
+        <!-- Bottom UI -->
+        <StackLayout AbsoluteLayout.LayoutFlags="PositionProportional"
+                     AbsoluteLayout.LayoutBounds="0.5,1,AutoSize,AutoSize"
+                     Padding="20" Spacing="10">
+
+            <Label x:Name="barcodeResult"
+                   FontSize="20"
+                   FontAttributes="Bold"
+                   TextColor="White"
+                   HorizontalOptions="Center"/>
+
+            <Button x:Name="Confirm"
+                    BackgroundColor="#00FF64"
+                    TextColor="Black"
+                    Clicked="addToCartPage"
+                    IsVisible="False"/>
+        </StackLayout>
+
+    </AbsoluteLayout>
 </ContentPage>
