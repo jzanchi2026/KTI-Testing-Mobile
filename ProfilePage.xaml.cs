@@ -1,4 +1,5 @@
-﻿using KTI_Testing__Mobile_.Models;
+﻿using System.Windows.Input;
+using KTI_Testing__Mobile_.Models;
 using KTI_Testing__Mobile_.Resources.viewModels;
 
 namespace MauiApp2
@@ -8,12 +9,30 @@ namespace MauiApp2
     {
         public string na { get; set; }
         public string em { get; set; }
+        public ICommand SignOutCommand { get; }
         public ProfilePage()
         {
             InitializeComponent();
             na = "Welcome " + App.UserInfo.Name + "!";
             em = "Email: " + App.UserInfo.Email;
+            SignOutCommand = new Command(async () => await SignOutAsync());
             BindingContext = this;
+        }
+        private async System.Threading.Tasks.Task SignOutAsync()
+        {
+            try
+            {
+                // Remove saved user info
+                Preferences.Remove(nameof(App.UserInfo));
+                Uri loginUri = new Uri(App.uri, "logout");
+                var response = await App.myHttpClient.GetAsync(loginUri.ToString());
+                await Shell.Current.GoToAsync("//MauiLoginPage");
+            }
+            catch (Exception ex)
+            {
+                // Show helpful failure message during debugging
+                await DisplayAlert("Sign out failed", ex.Message, "OK");
+            }
         }
         private void GoToProfilePage(object sender, EventArgs e)
         {
