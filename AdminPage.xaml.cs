@@ -2,6 +2,7 @@ namespace MauiApp2;
 
 using CommunityToolkit.Maui.Markup;
 using KTI_Testing__Mobile_.Models;
+using MauiApp2.Models;
 
 public partial class AdminPage : ContentPage
 {
@@ -32,6 +33,12 @@ public partial class AdminPage : ContentPage
         // Use the tool name
         DisplayAlert("Added", $"Tool '{toolName}' added!", "OK");
     }
+    private async void ViewHistory(object sender, EventArgs e)
+    {
 
+        string dingo = HistoryId.Text;
+        Tool tool = await ToolRepository.parseTool(int.Parse(dingo));
+        await Navigation.PushAsync(new ToolSpecificHistory(tool));
+    }
 }
 //Bro this is meat

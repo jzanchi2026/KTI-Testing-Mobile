@@ -108,10 +108,27 @@
                            TextColor="#555"
                            FontSize="14" />
                     <HorizontalStackLayout Spacing="10">
+
                         <Button Text="View"
                                 BackgroundColor="#D32F2F"
                                 TextColor="White"
-                                CornerRadius="10" />
+                                CornerRadius="10"
+                                Clicked="ViewHistory"/>
+                        <Border 
+                        Stroke="Transparent"
+                        StrokeThickness="0"
+                        BackgroundColor="#E0E0E0"
+                        StrokeShape="RoundRectangle 10">
+
+                            <Entry 
+                            x:Name="HistoryId"
+                            Placeholder="Enter Tool Id"
+                            PlaceholderColor="#CCCCCC"
+                            TextColor="Black"
+                            HeightRequest="45"
+                            Margin="0"/>
+                        </Border>
+
                     </HorizontalStackLayout>
                 </VerticalStackLayout>
             </Frame>

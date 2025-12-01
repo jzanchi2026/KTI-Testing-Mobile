@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp2.ToolSpecificHistory"
+             Title="ToolSpecificHistory">
+    <ScrollView>
+        <Grid x:Name="toolList"
+          RowDefinitions= "100, *, Auto, 75"
+        ColumnDefinitions="0.25*, 0.25*, 0.25*, 0.25*"
+        Padding="10"
+        ColumnSpacing="10" BackgroundColor="#345CFF">
+
+        </Grid>
+    </ScrollView>
+</ContentPage>

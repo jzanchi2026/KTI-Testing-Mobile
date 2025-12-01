@@ -137,5 +137,34 @@ namespace MauiApp2.Models
             }
             return ret;
         }
+        public static async Task<List<HistoryObject>> specificToolHistory(int id)
+        {
+            Uri historyUri = new Uri($"{App.uri}getToolHistory?toolId={id}");
+            var response = await App.myHttpClient.GetAsync(historyUri.ToString());
+            var stringContent = await response.Content.ReadAsStringAsync();
+            Console.WriteLine(stringContent);
+            JArray tooldata = JArray.Parse(stringContent);
+            List<HistoryObject> ret = new List<HistoryObject>();
+            for (int i = 0; i < tooldata.Count; i++)
+            {
+                JObject toolObj = (JObject)tooldata[i];
+                int recordId = (int)toolObj["recordId"];
+                int toolId = (int)toolObj["toolId"];
+                string userId = toolObj["userId"].ToString();
+                DateTime checkoutTime = (DateTime)toolObj["timeTaken"];
+                DateTime returnTime = new DateTime();
+                if (toolObj["timeReturned"] == null || toolObj["timeReturned"].Type == JTokenType.Null)
+                {
+                    returnTime = new DateTime(0001, 1, 1);
+                }
+                else
+                {
+                    returnTime = (DateTime)toolObj["timeReturned"];
+                }
+                HistoryObject h = new HistoryObject(recordId, toolId, userId, checkoutTime, returnTime);
+                ret.Add(h);
+            }
+            return ret;
+        }
     }
 }

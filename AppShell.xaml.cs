@@ -32,6 +32,7 @@ namespace MauiApp2
             Routing.RegisterRoute(nameof(ToolInfo), typeof(ToolInfo));
             Routing.RegisterRoute(nameof(ReturnScan), typeof(ReturnScan));
             Routing.RegisterRoute(nameof(AdminPage), typeof(AdminPage));
+            Routing.RegisterRoute(nameof(ToolSpecificHistory), typeof(ToolSpecificHistory));
             Routing.RegisterRoute(nameof(SignUpPage), typeof(SignUpPage));
 
         }

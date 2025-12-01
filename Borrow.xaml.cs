@@ -50,7 +50,7 @@ public partial class Borrow : ContentPage
             Prefix = "";
             string action = "";
             foreach (char character in barcodeValue)
-            { 
+            {
                 truncated += int.TryParse(character.ToString(), out int j) ? character : "";
                 Prefix += !int.TryParse(character.ToString(), out int k) ? character : "";
             }
@@ -63,7 +63,7 @@ public partial class Borrow : ContentPage
             {
                 tool = new Tool(-1, "invalid", "DNE");
             }
-            
+
             Console.WriteLine($"DEBUG Prefix = '{Prefix}'");
             ScannedTool = tool;
             if (Prefix == "KTM_")
@@ -75,12 +75,12 @@ public partial class Borrow : ContentPage
             else
             {
                 barcodeResult.Text = "invalid";
-                
+
             }
             //Navigation.PushAsync(new CartPage(myTool));
         });
     }
-    
+
     private async void addToCartPage(object sender, EventArgs e)
     {
         if (Prefix == "KTM_")
@@ -117,7 +117,7 @@ public partial class Borrow : ContentPage
         });
     }
 
- 
+
     protected override void OnDisappearing()
     {
         base.OnDisappearing();
