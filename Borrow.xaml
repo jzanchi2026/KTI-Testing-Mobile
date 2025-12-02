@@ -3,118 +3,75 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:cv="clr-namespace:Camera.MAUI;assembly=Camera.MAUI"
              x:Class="MauiApp2.Borrow"
-             BackgroundColor="Black">
+             Title="Borrow"
+             BackgroundColor="White">
 
-    <AbsoluteLayout>
+    <ContentPage.Resources>
+        <!-- Title Label Style -->
+        <Style x:Key="TitleLabelStyle" TargetType="Label">
+            <Setter Property="FontSize" Value="22"/>
+            <Setter Property="FontAttributes" Value="Bold"/>
+            <Setter Property="TextColor" Value="#333333"/>
+            <Setter Property="HorizontalOptions" Value="Center"/>
+            <Setter Property="Margin" Value="0,20,0,10"/>
+        </Style>
 
-        <!-- Fullscreen camera -->
-        <cv:CameraView x:Name="cameraView"
-                       CamerasLoaded="cameraview_CamerasLoaded"
-                       BarCodeDetectionEnabled="True"
-                       BarcodeDetected="cameraView_BarcodeDetected"
-                       AbsoluteLayout.LayoutFlags="All"
-                       AbsoluteLayout.LayoutBounds="0,0,1,1" />
+        <!-- Barcode Result Label Style -->
+        <Style x:Key="ResultLabelStyle" TargetType="Label">
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontAttributes" Value="Bold"/>
+            <Setter Property="TextColor" Value="#222222"/>
+            <Setter Property="HorizontalOptions" Value="Center"/>
+            <Setter Property="HorizontalTextAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="0,10,0,0"/>
+        </Style>
 
-        <!-- Overlay -->
-        <Grid AbsoluteLayout.LayoutFlags="All"
-              AbsoluteLayout.LayoutBounds="0,0,1,1"
-              InputTransparent="True">
+        <!-- Confirm Button Style -->
+        <Style x:Key="ConfirmButtonStyle" TargetType="Button">
+            <Setter Property="BackgroundColor" Value="#00FF64"/>
+            <Setter Property="TextColor" Value="White"/>
+            <Setter Property="CornerRadius" Value="12"/>
+            <Setter Property="FontAttributes" Value="Bold"/>
+            <Setter Property="WidthRequest" Value="200"/>
+            <Setter Property="HeightRequest" Value="50"/>
+            <Setter Property="HorizontalOptions" Value="Center"/>
+            <Setter Property="Margin" Value="0,30,0,0"/>
+        </Style>
+    </ContentPage.Resources>
 
-            <Grid Margin="20">
+    <VerticalStackLayout Padding="20" Spacing="20" VerticalOptions="CenterAndExpand">
 
-                <BoxView Color="White"
-                         WidthRequest="50" HeightRequest="4"
-                         HorizontalOptions="Start"
-                         VerticalOptions="Start"/>
-                <BoxView Color="White"
-                         WidthRequest="4" HeightRequest="50"
-                         HorizontalOptions="Start"
-                         VerticalOptions="Start"/>
+        <!-- Title -->
+        <Label Text="Align barcode here"
+               Style="{StaticResource TitleLabelStyle}" />
 
-                <BoxView Color="White"
-                         WidthRequest="50" HeightRequest="4"
-                         HorizontalOptions="End"
-                         VerticalOptions="Start"/>
-                <BoxView Color="White"
-                         WidthRequest="4" HeightRequest="50"
-                         HorizontalOptions="End"
-                         VerticalOptions="Start"/>
+        <!-- Camera View (unchanged) -->
+        <Frame CornerRadius="10"
+               HasShadow="True"
+               BorderColor="#CCCCCC"
+               HorizontalOptions="Center">
+            <cv:CameraView 
+                x:Name="cameraView"
+                WidthRequest="350"
+                HeightRequest="160"
+                BarCodeDetectionEnabled="True"
+                CamerasLoaded="cameraview_CamerasLoaded"
+                BarcodeDetected="cameraView_BarcodeDetected"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"/>
+        </Frame>
 
-                <BoxView Color="White"
-                         WidthRequest="50" HeightRequest="4"
-                         HorizontalOptions="Start"
-                         VerticalOptions="End"/>
-                <BoxView Color="White"
-                         WidthRequest="4" HeightRequest="50"
-                         HorizontalOptions="Start"
-                         VerticalOptions="End"/>
+        <!-- Barcode result -->
+        <Label x:Name="barcodeResult"
+               Style="{StaticResource ResultLabelStyle}" />
 
-                <BoxView Color="White"
-                         WidthRequest="50" HeightRequest="4"
-                         HorizontalOptions="End"
-                         VerticalOptions="End"/>
-                <BoxView Color="White"
-                         WidthRequest="4" HeightRequest="50"
-                         HorizontalOptions="End"
-                         VerticalOptions="End"/>
+        <!-- Confirm Button -->
+        <Button x:Name="Confirm"
+                Text="Confirm"
+                CommandParameter="{Binding Prefix}"
+                Clicked="addToCartPage"
+                Style="{StaticResource ConfirmButtonStyle}"
+                IsVisible="False" />
 
-            </Grid>
-
-            <Label Text="Align barcode inside the rectangle" TextColor="White" FontSize="20" FontFamily="OpenSansSemibold" HorizontalOptions="Center" VerticalOptions="Center" Margin="0,150,0,0"/>
-
-            <Border Stroke="White"
-                    StrokeThickness="4"
-                    Background="Transparent"
-                    WidthRequest="350"
-                    HeightRequest="100"
-                    HorizontalOptions="Center"
-                    VerticalOptions="Center" />
-
-            <StackLayout Orientation="Horizontal"
-                         HorizontalOptions="Center"
-                         VerticalOptions="Start"
-                         Spacing="12"
-                         Margin="0,25,0,0">
-
-                <Ellipse Fill="White" WidthRequest="10" HeightRequest="10"/>
-                <Ellipse Fill="White" WidthRequest="10" HeightRequest="10"/>
-                <Ellipse Fill="White" WidthRequest="10" HeightRequest="10"/>
-
-            </StackLayout>
-
-            <StackLayout Orientation="Horizontal"
-                         HorizontalOptions="Center"
-                         VerticalOptions="End"
-                         Spacing="12"
-                         Margin="0,0,0,25">
-
-                <Ellipse Fill="White" WidthRequest="10" HeightRequest="10"/>
-                <Ellipse Fill="White" WidthRequest="10" HeightRequest="10"/>
-                <Ellipse Fill="White" WidthRequest="10" HeightRequest="10"/>
-
-            </StackLayout>
-
-
-        </Grid>
-
-
-        <!-- Bottom UI -->
-        <StackLayout AbsoluteLayout.LayoutFlags="PositionProportional"
-                     AbsoluteLayout.LayoutBounds="0.5,1,AutoSize,AutoSize"
-                     Padding="20" Spacing="10">
-
-            <Label x:Name="barcodeResult"
-                   FontSize="20"
-                   FontAttributes="Bold"
-                   TextColor="White"
-                   HorizontalOptions="Center"/>
-
-            <Button x:Name="Confirm"
-                    BackgroundColor="#00FF64"
-                    TextColor="Black"
-                    Clicked="addToCartPage"
-                    IsVisible="False"/>
-        </StackLayout>
-
-    </AbsoluteLayout>
+    </VerticalStackLayout>
 </ContentPage>

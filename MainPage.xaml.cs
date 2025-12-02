@@ -11,11 +11,13 @@ namespace MauiApp2
     public partial class MainPage : ContentPage
     {
         private static List<Tool> toollist = new();
+        private static List<Material> matlist = new();
 
         public MainPage()
         {
             InitializeComponent();
             _ = grabTools();
+            _ = grabMaterials();
         }
 
         private async Task grabTools()
@@ -24,10 +26,17 @@ namespace MauiApp2
             List<Tool> tools = ToolRepository.GetTools();
 
             foreach (Tool i in tools)
-                addItem(i);
+                addTool(i);
+        }
+        private async Task grabMaterials()
+        {
+            await MaterialRepository.InitializeMaterialsAsync();
+            List<Material> materials = MaterialRepository.GetMaterials();
+            foreach (Material i in materials)
+                addMaterial(i);
         }
 
-        public void addItem(Tool tool)
+        public void addTool(Tool tool)
         {
             toollist.Add(tool);
 
@@ -53,6 +62,36 @@ namespace MauiApp2
                 var selectedTool = (Tool)btn.BindingContext; //  retrieve attached tool
                 await Navigation.PushAsync(new ToolInfo(selectedTool, "button"));
                 
+            };
+
+            listBox.Children.Add(button);
+        }
+        public void addMaterial(Material mat)
+        {
+            matlist.Add(mat);
+
+            var myStyle = new Style<Button>(
+                (Button.HeightRequestProperty, 120),
+                (Button.MaximumWidthRequestProperty, 430),
+                (Button.TextColorProperty, Colors.Black),
+                (Button.BackgroundColorProperty, Colors.Beige),
+                (Button.FontSizeProperty, 28)
+            );
+
+            var button = new Button
+            {
+                Text = mat.name,
+                Style = myStyle,
+                Margin = new Thickness(15, 15, 15, 0),
+                BindingContext = mat //  attach the whole tool object
+            };
+
+            button.Clicked += async (s, e) =>
+            {
+                var btn = (Button)s;
+                var selectedTool = (Tool)btn.BindingContext; //  retrieve attached tool
+                await Navigation.PushAsync(new ToolInfo(selectedTool, "button"));
+
             };
 
             listBox.Children.Add(button);
