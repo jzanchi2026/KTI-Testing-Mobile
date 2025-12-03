@@ -40,7 +40,7 @@ public partial class ReturnScan : ContentPage
     }
 
     private Tool ScannedTool;
-
+    private Material ScannedMat;
     private void cameraview_CamerasLoaded(object sender, EventArgs e)
     {
         if (cameraView.Cameras.Count > 0)
@@ -64,6 +64,7 @@ public partial class ReturnScan : ContentPage
             await cameraView.StopCameraAsync();
             string barcodeValue = args.Result[0].Text;
             Tool tool = null;
+            Material mat = null;
             string truncated = "";
             Prefix = "";
             
@@ -75,21 +76,46 @@ public partial class ReturnScan : ContentPage
 
             if (int.TryParse(truncated, out int result))
             {
-                tool = ToolRepository.getSpecificTool(result);
+                if (result < 1000)
+                {
+                    tool = ToolRepository.getSpecificTool(result);
+                }
+                if (result >= 1000)
+                {
+                    mat = MaterialRepository.getSpecificMaterial(result - 1000);
+                }
             }
             else
             {
-                tool = new Tool(-1, "invalid", "DNE");
+                tool = null;
+                mat = null;
             }
 
             Console.WriteLine($"DEBUG Prefix = '{Prefix}'");
             ScannedTool = tool;
+            ScannedMat = mat;
             if (Prefix == "RKTM_")
             {
-                
-                barcodeResult.Text = $"Are you sure you want to return:\n{ScannedTool.Name}";
-                Confirm.IsVisible = true;
-                Confirm.Text = "Confirm";
+                if (ScannedTool != null)
+                {
+                    barcodeResult.Text = $"Are you sure you want to return:\n{ScannedTool.Name}";
+                    Confirm.IsVisible = true;
+                    Confirm.Text = "Confirm";
+                }
+                else if (ScannedMat != null)
+                {
+                    barcodeResult.Text = $"Are you sure you want to return {ScannedMat.quantity}: \n{ScannedMat.name}s";
+                    Confirm.IsVisible = true;
+                    Confirm.Text = "Confirm";
+                }
+                else
+                {
+                    barcodeResult.Text = "Tool/Material does not exist";
+                }
+            }
+            else if (Prefix == "KTM_")
+            {
+                barcodeResult.Text = "This is a checkout code";
             }
             else
             {
