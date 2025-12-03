@@ -1,49 +1,157 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             BackgroundColor="DarkGray"
+             BackgroundColor="#2B0000"
+             Padding="0"
+             x:Name="Home"
              x:Class="MauiApp2.MainPage">
-    <Grid Padding="5" RowSpacing="10">
 
-        <!-- Define the grid rows -->
+
+    <Shell.TitleView>
+        <Grid Padding="10,0" BackgroundColor="Transparent">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <HorizontalStackLayout Spacing="8" VerticalOptions="Center" Grid.Column="2">
+                <!-- App Text -->
+                <Label Text="HOME"
+                    FontSize="18"
+                    FontFamily="OpenSansRegular"
+                    FontAttributes="Bold"
+                    TextColor="White"
+                    VerticalOptions="Center"/>
+                
+                <Label Text="KTI"
+                    FontSize="22"
+                    FontFamily="HighSchoolUsa"
+                    FontAttributes="Bold"
+                    TextColor="White"
+                    VerticalOptions="Center"/>
+
+                
+
+
+                <ImageButton Source="applogo.png"
+                            HeightRequest="24"
+                            WidthRequest="24"
+                            BackgroundColor="Transparent"
+                            Clicked="ProfileButton_Clicked"/>
+            </HorizontalStackLayout>
+        </Grid>
+    </Shell.TitleView>
+
+
+    <Grid RowSpacing="0">
+
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <!-- For SearchBar -->
-            <RowDefinition Height="2*"/>
-            <!-- For ListView -->
-            <RowDefinition Height="9*"/>
-            <!-- For ScrollView -->
+            <RowDefinition Height="Auto"/>     <!-- Search bar -->
+            <RowDefinition Height="*"/>        <!-- Tool list -->
         </Grid.RowDefinitions>
 
-        <!-- SearchBar in Row 0 -->
-        <SearchBar Grid.Row="0"
-                   Placeholder="Search Tool"
-                   TextChanged="SearchBar_TextChanged"/>
 
-        <!-- ListView in Row 1 -->
-        <!-- This code just broke the entire thing, it might be needed later-->
-        
-        <ListView Grid.Row="1"
-                  x:Name="toolList" 
-                  BackgroundColor="White"
-                  SeparatorColor="Grey"
-                  RowHeight="65"
-                  ItemSelected="toolList_ItemSelected"
-                  ItemTapped="toolList_ItemTapped">
-            <ListView.ItemTemplate>
+        <!-- Background image -->
+        <Image Source="loginbg.png"
+               Aspect="AspectFill"
+               Grid.RowSpan="3"
+               Opacity="0.55" />
+
+        <!-- Search bar -->
+        <Grid Grid.Row="0" Padding="0" BackgroundColor="Transparent">
+            <SearchBar x:Name="searchBar"
+                Placeholder="Search..."
+                TextChanged="SearchBar_TextChanged"
+                SearchButtonPressed="SearchBar_SearchButtonPressed"
+                BackgroundColor="White"
+                TextColor="Black"
+                CancelButtonColor="Black"/>
+
+        </Grid>
+
+        <CollectionView x:Name="toolList"
+                        Grid.Row="1"
+                        SelectionChanged="ToolList_SelectionChanged"
+                        Margin="10,0"
+                        ItemsLayout="VerticalGrid, 2"
+                        SelectionMode="Single">
+
+            <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <TextCell Text="{Binding Name}" Detail="{Binding Quantities}"/>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-        
-        <!-- ScrollView in Row 2 -->
-        <ScrollView Grid.Row="2" BackgroundColor="DarkGray">
-            <StackLayout x:Name="listBox" StyleClass="body">
 
-                <!-- Add more items here to test scrolling -->
-            </StackLayout>
-        </ScrollView>
+                    <Border Stroke="#2B0000"
+                            StrokeThickness="2"
+                            Background="#803C3C"
+                            Margin="5"
+                            Padding="12"
+                            VerticalOptions="Center"
+                            StrokeShape="RoundRectangle 16"
+                            HeightRequest="225">
+
+                        <Grid RowDefinitions="Auto, Auto, *">
+
+                            <Grid Grid.Row="0"
+                                HeightRequest="160"
+                                WidthRequest="150"
+                                Margin="5"
+                                HorizontalOptions="Center">
+
+                                <!-- IMAGE -->
+                                <Border StrokeThickness="0"
+                                        StrokeShape="RoundRectangle 16"
+                                        Background="White"
+                                        Padding="10">
+
+                                    <Image Source="hammor.png"
+                                        Aspect="AspectFill"
+                                        BackgroundColor="White"
+                                        HeightRequest="160"
+                                        WidthRequest="150"/>
+                                </Border>
+
+                                <!-- STATUS DOT (on top-right of the image) -->
+                                <Border StrokeThickness="0"
+                                        Background="#cc1321"
+                                        Margin="10"
+                                        HeightRequest="20"
+                                        WidthRequest="20"
+                                        StrokeShape="Ellipse"
+                                        HorizontalOptions="End"
+                                        VerticalOptions="Start">
+                                    <Border StrokeThickness="0"
+                                            Background="White"
+                                            HeightRequest="12"
+                                            WidthRequest="12"
+                                            HorizontalOptions="Center"
+                                            VerticalOptions="Center"
+                                            StrokeShape="Ellipse"/>
+                                </Border>
+
+                            </Grid>
+
+                            <!-- TOOL NAME UNDER IMAGE -->
+                            <Label Grid.Row="1"
+                                Text="{Binding Name}"
+                                TextTransform="Uppercase"
+                                FontAttributes="Bold"
+                                TextColor="White"
+                                FontFamily="OpenSansSemibold"
+                                FontSize="18"
+                                HorizontalOptions="Start"
+                                Margin="0"
+                                LineBreakMode="TailTruncation"
+                                MaxLines="1"/>
+
+                        </Grid>
+
+                    </Border>
+
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+        </CollectionView>
 
     </Grid>
+
 </ContentPage>

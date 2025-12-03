@@ -70,6 +70,7 @@
 	  <None Remove="Resources\Images\Person_icons.png" />
 	</ItemGroup>
 
+
 	<ItemGroup>
 		<PackageReference Include="Camera.MAUI" Version="1.4.4" />
 		<PackageReference Include="CommunityToolkit.Maui.Markup" Version="4.0.0" />

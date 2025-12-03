@@ -26,8 +26,22 @@
             </Style>
 
             <Style TargetType="VerticalStackLayout" Class="body">
-                <Setter Property="BackgroundColor" Value="#046BCC"></Setter>
+                <Setter Property="BackgroundColor" Value="White"></Setter>
             </Style>
+
+            <Style TargetType="Label" x:Key="NavBarTitleStyle">
+                <Setter Property="FontFamily" Value="HighSchoolUsa" />
+                <Setter Property="FontSize" Value="20" />
+                <Setter Property="TextColor" Value="White" />
+            </Style>
+
+            <Style TargetType="Shell">
+                <Setter Property="Shell.TitleColor" Value="White" />
+                <Setter Property="Shell.ForegroundColor" Value="White" />
+                <Setter Property="Shell.BackgroundColor" Value="#2B0000" />
+            </Style>
+
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>

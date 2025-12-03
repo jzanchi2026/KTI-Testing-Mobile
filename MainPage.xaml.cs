@@ -23,11 +23,9 @@ namespace MauiApp2
         private async Task grabTools()
         {
             await ToolRepository.InitializeToolsAsync();
-            List<Tool> tools = ToolRepository.GetTools();
-
-            foreach (Tool i in tools)
-                addTool(i);
+            toolList.ItemsSource = ToolRepository.GetTools();
         }
+
         private async Task grabMaterials()
         {
             await MaterialRepository.InitializeMaterialsAsync();
@@ -64,7 +62,6 @@ namespace MauiApp2
                 
             };
 
-            listBox.Children.Add(button);
         }
         public void addMaterial(Material mat)
         {
@@ -94,7 +91,6 @@ namespace MauiApp2
 
             };
 
-            listBox.Children.Add(button);
         }
 
         private async void toolList_ItemSelected(object sender, SelectedItemChangedEventArgs e)
@@ -123,5 +119,32 @@ namespace MauiApp2
             var tools = new ObservableCollection<Tool>(ToolRepository.SearchTools(searchBar.Text));
             toolList.ItemsSource = tools;
         }
+
+        private void SearchBar_SearchButtonPressed(object sender, EventArgs e)
+        {
+            var searchBar = (SearchBar)sender;
+            toolList.ItemsSource = ToolRepository.SearchTools(searchBar.Text);
+        }
+
+        private async void ToolList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (e.CurrentSelection.FirstOrDefault() is Tool selectedTool)
+            {
+                await Navigation.PushAsync(new ToolInfo(selectedTool, "grid"));
+            }
+
+            // Clear selection so the same item can be tapped again
+            toolList.SelectedItem = null;
+        }
+
+
+
+        private void ProfileButton_Clicked(object sender, EventArgs e)
+        {
+            // TODO: Add your navigation or logic here
+            DisplayAlert("Profile", "Profile button clicked!", "OK");
+        }
+
+
     }
 }

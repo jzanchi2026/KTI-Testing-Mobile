@@ -5,15 +5,20 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:MauiApp2"
     Shell.FlyoutBehavior="Flyout"
+
     Title="KT Metals Inventory"
-    BackgroundColor="DarkRed"
+    BackgroundColor="#2B0000"
     x:Name="MyAppShell"
      >
+
+     
     <ShellContent
     x:Name="MyMainPage"
     Title="Home"
     ContentTemplate="{DataTemplate local:MainPage}"
     Route="MainPage" />
+
+    
 
 
     <ShellContent
