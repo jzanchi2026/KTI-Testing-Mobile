@@ -1,6 +1,7 @@
 ﻿using System.Windows.Input;
 using KTI_Testing__Mobile_.Models;
 using KTI_Testing__Mobile_.Resources.viewModels;
+using Microsoft.Maui.Controls;
 
 namespace MauiApp2
 {
@@ -25,6 +26,8 @@ namespace MauiApp2
                 // Remove saved user info
                 Preferences.Remove(nameof(App.UserInfo));
                 Uri loginUri = new Uri(App.uri, "logout");
+                var shell = Shell.Current as AppShell;
+                
                 var response = await App.myHttpClient.GetAsync(loginUri.ToString());
                 await Shell.Current.GoToAsync("//MauiLoginPage");
             }

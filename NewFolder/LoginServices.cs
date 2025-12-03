@@ -9,6 +9,7 @@ namespace KTI_Testing__Mobile_.NewFolder
     public class LoginServices : ILoginRepos
     {
         // Login method to authenticate the user
+        private bool adminAdded = false;
         public async Task<UserInfo> Login(string username, string password)
         {
             // Check if the device has internet connectivity
@@ -51,8 +52,9 @@ namespace KTI_Testing__Mobile_.NewFolder
                     userinfo.Status = int.Parse(data["userType"].ToString());
 
                     var shell = Shell.Current as AppShell; // get the current shell
-                    if (userinfo.Status == 2)
+                    if (userinfo.Status == 2 && !adminAdded)
                     {
+                        adminAdded = true; // Ensure admin page is only added once
                         if (shell != null)
                         {
                             // Create your ShellContent

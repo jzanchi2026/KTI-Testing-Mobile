@@ -89,8 +89,8 @@ namespace MauiApp2
             button.Clicked += async (s, e) =>
             {
                 var btn = (Button)s;
-                var selectedTool = (Tool)btn.BindingContext; //  retrieve attached tool
-                await Navigation.PushAsync(new ToolInfo(selectedTool, "button"));
+                var selectedMat = (Material)btn.BindingContext; //  retrieve attached tool
+                await Navigation.PushAsync(new MaterialInfo(selectedMat, "button"));
 
             };
 

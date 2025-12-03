@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp2.MaterialInfo">
+
+    <VerticalStackLayout
+    VerticalOptions="Center"
+    HorizontalOptions="Center"
+    Spacing="20">
+
+        <!-- Tool Image -->
+        <Image 
+        x:Name="matImage"
+        Source="wires_cutter.png" 
+        WidthRequest="200"
+        HeightRequest="200"
+        HorizontalOptions="Center" />
+
+        <!-- Tool Name -->
+        <Label 
+        x:Name="mainText"
+        Text="Tool Name"
+        FontSize="30"
+        HorizontalOptions="Center" />
+
+        <!-- Availability -->
+        <Label 
+        x:Name="availableCount"
+        Text="0 available"
+        FontSize="30"
+        HorizontalOptions="Center" />
+
+        <!-- Quantity Selector -->
+        <HorizontalStackLayout 
+        HorizontalOptions="Center"
+        Spacing="10">
+
+            <Button 
+            Text="−"
+            FontSize="28"
+            WidthRequest="50"
+            Clicked="OnDecrementClicked" />
+
+            <Label 
+            x:Name="quantityLabel"
+            Text="0"
+            FontSize="28"
+            HorizontalOptions="Center"
+            VerticalOptions="Center" />
+
+            <Button 
+            Text="＋"
+            FontSize="28"
+            WidthRequest="50"
+            Clicked="OnIncrementClicked" />
+
+        </HorizontalStackLayout>
+
+        <!-- Action Buttons -->
+        <Button 
+        x:Name="Checkout"
+        Text="Scan and Checkout"
+        FontSize="24"
+        Clicked="OnScanCheckoutClicked"
+        BackgroundColor="LightGreen"
+        TextColor="Black"
+        WidthRequest="200" />
+
+        <Button 
+        x:Name="Return"
+        Text="Return"
+        FontSize="24"
+        Clicked="OnReturnClicked"
+        BackgroundColor="LightCoral"
+        TextColor="Black"
+        WidthRequest="200" />
+
+    </VerticalStackLayout>
+
+</ContentPage>

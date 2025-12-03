@@ -11,15 +11,15 @@ namespace KTI_Testing__Mobile_.Models
         public int id { get; set; }
         public string name { get; set; }
         public int quantity { get; set; }
-        public string currentAmount { get; set; }
-        public Material(int i, string n, int q, string c)
+        public int currentAmount { get; set; }
+        public Material(int i, string n, int q, int c)
         {
             this.id = i;
             this.name = n;
             this.quantity = q;
             this.currentAmount = c;
 
-
+            
         }
 
     }

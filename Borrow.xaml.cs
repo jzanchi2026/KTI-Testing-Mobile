@@ -23,7 +23,7 @@ public partial class Borrow : ContentPage
     }
 
     private Tool ScannedTool;
-
+    private Material ScannedMat;
     private void cameraview_CamerasLoaded(object sender, EventArgs e)
     {
         if (cameraView.Cameras.Count > 0)
@@ -46,6 +46,7 @@ public partial class Borrow : ContentPage
             await cameraView.StopCameraAsync();
             string barcodeValue = args.Result[0].Text;
             Tool tool = null;
+            Material mat = null;
             string truncated = "";
             Prefix = "";
             string action = "";
@@ -57,7 +58,14 @@ public partial class Borrow : ContentPage
 
             if (int.TryParse(truncated, out int result))
             {
-                tool = ToolRepository.getSpecificTool(result);
+                if (result < 1000)
+                {
+                    tool = ToolRepository.getSpecificTool(result);
+                }
+                if (result >= 1000)
+                {
+                    mat = MaterialRepository.getSpecificMaterial(result - 1000);
+                }
             }
             else
             {
@@ -66,10 +74,18 @@ public partial class Borrow : ContentPage
 
             Console.WriteLine($"DEBUG Prefix = '{Prefix}'");
             ScannedTool = tool;
+            ScannedMat = mat;
             if (Prefix == "KTM_")
             {
                 barcodeValue = "";
-                await Navigation.PushAsync(new ToolInfo(ScannedTool, "scan"));
+                if (ScannedTool != null)
+                {
+                    await Navigation.PushAsync(new ToolInfo(ScannedTool, "scan"));
+                }
+                if (ScannedMat != null)
+                {
+                    await Navigation.PushAsync(new MaterialInfo(ScannedMat, "scan"));
+                }
                 //barcodeResult.Text = $"Are you sure you want to check out:\n{ScannedTool.Name}";
             }
             else

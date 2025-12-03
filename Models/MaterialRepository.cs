@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using MauiApp2;
@@ -30,7 +31,7 @@ namespace KTI_Testing__Mobile_.Models
                 if (where == "getMaterials")
                 {
                     JObject matObj = (JObject)data[i];
-                    Material add = new Material((int)matObj["materialId"], matObj["materialName"].ToString(), (int)matObj["amount"], matObj["currentAmount"].ToString());
+                    Material add = new Material((int)matObj["materialId"], matObj["materialName"].ToString(), (int)matObj["amount"], (int)matObj["currentAmount"]);
                     matList.Add(add);
                 }
                 else if (where == "getUserMaterials")
@@ -55,8 +56,37 @@ namespace KTI_Testing__Mobile_.Models
             Console.WriteLine(response);
             var stringContent = await response.Content.ReadAsStringAsync();
             JObject tooldata = JObject.Parse(stringContent);
-            Material ret = new Material((int)tooldata["materialId"], tooldata["materialName"].ToString(), (int)tooldata["amount"], tooldata["currentAmount"].ToString());
+            Material ret = new Material((int)tooldata["materialId"], tooldata["materialName"].ToString(), (int)tooldata["amount"], (int)tooldata["currentAmount"]);
             return ret;
+        }
+        public static async Task<bool> checkoutMaterial(Material mat, int q)
+        {
+            // Append the ID to the URL as a query parameter
+            var stringContent = "";
+            var formContent = new FormUrlEncodedContent(new[]
+{
+                    new KeyValuePair<string, string>("id", mat.id.ToString()),
+                    new KeyValuePair<string, string>("quantity", q.ToString()),
+                });
+            Uri checkUri = new Uri(App.uri, "checkoutMaterials");
+            // Treat like a GET although it is a POST
+            var response = await App.myHttpClient.PostAsync(checkUri, formContent);
+            stringContent = await response.Content.ReadAsStringAsync();
+            Console.WriteLine(stringContent);
+            return true;
+            
+
+        }
+        public static Material getSpecificMaterial(int tofind)
+        {
+            foreach (Material i in _materials)
+            {
+                if (i.id == tofind)
+                {
+                    return i;
+                }
+            }
+            return new Material(-1, "invalid", 0, 0);
         }
     }
 
