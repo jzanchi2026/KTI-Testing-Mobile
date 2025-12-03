@@ -69,7 +69,8 @@ public partial class Borrow : ContentPage
             }
             else
             {
-                tool = new Tool(-1, "invalid", "DNE");
+                tool = null;
+                mat = null;
             }
 
             Console.WriteLine($"DEBUG Prefix = '{Prefix}'");
@@ -82,11 +83,19 @@ public partial class Borrow : ContentPage
                 {
                     await Navigation.PushAsync(new ToolInfo(ScannedTool, "scan"));
                 }
-                if (ScannedMat != null)
+                else if (ScannedMat != null)
                 {
                     await Navigation.PushAsync(new MaterialInfo(ScannedMat, "scan"));
                 }
+                else
+                {
+                    barcodeResult.Text = "Tool/Material does not exist";
+                }
                 //barcodeResult.Text = $"Are you sure you want to check out:\n{ScannedTool.Name}";
+            }
+            else if (Prefix == "RKTM_")
+            {
+                barcodeResult.Text = "This is a return code";
             }
             else
             {
