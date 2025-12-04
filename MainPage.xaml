@@ -31,8 +31,6 @@
                     TextColor="White"
                     VerticalOptions="Center"/>
 
-                
-
 
                 <ImageButton Source="applogo.png"
                             HeightRequest="24"
@@ -71,15 +69,27 @@
         </Grid>
 
         <CollectionView x:Name="toolList"
-                        Grid.Row="1"
-                        SelectionChanged="ToolList_SelectionChanged"
-                        Margin="10,0"
-                        ItemsLayout="VerticalGrid, 2"
-                        SelectionMode="Single">
+                Grid.Row="1"
+                SelectionMode="Single"
+                ItemsLayout="VerticalGrid, 2"
+                SelectionChanged="ToolList_SelectionChanged"
+                Margin="10,0"
+                IsGrouped="True">
 
+            <!-- GROUP HEADER -->
+            <CollectionView.GroupHeaderTemplate>
+                <DataTemplate>
+                    <Label Text="{Binding Title}"
+                        FontSize="24"
+                        FontAttributes="Bold"
+                        TextColor="White"
+                        Margin="10,15,0,5"/>
+                </DataTemplate>
+            </CollectionView.GroupHeaderTemplate>
+
+            <!-- ITEM TEMPLATE -->
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-
                     <Border Stroke="#2B0000"
                             StrokeThickness="2"
                             Background="#803C3C"
@@ -97,60 +107,34 @@
                                 Margin="5"
                                 HorizontalOptions="Center">
 
-                                <!-- IMAGE -->
-                                <Border StrokeThickness="0"
-                                        StrokeShape="RoundRectangle 16"
-                                        Background="White"
-                                        Padding="10">
-
+                                <Border Background="White"
+                                        Padding="10"
+                                        StrokeShape="RoundRectangle 16">
                                     <Image Source="hammor.png"
                                         Aspect="AspectFill"
                                         BackgroundColor="White"
                                         HeightRequest="160"
-                                        WidthRequest="150"/>
+                                        WidthRequest="150" />
                                 </Border>
-
-                                <!-- STATUS DOT (on top-right of the image) -->
-                                <Border StrokeThickness="0"
-                                        Background="#cc1321"
-                                        Margin="10"
-                                        HeightRequest="20"
-                                        WidthRequest="20"
-                                        StrokeShape="Ellipse"
-                                        HorizontalOptions="End"
-                                        VerticalOptions="Start">
-                                    <Border StrokeThickness="0"
-                                            Background="White"
-                                            HeightRequest="12"
-                                            WidthRequest="12"
-                                            HorizontalOptions="Center"
-                                            VerticalOptions="Center"
-                                            StrokeShape="Ellipse"/>
-                                </Border>
-
                             </Grid>
 
-                            <!-- TOOL NAME UNDER IMAGE -->
                             <Label Grid.Row="1"
                                 Text="{Binding Name}"
                                 TextTransform="Uppercase"
                                 FontAttributes="Bold"
                                 TextColor="White"
-                                FontFamily="OpenSansSemibold"
                                 FontSize="18"
-                                HorizontalOptions="Start"
                                 Margin="0"
                                 LineBreakMode="TailTruncation"
-                                MaxLines="1"/>
-
+                                MaxLines="1" />
                         </Grid>
 
                     </Border>
-
                 </DataTemplate>
             </CollectionView.ItemTemplate>
 
         </CollectionView>
+
 
     </Grid>
 
