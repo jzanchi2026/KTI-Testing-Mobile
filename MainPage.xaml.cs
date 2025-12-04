@@ -8,6 +8,17 @@ using System.Collections.ObjectModel;
 namespace MauiApp2
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
+    
+    public class ToolGroup : ObservableCollection<object>
+    {
+        public string Title { get; set; }
+
+        public ToolGroup(string title, IEnumerable<object> items) : base(items)
+        {
+            Title = title;
+        }
+    }
+    
     public partial class MainPage : ContentPage
     {
         private static List<Tool> toollist = new();
@@ -16,8 +27,7 @@ namespace MauiApp2
         public MainPage()
         {
             InitializeComponent();
-            _ = grabTools();
-            _ = grabMaterials();
+            _ = LoadGroupedData();
         }
 
         private async Task grabTools()
@@ -93,6 +103,24 @@ namespace MauiApp2
 
         }
 
+        private async Task LoadGroupedData()
+        {
+            await ToolRepository.InitializeToolsAsync();
+            await MaterialRepository.InitializeMaterialsAsync();
+
+            var tools = ToolRepository.GetTools();
+            var materials = MaterialRepository.GetMaterials();
+
+            var groups = new ObservableCollection<ToolGroup>
+            {
+                new ToolGroup("Materials", materials),
+                new ToolGroup("Tools", tools)
+            };
+
+            toolList.ItemsSource = groups;
+        }
+
+
         private async void toolList_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             if (e.SelectedItem is Tool selectedTool)
@@ -128,14 +156,17 @@ namespace MauiApp2
 
         private async void ToolList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (e.CurrentSelection.FirstOrDefault() is Tool selectedTool)
-            {
-                await Navigation.PushAsync(new ToolInfo(selectedTool, "grid"));
-            }
+            var selected = e.CurrentSelection.FirstOrDefault();
 
-            // Clear selection so the same item can be tapped again
+            if (selected is Tool tool)
+                await Navigation.PushAsync(new ToolInfo(tool, "grid"));
+
+            else if (selected is Material material)
+                await Navigation.PushAsync(new MaterialInfo(material, "grid"));
+
             toolList.SelectedItem = null;
         }
+
 
 
 
