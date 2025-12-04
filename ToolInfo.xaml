@@ -57,9 +57,16 @@
         Margin="40, 20"
         HorizontalOptions="Center"
         VerticalOptions="Center"
-        StrokeShape="RoundRectangle 25">
+        StrokeShape="RoundRectangle 25"
+        WidthRequest="340"
+        MaximumWidthRequest="340">
 
-        <VerticalStackLayout Spacing="18" Margin="20, 0" HorizontalOptions="Fill" WidthRequest="350">
+            <VerticalStackLayout 
+                Spacing="18" 
+                Margin="20, 0" 
+                HorizontalOptions="Center" 
+                WidthRequest="290">
+
 
             <!-- IMAGE WRAPPER -->
             <Border  
@@ -82,10 +89,13 @@
             <Label 
                 x:Name="mainText"
                 Text="TOOL NAME"
+                HorizontalTextAlignment="Center"
                 FontFamily="HighSchoolUsa"
                 TextTransform="Uppercase"
-                FontSize="26"
+                FontSize="28"
                 TextColor="#3B0000"
+                LineBreakMode="TailTruncation"
+                MaxLines="2" 
                 HorizontalOptions="Center" />
 
             <!-- AVAILABILITY -->
@@ -107,54 +117,68 @@
                 HorizontalTextAlignment="Center" />
 
             <!-- QUANTITY SELECTOR -->
-            <HorizontalStackLayout 
-                HorizontalOptions="Center"
-                Spacing="0"
-                HeightRequest="50">
+            <Border
+                Stroke="#3B0000"
+                StrokeThickness="2"
+                BackgroundColor="White"
+                HorizontalOptions="Fill"
+                HeightRequest="50"
+                StrokeShape="RoundRectangle 15">
 
-                <!-- Minus Button -->
-                <Button 
-                    Text="−"
-                    FontSize="28"
-                    WidthRequest="50"
-                    CornerRadius="0"
-                    BackgroundColor="#AE6F6F"
-                    TextColor="White"
-                    Clicked="OnDecrementClicked" />
+                <Grid ColumnDefinitions="*, Auto, *">
 
-                <!-- Quantity Display -->
-                <Border
-                    Stroke="#3B0000"
-                    StrokeThickness="2"
-                    HeightRequest="50"
-                    WidthRequest="70"
-                    BackgroundColor="White">
-                    <Label 
-                        x:Name="quantityLabel"
-                        Text="1"
-                        FontSize="24"
-                        HorizontalOptions="Center"
+                    <!-- Minus Button -->
+                    <Button 
+                        Grid.Column="0"
+                        Text="−"
+                        FontSize="28"
+                        BackgroundColor="#AE6F6F"
+                        TextColor="White"
+                        CornerRadius="0"
+                        HorizontalOptions="Fill"
+                        VerticalOptions="Fill"
+                        Clicked="OnDecrementClicked" />
+
+                    <!-- Quantity Display -->
+                    <Grid 
+                        Grid.Column="1"
+                        WidthRequest="120"
+                        BackgroundColor="White"
                         VerticalOptions="Center"
-                        TextColor="#3B0000"/>
-                </Border>
+                        HorizontalOptions="Center">
 
-                <!-- Plus Button -->
-                <Button 
-                    Text="＋"
-                    FontSize="28"
-                    WidthRequest="50"
-                    CornerRadius="0"
-                    BackgroundColor="#AE6F6F"
-                    TextColor="White"
-                    Clicked="OnIncrementClicked" />
+                        <Label 
+                            x:Name="quantityLabel"
+                            Text="1"
+                            FontSize="24"
+                            VerticalOptions="Center"
+                            HorizontalOptions="Center"
+                            TextColor="#3B0000"/>
+                    </Grid>
 
-            </HorizontalStackLayout>
+                    <!-- Plus Button -->
+                    <Button 
+                        Grid.Column="2"
+                        Text="＋"
+                        FontSize="28"
+                        BackgroundColor="#AE6F6F"
+                        TextColor="White"
+                        CornerRadius="0"
+                        HorizontalOptions="Fill"
+                        VerticalOptions="Fill"
+                        Clicked="OnIncrementClicked" />
+
+                </Grid>
+
+            </Border>
+
+
 
             <!-- CHECKOUT BUTTON -->
             <Button 
                 x:Name="Checkout"
-                Text="SCAN &amp; CHECK OUT"
-                FontFamily="OpenSansExtraBold"
+                Text="SCAN &amp; CHECKOUT"
+                FontFamily="OpenSansSemiBold"
                 FontSize="20"
                 BackgroundColor="#3B0000"
                 TextColor="White"
