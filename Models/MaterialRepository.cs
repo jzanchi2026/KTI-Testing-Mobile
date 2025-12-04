@@ -68,7 +68,7 @@ namespace KTI_Testing__Mobile_.Models
                     new KeyValuePair<string, string>("id", mat.id.ToString()),
                     new KeyValuePair<string, string>("quantity", q.ToString()),
                 });
-            Uri checkUri = new Uri(App.uri, "checkoutMaterials");
+            Uri checkUri = new Uri(App.uri, "checkoutMaterial");
             // Treat like a GET although it is a POST
             var response = await App.myHttpClient.PostAsync(checkUri, formContent);
             stringContent = await response.Content.ReadAsStringAsync();
