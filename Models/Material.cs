@@ -8,18 +8,16 @@ namespace KTI_Testing__Mobile_.Models
 {
     public  class Material
     {
-        public int id { get; set; }
-        public string name { get; set; }
-        public int quantity { get; set; }
-        public int currentAmount { get; set; }
-        public Material(int i, string n, int q, int c)
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public float Quantity { get; set; }
+        public float CurrentAmount { get; set; }
+        public Material(int i, string n, float q, float c)
         {
-            this.id = i;
-            this.name = n;
-            this.quantity = q;
-            this.currentAmount = c;
-
-            
+            this.Id = i;
+            this.Name = n;
+            this.Quantity = q;
+            this.CurrentAmount = c;
         }
 
     }

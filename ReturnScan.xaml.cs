@@ -104,7 +104,7 @@ public partial class ReturnScan : ContentPage
                 }
                 else if (ScannedMat != null)
                 {
-                    barcodeResult.Text = $"Are you sure you want to return {ScannedMat.quantity}: \n{ScannedMat.name}s";
+                    barcodeResult.Text = $"Are you sure you want to return {ScannedMat.Quantity}: \n{ScannedMat.Name}s";
                     Confirm.IsVisible = true;
                     Confirm.Text = "Confirm";
                 }

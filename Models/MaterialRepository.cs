@@ -31,7 +31,7 @@ namespace KTI_Testing__Mobile_.Models
                 if (where == "getMaterials")
                 {
                     JObject matObj = (JObject)data[i];
-                    Material add = new Material((int)matObj["materialId"], matObj["materialName"].ToString(), (int)matObj["amount"], (int)matObj["currentAmount"]);
+                    Material add = new Material((int)matObj["materialId"], matObj["materialName"].ToString(), float.Parse(matObj["amount"].ToString()), float.Parse(matObj["currentAmount"].ToString()));
                     matList.Add(add);
                 }
                 else if (where == "getUserMaterials")
@@ -56,24 +56,31 @@ namespace KTI_Testing__Mobile_.Models
             Console.WriteLine(response);
             var stringContent = await response.Content.ReadAsStringAsync();
             JObject tooldata = JObject.Parse(stringContent);
-            Material ret = new Material((int)tooldata["materialId"], tooldata["materialName"].ToString(), (int)tooldata["amount"], (int)tooldata["currentAmount"]);
+            Material ret = new Material((int)tooldata["materialId"], tooldata["materialName"].ToString(), float.Parse(tooldata["amount"].ToString().ToString()), float.Parse(tooldata["currentAmount"].ToString()));
             return ret;
         }
-        public static async Task<bool> checkoutMaterial(Material mat, int q)
+        public static async Task<bool> checkoutMaterial(Material mat, float q)
         {
             // Append the ID to the URL as a query parameter
-            var stringContent = "";
+            var stringContent = "";/*
             var formContent = new FormUrlEncodedContent(new[]
 {
-                    new KeyValuePair<string, string>("id", mat.id.ToString()),
+                    new KeyValuePair<string, string>("id", mat.Id.ToString()),
                     new KeyValuePair<string, string>("quantity", q.ToString()),
                 });
-            Uri checkUri = new Uri(App.uri, "checkoutMaterial");
+            Uri checkUri = new Uri(App.uri, "checkoutMaterial");*/
+            Uri checkUri = new Uri($"{App.uri}checkoutMaterial?id={mat.Id}&quantity={q.ToString()}");
             // Treat like a GET although it is a POST
-            var response = await App.myHttpClient.PostAsync(checkUri, formContent);
+            var response = await App.myHttpClient.PostAsync(checkUri, null);
             stringContent = await response.Content.ReadAsStringAsync();
             Console.WriteLine(stringContent);
-            return true;
+            JObject tooldata = JObject.Parse(stringContent);
+            bool ret = false;
+            if((bool)tooldata["success"] == true)
+            {
+                ret = true;
+            }
+            return ret;
             
 
         }
@@ -81,7 +88,7 @@ namespace KTI_Testing__Mobile_.Models
         {
             foreach (Material i in _materials)
             {
-                if (i.id == tofind)
+                if (i.Id == tofind)
                 {
                     return i;
                 }

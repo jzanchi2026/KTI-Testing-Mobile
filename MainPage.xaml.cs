@@ -87,7 +87,7 @@ namespace MauiApp2
 
             var button = new Button
             {
-                Text = mat.name,
+                Text = mat.Name,
                 Style = myStyle,
                 Margin = new Thickness(15, 15, 15, 0),
                 BindingContext = mat //  attach the whole tool object

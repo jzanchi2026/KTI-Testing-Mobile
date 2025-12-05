@@ -34,7 +34,11 @@
         <HorizontalStackLayout 
         HorizontalOptions="Center"
         Spacing="10">
-
+			<Button
+            Text="−−"
+            FontSize="28"
+            WidthRequest="84"
+            Clicked="OnBigDecrementClicked" />
             <Button 
             Text="−"
             FontSize="28"
@@ -53,8 +57,13 @@
             FontSize="28"
             WidthRequest="50"
             Clicked="OnIncrementClicked" />
+			<Button
+            Text="＋＋"
+            FontSize="28"
+            WidthRequest="84"
+            Clicked="OnBigIncrementClicked" />
 
-        </HorizontalStackLayout>
+		</HorizontalStackLayout>
 
         <!-- Action Buttons -->
         <Button 

@@ -31,25 +31,45 @@ public partial class MaterialInfo : ContentPage
     public MaterialInfo(Material scannedMat, string a)
     {
         InitializeComponent();
-        _passedValue = scannedMat.name;
+        _passedValue = scannedMat.Name;
         mat = scannedMat;
         mainText.Text = _passedValue;
         action = a;
+        availableCount.Text = scannedMat.CurrentAmount.ToString();
     }
-    int quantity = 0;
+    float quantity = 0;
 
     private void OnIncrementClicked(object sender, EventArgs e)
     {
-        quantity++;
-        quantityLabel.Text = quantity.ToString();
+        quantity += 0.1f;
+        quantityLabel.Text = quantity.ToString("0.0");
     }
 
     private void OnDecrementClicked(object sender, EventArgs e)
     {
         if (quantity > 0)
         {
+            quantity -= 0.1f;
+            quantityLabel.Text = quantity.ToString("0.0");
+        }
+    }
+    private void OnBigIncrementClicked(object sender, EventArgs e)
+    {
+        quantity++;
+        quantityLabel.Text = quantity.ToString("0.0");
+    }
+
+    private void OnBigDecrementClicked(object sender, EventArgs e)
+    {
+        if (quantity > 1)
+        {
             quantity--;
-            quantityLabel.Text = quantity.ToString();
+            quantityLabel.Text = quantity.ToString("0.0");
+        }
+        else
+        {
+            quantity = 0;
+            quantityLabel.Text = quantity.ToString("0.0");
         }
     }
 
@@ -57,10 +77,10 @@ public partial class MaterialInfo : ContentPage
     {
         if (mat != null)
         {
-            bool a = await MaterialRepository.checkoutMaterial(mat, int.Parse(quantityLabel.Text));
+            bool a = await MaterialRepository.checkoutMaterial(mat, float.Parse(quantityLabel.Text));
             if (a)
             {
-                await DisplayAlert("Success", "Tool checked out successfully!", "OK");
+                await DisplayAlert("Success", "Material checked out successfully!", "OK");
             }
             else
             {
