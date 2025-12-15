@@ -36,5 +36,10 @@
 	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>we kinda need ur camera for stuff</string>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
 </dict>
 </plist>

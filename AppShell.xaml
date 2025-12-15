@@ -8,18 +8,14 @@
 
     Title="KT Metals Inventory"
     BackgroundColor="#2B0000"
-    x:Name="MyAppShell"
-     >
+    x:Name="MyAppShell">
 
-     
     <ShellContent
     x:Name="MyMainPage"
     Title="Home"
+    Icon="home_icon.png"
     ContentTemplate="{DataTemplate local:MainPage}"
     Route="MainPage" />
-
-    
-
 
     <ShellContent
         x:Name="MyLoginPage"
@@ -32,29 +28,41 @@
         />
     <ShellContent
          Title="Profile"
+         Icon="prof_icon.png"
          ContentTemplate="{DataTemplate local:ProfilePage}"
          Route="ProfilePage" />
     
     <ShellContent
-        Title="history"
+        Title="History"
+        Icon="history_icon.png"
         ContentTemplate="{DataTemplate local:HistoryPage}"
         Route="HistoryPage" />
     <ShellContent
-        Title="cart"
+        Title="Cart"
+        Icon="cart_icon.png"
         ContentTemplate="{DataTemplate local:CartPage}"
         Route="CartPage" />
     <ShellContent
         Title="Inventory"
+        Icon="inv_icon.png"
         ContentTemplate="{DataTemplate local:Inventory}"
         Route="Inventory" />
     <ShellContent
         Title="Borrow Items"
+        Icon="borrow_icon.png"
         ContentTemplate="{DataTemplate local:Borrow}"
         Route="Borrow" />
     <Shell.FlyoutFooter>
-        <StackLayout>
-            <Button Text="Sign Out" Command ="{Binding SignOutCommand}" BackgroundColor="DarkRed"></Button>
-        </StackLayout>
+        <Grid Padding="20" BackgroundColor="White">
+            <Button
+                Text="Sign Out"
+                Command="{Binding SignOutCommand}"
+                BackgroundColor="#700000"
+                TextColor="White"
+                CornerRadius="10"
+                HeightRequest="45"
+                FontAttributes="Bold"/>
+        </Grid>
     </Shell.FlyoutFooter>
 
 </Shell>

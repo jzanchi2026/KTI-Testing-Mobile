@@ -39,6 +39,41 @@
         </Style>
     </ContentPage.Resources>
 
+    <Shell.TitleView>
+        <Grid Padding="10,0" BackgroundColor="Transparent">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <HorizontalStackLayout Spacing="8" VerticalOptions="Center" Grid.Column="2">
+                <!-- App Text -->
+                <Label Text="SCAN ITEMS"
+                    FontSize="18"
+                    FontFamily="OpenSansRegular"
+                    FontAttributes="Bold"
+                    TextColor="White"
+                    VerticalOptions="Center"/>
+                
+                <Label Text="KTI"
+                    FontSize="22"
+                    FontFamily="HighSchoolUsa"
+                    FontAttributes="Bold"
+                    TextColor="White"
+                    VerticalOptions="Center"/>
+
+
+                <ImageButton Source="applogo.png"
+                            HeightRequest="24"
+                            WidthRequest="24"
+                            BackgroundColor="Transparent"
+                            Clicked="ProfileButton_Clicked"/>
+            </HorizontalStackLayout>
+        </Grid>
+    </Shell.TitleView>
+
+
     <VerticalStackLayout Padding="20" Spacing="20" VerticalOptions="CenterAndExpand">
 
         <!-- Title -->

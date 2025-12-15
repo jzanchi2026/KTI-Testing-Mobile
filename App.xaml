@@ -10,6 +10,22 @@
                 <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
+            <ResourceDictionary>
+                <Color x:Key="NavBarBackgroundColor">#3B0000</Color>
+                <Color x:Key="NavBarTextColor">White</Color>
+
+                <Style TargetType="NavigationPage">
+                    <Setter Property="BarBackgroundColor" Value="{StaticResource NavBarBackgroundColor}" />
+                    <Setter Property="BarTextColor" Value="{StaticResource NavBarTextColor}" />
+                </Style>
+
+                <Style TargetType="Shell">
+                    <Setter Property="NavBarHasShadow" Value="True" />
+                    <Setter Property="Shell.NavBarIsVisible" Value="True" />
+                </Style>
+            </ResourceDictionary>
+
+
             <Style TargetType="Button" Class="Items">
                 <Setter Property="MaximumHeightRequest" Value="300"></Setter>
                 <Setter Property="MaximumWidthRequest" Value="1000"></Setter>
@@ -19,6 +35,7 @@
                 <Setter Property="HeightRequest" Value="120"></Setter>
                 <Setter Property="FontSize" Value="28"></Setter>
             </Style>
+
 
             <Style TargetType="Label" Class="toolName">
                 <Setter Property="FontSize" Value="Large"></Setter>
