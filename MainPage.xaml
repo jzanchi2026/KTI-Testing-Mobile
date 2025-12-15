@@ -3,8 +3,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              BackgroundColor="#2B0000"
              Padding="0"
+             xmlns:local="clr-namespace:MauiApp2"
              x:Name="Home"
              x:Class="MauiApp2.MainPage">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:NameFallbackConverter x:Key="NameFallbackConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
 
     <Shell.TitleView>
@@ -81,7 +88,7 @@
                 <DataTemplate>
                     <Label Text="{Binding Title}"
                         FontSize="24"
-                        FontAttributes="Bold"
+                        FontFamily="OpenSansSemiBold"
                         TextColor="White"
                         Margin="10,15,0,5"/>
                 </DataTemplate>
@@ -118,15 +125,15 @@
                                 </Border>
                             </Grid>
 
-                            <Label Grid.Row="1"
-                                Text="{Binding Name}"
-                                TextTransform="Uppercase"
+                            <Label
+                                Grid.Row="1"
+                                FontSize="18"
                                 FontAttributes="Bold"
                                 TextColor="White"
-                                FontSize="18"
-                                Margin="0"
+                                TextTransform="Uppercase"
                                 LineBreakMode="TailTruncation"
-                                MaxLines="1" />
+                                MaxLines="1"
+                                Text="{Binding Converter={StaticResource NameFallbackConverter}}" />
                         </Grid>
 
                     </Border>
