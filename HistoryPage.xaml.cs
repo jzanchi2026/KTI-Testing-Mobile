@@ -1,78 +1,58 @@
-﻿using CommunityToolkit.Maui.Markup;
+﻿using MauiApp2.Models;
 using KTI_Testing__Mobile_.Models;
-using MauiApp2.Models;
+using System.Collections.ObjectModel;
 
 namespace MauiApp2
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class HistoryPage : ContentPage
     {
+        private ObservableCollection<HistoryDisplayItem> _items = new();
+
         public HistoryPage()
         {
             InitializeComponent();
-            _ = grabTools();
-
+            historyList.ItemsSource = _items;
+            _ = LoadHistory();
         }
-        public async Task grabTools()
+
+        private async Task LoadHistory()
         {
             List<HistoryObject> tools = await ToolRepository.userToolHistory();
 
-            foreach (HistoryObject i in tools)
+            foreach (var h in tools)
             {
-                addItem(i);
+                Tool tool = ToolRepository.getSpecificTool(h.ToolId);
+
+                bool returned = h.ReturnTime.Year != 1;
+
+                _items.Add(new HistoryDisplayItem
+                {
+                    ToolName = tool.Name,
+                    CheckoutText = $"Checkout: {h.CheckoutTime:MM/dd/yyyy}",
+
+                    ReturnText = returned
+                        ? $"Returned: {h.ReturnTime:MM/dd/yyyy}"
+                        : "Not Returned",
+
+                    ReturnColor = returned
+                        ? Color.FromArgb("#FFCA26")
+                        : Color.FromArgb("#B00020")
+                });
             }
         }
-        public void addItem(HistoryObject h)
+
+        private async void ProfileButton_Clicked(object sender, EventArgs e)
         {
-            Tool tool = ToolRepository.getSpecificTool(h.ToolId);
-            var myStyle = new Style<Button>(
-                (Button.HeightRequestProperty, 120),
-                (Button.MaximumWidthRequestProperty, 430),
-                (Button.TextColorProperty, Colors.Black),
-                (Button.BackgroundColorProperty, Colors.WhiteSmoke),
-                (Button.FontSizeProperty, 10)
-            );
-
-            string retTime = h.ReturnTime.Year == 1 ? "Not Returned" : h.ReturnTime.ToString();
-            string chkTime = h.CheckoutTime.ToString();
-
-            Button button = new Button
-            {
-                Text = $"{tool.Name}\nCheckout time: {chkTime}\nReturn time: {retTime}",
-                LineBreakMode = LineBreakMode.WordWrap,
-                Style = myStyle,
-                Margin = new Thickness(15, 15, 15, 0)
-            };
-
-            // ✅ Add a new row for this button before the footer row (3)
-            int insertRow = toolList.RowDefinitions.Count - 1; // place before bottom buttons
-            toolList.RowDefinitions.Insert(insertRow, new RowDefinition { Height = GridLength.Auto });
-
-            Grid.SetRow(button, insertRow);
-            Grid.SetColumnSpan(button, toolList.ColumnDefinitions.Count);
-
-            toolList.Children.Add(button);
+            await Shell.Current.GoToAsync(nameof(ProfilePage));
         }
+    }
 
-        private void latestSubmitions_Clicked(object sender, EventArgs e)
-        {
 
-        }
-        /*
-        private void GoToProfilePage(object sender, EventArgs e)
-        {
-            Shell.Current.GoToAsync(nameof(ProfilePage));
-        }
-
-        private void GoToCartPage(object sender, EventArgs e)
-        {
-            Shell.Current.GoToAsync(nameof(CartPage));
-        }
-
-        private void GoToSettingPage(object sender, EventArgs e)
-        {
-            Shell.Current.GoToAsync(nameof(SettingsPage));
-        }
-        */
+    public class HistoryDisplayItem
+    {
+        public string ToolName { get; set; } = string.Empty;
+        public string CheckoutText { get; set; } = string.Empty;
+        public string ReturnText { get; set; } = string.Empty;
+        public Color ReturnColor { get; set; }
     }
 }
