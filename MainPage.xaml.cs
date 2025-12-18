@@ -170,11 +170,11 @@ namespace MauiApp2
 
 
 
-        private void ProfileButton_Clicked(object sender, EventArgs e)
+        private async void ProfileButton_Clicked(object sender, EventArgs e)
         {
-            // TODO: Add your navigation or logic here
-            DisplayAlert("Profile", "Profile button clicked!", "OK");
+            await Shell.Current.GoToAsync(nameof(ProfilePage));
         }
+
 
 
     }

@@ -1,25 +1,43 @@
-﻿using CommunityToolkit.Maui.Markup;
+﻿using MauiApp2.Models;
 using KTI_Testing__Mobile_.Models;
-using MauiApp2.Models;
+using System.Collections.ObjectModel;
 
 namespace MauiApp2
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class HistoryPage : ContentPage
     {
+        private ObservableCollection<HistoryDisplayItem> _items = new();
+
         public HistoryPage()
         {
             InitializeComponent();
-            _ = grabTools();
-
+            historyList.ItemsSource = _items;
+            _ = LoadHistory();
         }
-        public async Task grabTools()
+
+        private async Task LoadHistory()
         {
             List<HistoryObject> tools = await ToolRepository.userToolHistory();
 
-            foreach (HistoryObject i in tools)
+            foreach (var h in tools)
             {
-                addItem(i);
+                Tool tool = ToolRepository.getSpecificTool(h.ToolId);
+
+                bool returned = h.ReturnTime.Year != 1;
+
+                _items.Add(new HistoryDisplayItem
+                {
+                    ToolName = tool.Name,
+                    CheckoutText = $"Checkout: {h.CheckoutTime:MM/dd/yyyy}",
+
+                    ReturnText = returned
+                        ? $"Returned: {h.ReturnTime:MM/dd/yyyy}"
+                        : "Not Returned",
+
+                    ReturnColor = returned
+                        ? Color.FromArgb("#FFCA26")
+                        : Color.FromArgb("#B00020")
+                });
             }
             List<HistoryObject> mats = await MaterialRepository.userMaterialHistory();
 
@@ -28,7 +46,8 @@ namespace MauiApp2
                 addItem(i);
             }
         }
-        public void addItem(HistoryObject h)
+
+        private async void ProfileButton_Clicked(object sender, EventArgs e)
         {
             if (h.TakenQ != 0)
             {
@@ -88,28 +107,15 @@ namespace MauiApp2
 
                 toolList.Children.Add(button);
             }
-
         }
+    }
 
-        private void latestSubmitions_Clicked(object sender, EventArgs e)
-        {
 
-        }
-        /*
-        private void GoToProfilePage(object sender, EventArgs e)
-        {
-            Shell.Current.GoToAsync(nameof(ProfilePage));
-        }
-
-        private void GoToCartPage(object sender, EventArgs e)
-        {
-            Shell.Current.GoToAsync(nameof(CartPage));
-        }
-
-        private void GoToSettingPage(object sender, EventArgs e)
-        {
-            Shell.Current.GoToAsync(nameof(SettingsPage));
-        }
-        */
+    public class HistoryDisplayItem
+    {
+        public string ToolName { get; set; } = string.Empty;
+        public string CheckoutText { get; set; } = string.Empty;
+        public string ReturnText { get; set; } = string.Empty;
+        public Color ReturnColor { get; set; }
     }
 }

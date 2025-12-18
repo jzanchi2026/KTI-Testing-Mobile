@@ -130,6 +130,7 @@
                                 FontSize="18"
                                 FontAttributes="Bold"
                                 TextColor="White"
+                                FontFamily="OpenSansSemiBold"
                                 TextTransform="Uppercase"
                                 LineBreakMode="TailTruncation"
                                 MaxLines="1"

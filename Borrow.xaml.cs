@@ -160,4 +160,9 @@ public partial class Borrow : ContentPage
         });
     }
 
+    private async void ProfileButton_Clicked(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync(nameof(ProfilePage));
+    }
+
 }

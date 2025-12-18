@@ -14,8 +14,8 @@ namespace MauiApp2
         public ProfilePage()
         {
             InitializeComponent();
-            na = "Welcome " + App.UserInfo.Name + "!";
-            em = "Email: " + App.UserInfo.Email;
+            na = "Welcome " + (App.UserInfo?.Name ?? "Guest") + "!";
+            em = "Email: " + (App.UserInfo?.Email ?? "N/A");
             SignOutCommand = new Command(async () => await SignOutAsync());
             BindingContext = this;
         }
@@ -24,7 +24,11 @@ namespace MauiApp2
             try
             {
                 // Remove saved user info
-                Preferences.Remove(nameof(App.UserInfo));
+                if (Preferences.ContainsKey(nameof(App.UserInfo)))
+                {
+                    Preferences.Remove(nameof(App.UserInfo));
+                }
+
                 Uri loginUri = new Uri(App.uri, "logout");
                 var shell = Shell.Current as AppShell;
                 

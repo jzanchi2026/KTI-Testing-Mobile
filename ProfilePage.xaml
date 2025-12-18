@@ -25,16 +25,16 @@
 
                     <!-- Circular Profile Image -->
                     <Frame Padding="0"
-                           CornerRadius="80"
-                           HeightRequest="150"
-                           WidthRequest="150"
-                           HasShadow="False"
-                           BackgroundColor="#EEEEEE">
+                        CornerRadius="75"
+                        HeightRequest="150"
+                        WidthRequest="150"
+                        IsClippedToBounds="True"
+                        HasShadow="False">
 
                         <Image Source="anger.png"
-                               Aspect="AspectFill"
-                               Clip="EllipseGeometry Center='75,75' RadiusX='75' RadiusY='75'" />
+                            Aspect="AspectFill"/>
                     </Frame>
+
 
                     <!-- User Name -->
                     <Label Text="{Binding na}"
