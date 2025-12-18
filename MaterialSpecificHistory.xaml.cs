@@ -5,28 +5,28 @@ using MauiApp2.Models;
 namespace MauiApp2
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ToolSpecificHistory : ContentPage
+    public partial class MaterialSpecificHistory : ContentPage
     {
-        private Tool tool;
-        public ToolSpecificHistory()
+        private Material mat;
+        public MaterialSpecificHistory()
         {
             InitializeComponent();
-            grabTools();
+            grabMats();
 
         }
-        public ToolSpecificHistory(Tool the)
+        public MaterialSpecificHistory(Material the)
         {
             InitializeComponent();
-            tool = the;
-            grabTools();
+            mat = the;
+            grabMats();
             
 
         }
-        public async void grabTools()
+        public async void grabMats()
         {
     
-            List<HistoryObject> toolHistory = await ToolRepository.specificToolHistory(tool.Id);
-            foreach (HistoryObject i in toolHistory)
+            List<HistoryObject> matHistory = await MaterialRepository.specificMaterialHistory(mat.Id);
+            foreach (HistoryObject i in matHistory)
             {
                 addItem(i);
             }
@@ -34,7 +34,7 @@ namespace MauiApp2
         }
         public void addItem(HistoryObject h)
         {
-            Tool tool = ToolRepository.getSpecificTool(h.Id);
+            Material mat = MaterialRepository.getSpecificMaterial(h.Id);
             var myStyle = new Style<Button>(
                 (Button.HeightRequestProperty, 120),
                 (Button.MaximumWidthRequestProperty, 430),
@@ -48,20 +48,20 @@ namespace MauiApp2
 
             Button button = new Button
             {
-                Text = $"{tool.Name}\nCheckout time: {chkTime}\nReturn time: {retTime}",
+                Text = $"{mat.Name}\nCheckout time: {chkTime}\nReturn time: {retTime}",
                 LineBreakMode = LineBreakMode.WordWrap,
                 Style = myStyle,
                 Margin = new Thickness(15, 15, 15, 0)
             };
 
             // ✅ Add a new row for this button before the footer row (3)
-            int insertRow = toolList.RowDefinitions.Count - 1; // place before bottom buttons
-            toolList.RowDefinitions.Insert(insertRow, new RowDefinition { Height = GridLength.Auto });
+            int insertRow = matList.RowDefinitions.Count - 1; // place before bottom buttons
+            matList.RowDefinitions.Insert(insertRow, new RowDefinition { Height = GridLength.Auto });
 
             Grid.SetRow(button, insertRow);
-            Grid.SetColumnSpan(button, toolList.ColumnDefinitions.Count);
+            Grid.SetColumnSpan(button, matList.ColumnDefinitions.Count);
 
-            toolList.Children.Add(button);
+            matList.Children.Add(button);
         }
     }
 }

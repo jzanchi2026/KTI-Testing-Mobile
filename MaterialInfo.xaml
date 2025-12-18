@@ -174,19 +174,21 @@
 
 
             <!-- CHECKOUT BUTTON -->
-                x:Name="Checkout"
-                Text="SCAN &amp; CHECKOUT"
-                FontFamily="OpenSansSemiBold"
-                FontSize="20"
-                BackgroundColor="#3B0000"
-                TextColor="White"
-                CornerRadius="15"
-                HeightRequest="55"
-                Clicked="OnScanCheckoutClicked"
-                Margin="0,10,0,0"
-                HorizontalOptions="Fill" />
+				<Button
+					x:Name="Checkout"
+					Text="SCAN &amp; CHECKOUT"
+					FontFamily="OpenSansSemiBold"
+					FontSize="20"
+					BackgroundColor="#3B0000"
+					TextColor="White"
+					CornerRadius="15"
+					HeightRequest="55"
+					Clicked="OnScanCheckoutClicked"
+					Margin="0,10,0,0"
+					HorizontalOptions="Fill" />
 
-            <!-- RETURN BUTTON (Optional) -->
+
+				<!-- RETURN BUTTON (Optional) -->
             <Button 
                 x:Name="Return"
                 Text="RETURN"

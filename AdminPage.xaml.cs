@@ -36,9 +36,16 @@ public partial class AdminPage : ContentPage
     private async void ViewHistory(object sender, EventArgs e)
     {
 
-        string dingo = HistoryId.Text;
-        Tool tool = await ToolRepository.parseTool(int.Parse(dingo));
+        string id = HistoryId.Text;
+        Tool tool = await ToolRepository.parseTool(int.Parse(id));
         await Navigation.PushAsync(new ToolSpecificHistory(tool));
+    }
+    private async void ViewMHistory(object sender, EventArgs e)
+    {
+
+        string id = HistoryId.Text;
+        Material mat = await MaterialRepository.parseMaterial(int.Parse(id));
+        await Navigation.PushAsync(new MaterialSpecificHistory(mat));
     }
 }
 //Bro this is meat

@@ -21,37 +21,74 @@ namespace MauiApp2
             {
                 addItem(i);
             }
+            List<HistoryObject> mats = await MaterialRepository.userMaterialHistory();
+
+            foreach (HistoryObject i in mats)
+            {
+                addItem(i);
+            }
         }
         public void addItem(HistoryObject h)
         {
-            Tool tool = ToolRepository.getSpecificTool(h.ToolId);
-            var myStyle = new Style<Button>(
-                (Button.HeightRequestProperty, 120),
-                (Button.MaximumWidthRequestProperty, 430),
-                (Button.TextColorProperty, Colors.Black),
-                (Button.BackgroundColorProperty, Colors.WhiteSmoke),
-                (Button.FontSizeProperty, 10)
-            );
-
-            string retTime = h.ReturnTime.Year == 1 ? "Not Returned" : h.ReturnTime.ToString();
-            string chkTime = h.CheckoutTime.ToString();
-
-            Button button = new Button
+            if (h.TakenQ != 0)
             {
-                Text = $"{tool.Name}\nCheckout time: {chkTime}\nReturn time: {retTime}",
-                LineBreakMode = LineBreakMode.WordWrap,
-                Style = myStyle,
-                Margin = new Thickness(15, 15, 15, 0)
-            };
+                Material mat = MaterialRepository.getSpecificMaterial(h.Id);
+                var myStyle = new Style<Button>(
+                    (Button.HeightRequestProperty, 120),
+                    (Button.MaximumWidthRequestProperty, 430),
+                    (Button.TextColorProperty, Colors.Black),
+                    (Button.BackgroundColorProperty, Colors.WhiteSmoke),
+                    (Button.FontSizeProperty, 10)
+                );
+                string retTime = h.ReturnTime.Year == 1 ? "Not Returned" : h.ReturnTime.ToString();
+                string chkTime = h.CheckoutTime.ToString();
+                Button button = new Button
+                {
+                    Text = $"Material: {mat.Name}\nCheckout time: {chkTime}\nReturn time: {retTime}",
+                    LineBreakMode = LineBreakMode.WordWrap,
+                    Style = myStyle,
+                    Margin = new Thickness(15, 15, 15, 0)
+                };
+                // ✅ Add a new row for this button before the footer row (3)
+                int insertRow = toolList.RowDefinitions.Count - 1; // place before bottom buttons
+                toolList.RowDefinitions.Insert(insertRow, new RowDefinition { Height = GridLength.Auto });
+                Grid.SetRow(button, insertRow);
+                Grid.SetColumnSpan(button, toolList.ColumnDefinitions.Count);
+                toolList.Children.Add(button);
+                return;
+            }
+            else
+            {
+                Tool tool = ToolRepository.getSpecificTool(h.Id);
+                var myStyle = new Style<Button>(
+                    (Button.HeightRequestProperty, 120),
+                    (Button.MaximumWidthRequestProperty, 430),
+                    (Button.TextColorProperty, Colors.Black),
+                    (Button.BackgroundColorProperty, Colors.WhiteSmoke),
+                    (Button.FontSizeProperty, 10)
+                );
 
-            // ✅ Add a new row for this button before the footer row (3)
-            int insertRow = toolList.RowDefinitions.Count - 1; // place before bottom buttons
-            toolList.RowDefinitions.Insert(insertRow, new RowDefinition { Height = GridLength.Auto });
+                string retTime = h.ReturnTime.Year == 1 ? "Not Returned" : h.ReturnTime.ToString();
+                string chkTime = h.CheckoutTime.ToString();
 
-            Grid.SetRow(button, insertRow);
-            Grid.SetColumnSpan(button, toolList.ColumnDefinitions.Count);
+                Button button = new Button
+                {
+                    Text = $"Tool: {tool.Name}\nCheckout time: {chkTime}\nReturn time: {retTime}",
+                    LineBreakMode = LineBreakMode.WordWrap,
+                    Style = myStyle,
+                    Margin = new Thickness(15, 15, 15, 0)
+                };
 
-            toolList.Children.Add(button);
+                // ✅ Add a new row for this button before the footer row (3)
+                int insertRow = toolList.RowDefinitions.Count - 1; // place before bottom buttons
+                toolList.RowDefinitions.Insert(insertRow, new RowDefinition { Height = GridLength.Auto });
+
+                Grid.SetRow(button, insertRow);
+                Grid.SetColumnSpan(button, toolList.ColumnDefinitions.Count);
+
+                toolList.Children.Add(button);
+            }
+
         }
 
         private void latestSubmitions_Clicked(object sender, EventArgs e)

@@ -5,6 +5,7 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using MauiApp2;
+using Microsoft.Maui;
 using Newtonsoft.Json.Linq;
 
 namespace KTI_Testing__Mobile_.Models
@@ -37,7 +38,7 @@ namespace KTI_Testing__Mobile_.Models
                 else if (where == "getUserMaterials")
                 {
                     JObject toolObj = (JObject)data[i];
-                    Material ret = await parseMaterial((int)toolObj["toolId"]);
+                    Material ret = await parseMaterial((int)toolObj["materialId"]);
                     matList.Add(ret);
                 }
             }
@@ -51,6 +52,7 @@ namespace KTI_Testing__Mobile_.Models
         public static List<Material> GetMaterials() => _materials;
         public static async Task<Material> parseMaterial(int id)
         {
+
             Uri invUri = new Uri(App.uri, "getMaterial?id=" + id);
             var response = await App.myHttpClient.GetAsync(invUri.ToString());
             Console.WriteLine(response);
@@ -94,6 +96,68 @@ namespace KTI_Testing__Mobile_.Models
                 }
             }
             return new Material(-1, "invalid", 0, 0);
+        }
+        public static async Task<List<HistoryObject>> specificMaterialHistory(int id)
+        {
+            Uri historyUri = new Uri($"{App.uri}getMaterialHistory?id={id}");
+            var response = await App.myHttpClient.GetAsync(historyUri.ToString());
+            var stringContent = await response.Content.ReadAsStringAsync();
+            Console.WriteLine(stringContent);
+            JArray tooldata = JArray.Parse(stringContent);
+            List<HistoryObject> ret = new List<HistoryObject>();
+            for (int i = 0; i < tooldata.Count; i++)
+            {
+                JObject matObj = (JObject)tooldata[i];
+                int recordId = (int)matObj["recordId"];
+                int matId = (int)matObj["materialId"];
+                string userId = matObj["userId"].ToString();
+                DateTime checkoutTime = (DateTime)matObj["timeTaken"];
+                DateTime returnTime = new DateTime();
+                float takenQ = float.Parse(matObj["takenQuantity"].ToString());
+                float returnedQ = float.Parse(matObj["returnedQuantity"].ToString());
+                if (matObj["timeReturned"] == null || matObj["timeReturned"].Type == JTokenType.Null)
+                {
+                    returnTime = new DateTime(0001, 1, 1);
+                }
+                else
+                {
+                    returnTime = (DateTime)matObj["timeReturned"];
+                }
+                HistoryObject h = new HistoryObject(recordId, matId, userId, checkoutTime, returnTime, takenQ, returnedQ);
+                ret.Add(h);
+            }
+            return ret;
+        }
+        public static async Task<List<HistoryObject>> userMaterialHistory()
+        {
+            Uri historyUri = new Uri($"{App.uri}getUserMaterials");
+            var response = await App.myHttpClient.GetAsync(historyUri.ToString());
+            var stringContent = await response.Content.ReadAsStringAsync();
+            Console.WriteLine(stringContent);
+            JArray tooldata = JArray.Parse(stringContent);
+            List<HistoryObject> ret = new List<HistoryObject>();
+            for (int i = 0; i < tooldata.Count; i++)
+            {
+                JObject toolObj = (JObject)tooldata[i];
+                int recordId = (int)toolObj["recordId"];
+                int toolId = (int)toolObj["materialId"];
+                string userId = toolObj["userId"].ToString();
+                DateTime checkoutTime = (DateTime)toolObj["timeTaken"];
+                DateTime returnTime = new DateTime();
+                if (toolObj["timeReturned"] == null || toolObj["timeReturned"].Type == JTokenType.Null)
+                {
+                    returnTime = new DateTime(0001, 1, 1);
+                }
+                else
+                {
+                    returnTime = (DateTime)toolObj["timeReturned"];
+                }
+                float takenQ = float.Parse(toolObj["takenQuantity"].ToString());
+                float returnedQ = float.Parse(toolObj["returnedQuantity"].ToString());
+                HistoryObject h = new HistoryObject(recordId, toolId, userId, checkoutTime, returnTime, takenQ, returnedQ);
+                ret.Add(h);
+            }
+            return ret;
         }
     }
 

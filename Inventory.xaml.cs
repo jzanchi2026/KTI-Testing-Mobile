@@ -45,29 +45,58 @@ public partial class Inventory : ContentPage
         List<Tool> toolList = await ToolRepository.ringo("getUserTools");
         foreach (Tool i in toolList)
         {
-            addItem(i);
+            addItem(i, null);
         }
-    }
-    public void addItem(Tool tool)
-    {
+        List<Material> matList = await MaterialRepository.dingo("getUserMaterials");
+        foreach (Material i in matList)
+        {
+            addItem(null, i);
+        }
 
-        var myStyle = new Style<Button>(
+    }
+    public void addItem(Tool tool, Material mat)
+    {
+        if(mat == null)
+        {
+            var myStyle = new Style<Button>(
             (Button.HeightRequestProperty, 120),
             (Button.MaximumWidthRequestProperty, 430),
             (Button.TextColorProperty, Colors.Black),
             (Button.BackgroundColorProperty, Colors.Beige),
             (Button.FontSizeProperty, 28)
-        );
+);
 
 
-        var button = new Button
+            var button = new Button
+            {
+                Text = tool.Name,
+                Style = myStyle,
+                Margin = new Thickness(15, 15, 15, 0),
+                BindingContext = tool //  attach the whole tool object
+            };
+            listBox.Children.Add(button);
+        }
+        if (tool == null)
         {
-            Text = tool.Name,
-            Style = myStyle,
-            Margin = new Thickness(15, 15, 15, 0),
-            BindingContext = tool //  attach the whole tool object
-        };
-        listBox.Children.Add(button);
+            var myStyle = new Style<Button>(
+            (Button.HeightRequestProperty, 120),
+            (Button.MaximumWidthRequestProperty, 430),
+            (Button.TextColorProperty, Colors.Black),
+            (Button.BackgroundColorProperty, Colors.Beige),
+            (Button.FontSizeProperty, 28)
+);
+
+
+            var button = new Button
+            {
+                Text = mat.Name,
+                Style = myStyle,
+                Margin = new Thickness(15, 15, 15, 0),
+                BindingContext = mat //  attach the whole tool object
+            };
+            listBox.Children.Add(button);
+        }
+
     }
     protected override void OnAppearing()
     {

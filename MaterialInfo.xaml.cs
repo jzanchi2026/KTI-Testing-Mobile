@@ -65,6 +65,7 @@ public partial class MaterialInfo : ContentPage
         {
             quantity--;
             quantityLabel.Text = quantity.ToString("0.0");
+            
         }
         else
         {
