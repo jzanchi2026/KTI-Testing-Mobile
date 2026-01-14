@@ -148,7 +148,7 @@
 
                         <Label 
                             x:Name="quantityLabel"
-                            Text="1"
+                            Text="0"
                             FontSize="24"
                             VerticalOptions="Center"
                             HorizontalOptions="Center"

@@ -73,7 +73,7 @@ public partial class ToolInfo : ContentPage
     private async void OnReturnClicked(object sender, EventArgs e)
     {
         
-        await Navigation.PushAsync(new ReturnScan());
+        await Navigation.PushAsync(new ReturnScan(0));
     }
 
     // Temporary function that puts random img in

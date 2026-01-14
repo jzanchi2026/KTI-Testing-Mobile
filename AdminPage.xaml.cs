@@ -15,6 +15,8 @@ public partial class AdminPage : ContentPage
     {
         await DisplayAlert("Broccoli", "", "OK");
     }
+    /*
+     * SEE STATEMENT IN .xaml FILE
     private async void AddTool(object sender, EventArgs e)
     {
         string toolName = ToolNameEntry.Text;
@@ -33,6 +35,7 @@ public partial class AdminPage : ContentPage
         // Use the tool name
         DisplayAlert("Added", $"Tool '{toolName}' added!", "OK");
     }
+    */
     private async void ViewHistory(object sender, EventArgs e)
     {
 

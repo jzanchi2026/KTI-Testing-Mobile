@@ -159,6 +159,33 @@ namespace KTI_Testing__Mobile_.Models
             }
             return ret;
         }
+        public static async void returnMaterial(Material m, float q)
+        {
+            List<HistoryObject> his = await userMaterialHistory();
+            // compare if return quantity is greater than or less than amount taken
+            float compareQ = 0;
+            foreach(HistoryObject h in his)
+            {
+                if(h.Id == m.Id)
+                {
+                    compareQ += h.TakenQ;
+                    break;
+                }
+            }
+            if (q <= compareQ)
+            {
+                //Initiate return
+                Uri returnUri = new Uri($"{App.uri}returnMaterials?id={m.Id}&quantity={m.Quantity.ToString()}");
+                var response = await App.myHttpClient.PostAsync(returnUri, null);
+                var stringContent = await response.Content.ReadAsStringAsync();
+                Console.WriteLine(stringContent);
+            }
+            else
+            {
+                //Stinky
+            }
+
+        }
     }
 
 }

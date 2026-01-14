@@ -28,6 +28,7 @@ public partial class MaterialInfo : ContentPage
     private string _passedValue;
     private Material mat;
     private string action;
+    private float maxQ;
     public MaterialInfo(Material scannedMat, string a)
     {
         InitializeComponent();
@@ -36,13 +37,17 @@ public partial class MaterialInfo : ContentPage
         mainText.Text = _passedValue;
         action = a;
         availableCount.Text = scannedMat.CurrentAmount.ToString();
+        maxQ = scannedMat.CurrentAmount;
     }
     float quantity = 0;
 
     private void OnIncrementClicked(object sender, EventArgs e)
     {
-        quantity += 0.1f;
-        quantityLabel.Text = quantity.ToString("0.0");
+        if (quantity < maxQ)
+        {
+            quantity += 0.1f;
+            quantityLabel.Text = quantity.ToString("0.0");
+        }
     }
 
     private void OnDecrementClicked(object sender, EventArgs e)
@@ -94,7 +99,7 @@ public partial class MaterialInfo : ContentPage
     private async void OnReturnClicked(object sender, EventArgs e)
     {
 
-        await Navigation.PushAsync(new ReturnScan());
+        await Navigation.PushAsync(new ReturnScan(quantity));
     }
 
     // Temporary function that puts random img in

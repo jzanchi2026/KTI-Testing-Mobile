@@ -24,10 +24,11 @@ using System.Windows.Input;
 public partial class ReturnScan : ContentPage
 {
     public string Prefix { get; set; }
-    public ReturnScan()
+    public float quantity { get; set; }
+    public ReturnScan(float value)
     {
         InitializeComponent();
-
+        quantity = value;
         RefreshView refreshView = new RefreshView();
         ICommand refreshCommand = new Command(() =>
         {
@@ -126,7 +127,19 @@ public partial class ReturnScan : ContentPage
     }
     private async void addToCartPage(object sender, EventArgs e)
     {
-        ToolRepository.returnTool(ScannedTool);
+        if (ScannedTool != null)
+        {
+            ToolRepository.returnTool(ScannedTool);
+        }
+        else if (ScannedMat != null)
+        {
+            MaterialRepository.returnMaterial(ScannedMat, quantity);
+        }
+        else
+        {
+            barcodeResult.Text = "Tool/Material does not exist";
+        }
+        
         Confirm.IsVisible = false;
         barcodeResult.Text = "";
 

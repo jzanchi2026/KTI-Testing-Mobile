@@ -8,8 +8,9 @@
 
     <ScrollView>
         <VerticalStackLayout Padding="24" Spacing="20">
-
-            <!-- SECTION 1: OVERVIEW -->
+            <!-- ALL OTHER FUNCTIONS TO BE IMPLEMENTED AT A LATER DATE
+            FOR ALPHA TEST PURPOSES THEY ARE TEMPORARILY CUT
+            
             <Frame CornerRadius="15" Padding="20" BackgroundColor="White" HasShadow="True">
                 <VerticalStackLayout Spacing="12">
                     <Label Text="🔨 Tool Creation"
@@ -44,7 +45,7 @@
                 </VerticalStackLayout>
             </Frame>
 
-            <!-- SECTION 2: USERS -->
+            
             <Frame CornerRadius="15" Padding="20" BackgroundColor="White" HasShadow="True">
                 <VerticalStackLayout Spacing="12">
                     <Label Text="🏞 Add Image"
@@ -76,7 +77,7 @@
                 </VerticalStackLayout>
             </Frame>
 
-            <!-- SECTION 3: REPORTS -->
+            
             <Frame CornerRadius="15" Padding="20" BackgroundColor="White" HasShadow="True">
                 <VerticalStackLayout Spacing="12">
                     <Label Text="🥦 Broccoli"
@@ -96,7 +97,8 @@
                     </HorizontalStackLayout>
                 </VerticalStackLayout>
             </Frame>
-
+            END HERE
+            -->
             <!-- SECTION 4: SETTINGS -->
             <Frame CornerRadius="15" Padding="20" BackgroundColor="White" HasShadow="True">
                 <VerticalStackLayout Spacing="12">

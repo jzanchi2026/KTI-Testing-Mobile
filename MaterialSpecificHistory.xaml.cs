@@ -48,7 +48,7 @@ namespace MauiApp2
 
             Button button = new Button
             {
-                Text = $"{mat.Name}\nCheckout time: {chkTime}\nReturn time: {retTime}",
+                Text = $"Material: {mat.Name} Amount: {h.TakenQ}\nCheckout time: {chkTime}\nReturn time: {retTime}",
                 LineBreakMode = LineBreakMode.WordWrap,
                 Style = myStyle,
                 Margin = new Thickness(15, 15, 15, 0)
