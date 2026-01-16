@@ -31,17 +31,12 @@
          Icon="prof_icon.png"
          ContentTemplate="{DataTemplate local:ProfilePage}"
          Route="ProfilePage" />
-    
+
     <ShellContent
         Title="History"
         Icon="history_icon.png"
         ContentTemplate="{DataTemplate local:HistoryPage}"
         Route="HistoryPage" />
-    <ShellContent
-        Title="Cart"
-        Icon="cart_icon.png"
-        ContentTemplate="{DataTemplate local:CartPage}"
-        Route="CartPage" />
     <ShellContent
         Title="Inventory"
         Icon="inv_icon.png"
