@@ -127,23 +127,34 @@ public partial class ReturnScan : ContentPage
     }
     private async void addToCartPage(object sender, EventArgs e)
     {
+        bool b = false;
         if (ScannedTool != null)
         {
-            ToolRepository.returnTool(ScannedTool);
+            b = await ToolRepository.returnTool(ScannedTool);
         }
         else if (ScannedMat != null)
         {
-            MaterialRepository.returnMaterial(ScannedMat, quantity);
+            b = await MaterialRepository.returnMaterial(ScannedMat, quantity);
+            
         }
         else
         {
+
             barcodeResult.Text = "Tool/Material does not exist";
+            
         }
-        
+        if (b)
+        {
+            await DisplayAlert("Success", "Return successful!", "OK");
+        }
+        else
+        {
+            await DisplayAlert("Error", "Return failed!", "OK");
+        }
         Confirm.IsVisible = false;
         barcodeResult.Text = "";
-
-        await Shell.Current.GoToAsync("..");
+        
+        await Shell.Current.GoToAsync("//IMPL_MainPage/MainPage");
     }
     protected override void OnAppearing()
     {

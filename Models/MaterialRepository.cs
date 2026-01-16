@@ -130,9 +130,10 @@ namespace KTI_Testing__Mobile_.Models
         }
         public static async Task<List<HistoryObject>> userMaterialHistory()
         {
-            Uri historyUri = new Uri($"{App.uri}getUserMaterials");
-            var response = await App.myHttpClient.GetAsync(historyUri.ToString());
+            Uri historyUri = new Uri(App.uri, "getUserMaterials");
+            var response = await App.myHttpClient.GetAsync(historyUri);
             var stringContent = await response.Content.ReadAsStringAsync();
+
             Console.WriteLine(stringContent);
             JArray tooldata = JArray.Parse(stringContent);
             List<HistoryObject> ret = new List<HistoryObject>();
@@ -159,7 +160,7 @@ namespace KTI_Testing__Mobile_.Models
             }
             return ret;
         }
-        public static async void returnMaterial(Material m, float q)
+        public static async Task<bool> returnMaterial(Material m, float q)
         {
             List<HistoryObject> his = await userMaterialHistory();
             // compare if return quantity is greater than or less than amount taken
@@ -175,14 +176,23 @@ namespace KTI_Testing__Mobile_.Models
             if (q <= compareQ)
             {
                 //Initiate return
-                Uri returnUri = new Uri($"{App.uri}returnMaterials?id={m.Id}&quantity={m.Quantity.ToString()}");
+                Uri returnUri = new Uri($"{App.uri}returnMaterial?id={m.Id}&quantity={q}");
                 var response = await App.myHttpClient.PostAsync(returnUri, null);
                 var stringContent = await response.Content.ReadAsStringAsync();
                 Console.WriteLine(stringContent);
+                if (stringContent.Contains("Cannot POST"))
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
             }
             else
             {
                 //Stinky
+                return false;
             }
 
         }

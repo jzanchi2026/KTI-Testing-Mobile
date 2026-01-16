@@ -99,7 +99,7 @@ namespace MauiApp2.Models
             return false;
 
         }
-        public static async void returnTool(Tool tool)
+        public static async Task<bool> returnTool(Tool tool)
         {
             Uri checkUri = new Uri($"{App.uri}returnTool?id={tool.Id}");
             // Treat like a GET although it is a POST
@@ -107,6 +107,14 @@ namespace MauiApp2.Models
             var stringContent = await response.Content.ReadAsStringAsync();
 
             Console.WriteLine(stringContent);
+            if (stringContent.Contains("Cannot POST"))
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
         public static async Task<List<HistoryObject>> userToolHistory()
         {
