@@ -1,28 +1,42 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MauiApp2.Inventory"
-             Title="Inventory">
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="MauiApp2.Inventory"
+    BackgroundColor="#121212">
 
     <Grid RowDefinitions="Auto,Auto,*">
-        <!-- Top button -->
-        <Button Text="Add" Grid.Row="0" />
 
-        <!-- CollectionView (optional) -->
-        <CollectionView Grid.Row="1" ItemsSource="{Binding Tools}">
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Label Text="{Binding Name}" TextColor="Red" />
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
+        <!-- Header (IDENTICAL to DOC 1 style) -->
+        <Label
+            Grid.Row="0"
+            Text="Inventory"
+            FontSize="24"
+            FontAttributes="Bold"
+            HorizontalOptions="Center"
+            TextColor="White"
+            Margin="0,20"/>
 
-        <!-- Scrollable listBox filling remaining space -->
-        <ScrollView Grid.Row="2" BackgroundColor="DarkGray">
-            <StackLayout x:Name="listBox">
 
-                <!-- Add more labels to test scrolling -->
+        <!-- Scrollable content area -->
+        <ScrollView
+            Grid.Row="2"
+            Margin="10">
+
+            <!-- Card container matching DOC 1 frames -->
+            <StackLayout
+                x:Name="listBox"
+                Spacing="6">
+
+                <!-- 
+                Buttons added dynamically in C# will appear here.
+                Their container spacing, margins, and background
+                now match DOC 1 visually.
+                -->
+
             </StackLayout>
+
         </ScrollView>
+
     </Grid>
 </ContentPage>

@@ -56,55 +56,62 @@ public partial class Inventory : ContentPage
     }
     public void addItem(Tool tool, Material mat)
     {
-        if(mat == null)
+        string name = tool != null ? tool.Name : mat.Name;
+        object context = tool != null ? tool : mat;
+
+        var nameLabel = new Label
         {
-            var myStyle = new Style<Button>(
-            (Button.HeightRequestProperty, 120),
-            (Button.MaximumWidthRequestProperty, 430),
-            (Button.TextColorProperty, Colors.Black),
-            (Button.BackgroundColorProperty, Colors.Beige),
-            (Button.FontSizeProperty, 28)
-);
+            Text = name,
+            FontSize = 18,
+            FontAttributes = FontAttributes.Bold,
+            TextColor = Colors.White
+        };
 
-
-            var button = new Button
-            {
-                Text = tool.Name,
-                Style = myStyle,
-                Margin = new Thickness(15, 15, 15, 0),
-                BindingContext = tool //  attach the whole tool object
-            };
-            listBox.Children.Add(button);
-        }
-        if (tool == null)
+        var infoLabel = new Label
         {
-            var myStyle = new Style<Button>(
-            (Button.HeightRequestProperty, 120),
-            (Button.MaximumWidthRequestProperty, 430),
-            (Button.TextColorProperty, Colors.Black),
-            (Button.BackgroundColorProperty, Colors.Beige),
-            (Button.FontSizeProperty, 28)
-);
+            Text = tool != null ? "Tool" : "Material",
+            FontSize = 14,
+            TextColor = Color.FromArgb("#BBBBBB")
+        };
 
-
-            var button = new Button
-            {
-                Text = mat.Name,
-                Style = myStyle,
-                Margin = new Thickness(15, 15, 15, 0),
-                BindingContext = mat //  attach the whole tool object
-            };
-            listBox.Children.Add(button);
+        var stack = new VerticalStackLayout
+        {
+            Spacing = 6,
+            Children =
+        {
+            nameLabel,
+            infoLabel
         }
+        };
 
+        var frame = new Frame
+        {
+            BackgroundColor = Color.FromArgb("#1E1E1E"),
+            CornerRadius = 12,
+            Padding = 12,
+            Margin = new Thickness(0, 6),
+            HasShadow = true,
+            Content = stack,
+            BindingContext = context
+        };
+
+        // Optional: tap behavior (acts like a button)
+        var tap = new TapGestureRecognizer();
+        tap.Tapped += (s, e) =>
+        {
+            var boundItem = ((Frame)s).BindingContext;
+            // handle tap here if needed
+        };
+        frame.GestureRecognizers.Add(tap);
+
+        listBox.Children.Add(frame);
     }
+
     protected override void OnAppearing()
     {
         base.OnAppearing();
-        foreach (var button in listBox.Children.OfType<Button>().ToList())
-        {
-            listBox.Children.Remove(button);
-        }
+        listBox.Children.Clear();
+
 
         GetInvTools();
     }
