@@ -68,7 +68,7 @@ public partial class ReturnScan : ContentPage
             Material mat = null;
             string truncated = "";
             Prefix = "";
-            
+
             foreach (char character in barcodeValue)
             {
                 truncated += int.TryParse(character.ToString(), out int j) ? character : "";
@@ -135,13 +135,13 @@ public partial class ReturnScan : ContentPage
         else if (ScannedMat != null)
         {
             b = await MaterialRepository.returnMaterial(ScannedMat, quantity);
-            
+
         }
         else
         {
 
             barcodeResult.Text = "Tool/Material does not exist";
-            
+
         }
         if (b)
         {
@@ -153,8 +153,8 @@ public partial class ReturnScan : ContentPage
         }
         Confirm.IsVisible = false;
         barcodeResult.Text = "";
-        
-        await Shell.Current.GoToAsync("//IMPL_MainPage/MainPage");
+
+        await Shell.Current.GoToAsync("..");
     }
     protected override void OnAppearing()
     {
