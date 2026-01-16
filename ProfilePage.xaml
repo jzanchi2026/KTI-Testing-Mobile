@@ -2,71 +2,192 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MauiApp2.ProfilePage"
-             Title="Profile"
-             BackgroundColor="#F5F6FA">
+             BackgroundColor="#2B0000">
 
-    <Grid Padding="20">
+    <Shell.TitleView>
+        <Grid Padding="10,0" BackgroundColor="Transparent">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
 
-        <VerticalStackLayout
-            Spacing="22"
-            HorizontalOptions="Center"
-            VerticalOptions="Center">
-
-            <!-- Profile Card -->
-            <Frame
-                BackgroundColor="White"
-                CornerRadius="20"
-                Padding="25"
-                HasShadow="True"
-                WidthRequest="350">
-
-                <VerticalStackLayout Spacing="18"
-                                     HorizontalOptions="Center">
-
-                    <!-- Circular Profile Image -->
-                    <Frame Padding="0"
-                        CornerRadius="75"
-                        HeightRequest="150"
-                        WidthRequest="150"
-                        IsClippedToBounds="True"
-                        HasShadow="False">
-
-                        <Image Source="anger.png"
-                            Aspect="AspectFill"/>
-                    </Frame>
+            <HorizontalStackLayout Spacing="8" VerticalOptions="Center" Grid.Column="2">
+                <!-- App Text -->
+                <Label Text="PROFILE"
+                    FontSize="18"
+                    FontFamily="OpenSansRegular"
+                    FontAttributes="Bold"
+                    TextColor="White"
+                    VerticalOptions="Center"/>
+                
+                <Label Text="KTI"
+                    FontSize="22"
+                    FontFamily="HighSchoolUsa"
+                    FontAttributes="Bold"
+                    TextColor="White"
+                    VerticalOptions="Center"/>
 
 
-                    <!-- User Name -->
-                    <Label Text="{Binding na}"
-                           FontAttributes="Bold"
-                           FontSize="26"
-                           HorizontalTextAlignment="Center"
-                           TextColor="#1E1E1E" />
+                <ImageButton Source="applogo.png"
+                            HeightRequest="24"
+                            WidthRequest="24"
+                            BackgroundColor="Transparent"/>
+            </HorizontalStackLayout>
+        </Grid>
+    </Shell.TitleView>
 
-                    <!-- Email -->
-                    <Label Text="{Binding em}"
-                           FontSize="16"
-                           HorizontalTextAlignment="Center"
-                           TextColor="#777" />
+    <Grid RowSpacing="0">
 
-                    <!-- Divider -->
-                    <BoxView HeightRequest="1" WidthRequest="200" Color="#DDD" />
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
-                    <!-- Buttons -->
-                    <VerticalStackLayout Spacing="12" WidthRequest="200">
 
-                        <Button Text="Log Out"
-                                BackgroundColor="#E24A4A"
+        <!-- Background image -->
+        <Image Source="loginbg.png"
+               Aspect="AspectFill"
+               Grid.RowSpan="3"
+               Opacity="0.55" />
+
+
+        <!-- ===== MAIN CONTENT ===== -->
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="20"
+                                 HorizontalOptions="Center">
+
+                <!-- PROFILE CARD -->
+                <Frame BackgroundColor="White"
+                       CornerRadius="25"
+                       WidthRequest="350"
+                       Padding="20"
+                       HasShadow="True">
+
+                    <VerticalStackLayout Spacing="16"
+                                         HorizontalOptions="Center">
+
+                        <!-- PROFILE IMAGE -->
+                        <Frame HeightRequest="140"
+                               WidthRequest="140"
+                               CornerRadius="70"
+                               IsClippedToBounds="True"
+                               HasShadow="False"
+                               BackgroundColor="#DDD">
+
+                            <Image Source="anger.png"
+                                   Aspect="AspectFill"/>
+                        </Frame>
+
+                        <!-- NAME -->
+                        <Label Text="{Binding na}"
+                               FontSize="24"
+                               FontFamily="HighSchoolUsa"
+                               FontAttributes="Bold"
+                               TextColor="#6B0F1A"
+                               HorizontalTextAlignment="Center"/>
+
+                        <!-- CLASS / EMAIL -->
+                        <Label Text="{Binding em}"
+                               FontSize="16"
+                               FontFamily="OpenSansSemiBold"
+                               TextColor="#777"
+                               HorizontalTextAlignment="Center"/>
+
+                        <!-- CURRENT ITEMS -->
+                        <Label Text="CURRENT ITEMS"
+                            FontAttributes="Bold"
+                            FontFamily="OpenSansSemiBold"
+                            TextColor="#6B0F1A"
+                            HorizontalOptions="Start"/>
+
+                        <CollectionView ItemsSource="{Binding CurrentItems}"
+                                        HeightRequest="80"
+                                        SelectionMode="None">
+
+                            <CollectionView.ItemsLayout>
+                                <LinearItemsLayout Orientation="Horizontal"
+                                                ItemSpacing="10" />
+                            </CollectionView.ItemsLayout>
+
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Border HeightRequest="60"
+                                            WidthRequest="60"
+                                            BackgroundColor="#6B0F1A"
+                                            StrokeShape="RoundRectangle 10"
+                                            Padding="6">
+
+                                        <Image Source="hammor.png"
+                                            Aspect="AspectFit" />
+                                    </Border>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+
+
+                        <Label Text="see more..."
+                            FontSize="12"
+                            TextDecorations="Underline"
+                            TextColor="#6B0F1A"
+                            HorizontalOptions="Start">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="SeeInventoryTapped"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+
+                        <!-- HISTORY -->
+                        <Label Text="HISTORY"
+                            FontAttributes="Bold"
+                            FontFamily="OpenSansSemiBold"
+                            TextColor="#6B0F1A"
+                            HorizontalOptions="Start"/>
+
+                        <CollectionView ItemsSource="{Binding HistoryItems}"
+                                        HeightRequest="80"
+                                        SelectionMode="None">
+
+                            <CollectionView.ItemsLayout>
+                                <LinearItemsLayout Orientation="Horizontal"
+                                                ItemSpacing="10" />
+                            </CollectionView.ItemsLayout>
+
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Border HeightRequest="60"
+                                            WidthRequest="60"
+                                            BackgroundColor="#B0B0B0"
+                                            StrokeShape="RoundRectangle 10"
+                                            Padding="6">
+
+                                        <Image Source="hammor.png"
+                                            Aspect="AspectFit" />
+                                    </Border>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+
+                        <Label Text="see more..."
+                            FontSize="12"
+                            TextDecorations="Underline"
+                            TextColor="#6B0F1A"
+                            HorizontalOptions="Start">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="SeeHistoryTapped"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+
+
+
+                        <!-- SIGN OUT -->
+                        <Button Text="SIGN OUT"
+                                BackgroundColor="#6B0F1A"
                                 TextColor="White"
-                                CornerRadius="10"
-                                HeightRequest="45"
-                                Command ="{Binding SignOutCommand}"/>
+                                CornerRadius="12"
+                                HeightRequest="50"
+                                Command="{Binding SignOutCommand}"/>
                     </VerticalStackLayout>
-
-                </VerticalStackLayout>
-            </Frame>
-
-        </VerticalStackLayout>
-
+                </Frame>
+            </VerticalStackLayout>
+        </ScrollView>
     </Grid>
 </ContentPage>

@@ -1,64 +1,87 @@
-﻿using System.Windows.Input;
+﻿using System.Collections.ObjectModel;
+using System.Windows.Input;
 using KTI_Testing__Mobile_.Models;
-using KTI_Testing__Mobile_.Resources.viewModels;
+using MauiApp2.Models;
 using Microsoft.Maui.Controls;
 
 namespace MauiApp2
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ProfilePage : ContentPage
     {
         public string na { get; set; }
         public string em { get; set; }
         public ICommand SignOutCommand { get; }
+
+        private ObservableCollection<ProfileDisplayItem> _currentItems = new();
+        private ObservableCollection<ProfileDisplayItem> _historyItems = new();
+
+        public ObservableCollection<ProfileDisplayItem> CurrentItems => _currentItems;
+        public ObservableCollection<ProfileDisplayItem> HistoryItems => _historyItems;
+
         public ProfilePage()
         {
             InitializeComponent();
+
             na = "Welcome " + (App.UserInfo?.Name ?? "Guest") + "!";
             em = "Email: " + (App.UserInfo?.Email ?? "N/A");
+
             SignOutCommand = new Command(async () => await SignOutAsync());
+
             BindingContext = this;
+
+            _ = LoadProfileItems();
         }
-        private async System.Threading.Tasks.Task SignOutAsync()
+
+        private async Task LoadProfileItems()
         {
-            try
+            List<HistoryObject> tools = await ToolRepository.userToolHistory();
+            List<HistoryObject> mats = await MaterialRepository.userMaterialHistory();
+
+            foreach (HistoryObject h in tools.Concat(mats))
             {
-                // Remove saved user info
-                if (Preferences.ContainsKey(nameof(App.UserInfo)))
+                bool returned = h.ReturnTime.Year != 1;
+
+                if (!returned)
                 {
-                    Preferences.Remove(nameof(App.UserInfo));
+                    _currentItems.Add(new ProfileDisplayItem
+                    {
+                        Icon = "hammor.png"
+                    });
                 }
-
-                Uri loginUri = new Uri(App.uri, "logout");
-                var shell = Shell.Current as AppShell;
-                
-                var response = await App.myHttpClient.GetAsync(loginUri.ToString());
-                await Shell.Current.GoToAsync("//MauiLoginPage");
-            }
-            catch (Exception ex)
-            {
-                // Show helpful failure message during debugging
-                await DisplayAlert("Sign out failed", ex.Message, "OK");
+                else if (_historyItems.Count < 5)
+                {
+                    _historyItems.Add(new ProfileDisplayItem
+                    {
+                        Icon = "hammor.png"
+                    });
+                }
             }
         }
-        private void GoToProfilePage(object sender, EventArgs e)
+
+        private async Task SignOutAsync()
         {
-            Shell.Current.GoToAsync(nameof(ProfilePage));
+            if (Preferences.ContainsKey(nameof(App.UserInfo)))
+                Preferences.Remove(nameof(App.UserInfo));
+
+            Uri loginUri = new Uri(App.uri, "logout");
+            await App.myHttpClient.GetAsync(loginUri.ToString());
+
+            await Shell.Current.GoToAsync("//MauiLoginPage");
         }
 
-        private void GoToHistoryPage(object sender, EventArgs e)
+        private async void SeeHistoryTapped(object sender, EventArgs e)
         {
-            Shell.Current.GoToAsync(nameof(HistoryPage));
+            await Shell.Current.GoToAsync(nameof(HistoryPage));
         }
 
-        private void GoToCartPage(object sender, EventArgs e)
+        private async void SeeInventoryTapped(object sender, EventArgs e)
         {
-            Shell.Current.GoToAsync(nameof(CartPage));
+            await Shell.Current.GoToAsync(nameof(Inventory));
         }
 
-        private void GoToSettingPage(object sender, EventArgs e)
+        public class ProfileDisplayItem
         {
-            Shell.Current.GoToAsync(nameof(SettingsPage));
+            public string Icon { get; set; } = string.Empty;
         }
     }
 }
